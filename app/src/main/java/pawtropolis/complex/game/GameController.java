@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import pawtropolis.complex.game.console.InputController;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.game.service.GameService;
@@ -15,6 +16,7 @@ import pawtropolis.complex.map.util.MapInitializer;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
 @ToString
+@Controller
 public class GameController {
 
 	private GameService service;
