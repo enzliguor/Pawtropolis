@@ -1,12 +1,16 @@
 package pawtropolis.complex.game.domain;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 
 @ToString
 @EqualsAndHashCode
+@PropertySource(value = "file:application.properties")
 public class Player {
 
-	private static final int DEFAULT_LIFE_POINTS = 100;
+	@Value("${DEFAULT_LIFE_POINTS}")
+	private int DEFAULT_LIFE_POINTS;
 	@Getter
 	@Setter
 	private String name;
