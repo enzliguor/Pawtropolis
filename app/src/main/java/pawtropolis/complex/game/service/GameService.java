@@ -18,7 +18,7 @@ public class GameService {
     private final Player player;
     private Room currentRoom ;
 
-    private GameService(Player player, Room currentRoom) {
+    private GameService() {
         this.player = new Player();
         this.currentRoom = MapInitializer.populateMap();
     }
