@@ -72,4 +72,8 @@ public class GameService {
         }
     }
 
+    public void setPlayerName(String name){
+        this.player.setName(name);
+    }
+
 }
