@@ -21,18 +21,13 @@ public class Player {
 
 	public Player() {
 		this.bag = new Bag();
-	}
-
-	public Player(String name, int lifePoints){
-		this();
-		this.name = name;
-		this.lifePoints = lifePoints;
+		this.lifePoints = DEFAULT_LIFE_POINTS;
 	}
 
 	public Player(String name){
-		this(name, DEFAULT_LIFE_POINTS);
+		this();
+		this.name = name;
 	}
-
 
 	public void showBagContent() {
 		this.bag.showBagContent();
