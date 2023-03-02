@@ -1,6 +1,7 @@
 package pawtropolis.complex.game.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.map.domain.Room;
@@ -11,19 +12,15 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Service
 public class GameService {
 
     private final Player player;
     private Room currentRoom ;
-    private static GameService gameService;
 
     private GameService(Player player, Room currentRoom) {
         this.player = new Player();
         this.currentRoom = MapInitializer.populateMap();
-    }
-
-    public static GameService getInstance(Player player, Room entry) {
-        return (gameService == null)? new GameService(player, entry): gameService;
     }
 
     public void goToAnAdjacentRoom(String cardinalPoint) {
