@@ -5,6 +5,7 @@ import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.map.domain.Room;
 import pawtropolis.complex.map.util.CardinalPoint;
+import pawtropolis.complex.map.util.MapInitializer;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -17,8 +18,8 @@ public class GameService {
     private static GameService gameService;
 
     private GameService(Player player, Room currentRoom) {
-        this.player = player;
-        this.currentRoom = currentRoom;
+        this.player = new Player();
+        this.currentRoom = MapInitializer.populateMap();
     }
 
     public static GameService getInstance(Player player, Room entry) {
