@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import pawtropolis.complex.game.console.InputController;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.game.service.GameService;
@@ -16,7 +17,12 @@ import pawtropolis.complex.map.util.MapInitializer;
 @ToString
 public class GameController {
 
-	private static GameController gameController;
+	private GameService service;
+
+	@Autowired
+	public GameController(GameService service){
+		this.service = service;
+	}
 
 	private static final String HELP = """
 				look             -> get a description of the current Room
@@ -32,21 +38,10 @@ public class GameController {
 				Type 'help' for a list of available command
 				""";
 
-	public static GameController getInstance(){
-		if(gameController == null){
-			return new GameController();
-		}
-		return gameController;
-	}
-
 	public void runGame() {
 		log.info("Type player name:");
 		String playerName = InputController.readString();
-		Player player = new Player(playerName);
-
-		Room entry = MapInitializer.populateMap();
-
-		GameService service = GameService.getInstance(player, entry);
+		service.setPlayerName(playerName);
 
 		boolean gameEnded = false;
 
