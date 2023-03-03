@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pawtropolis.complex.game.console.InputController;
-import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.game.service.GameService;
-import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.util.MapInitializer;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
@@ -55,12 +52,11 @@ public class GameController {
 		while(!gameEnded) {
 			log.info("Where are you going to go?");
 			log.info(">");
-			//divide the input in a command and check for another instruction
+
 			String [] strings = InputController.readString().split("\\s", 2);
 			String input = strings[0].trim();
 			String instruction = (strings.length>1)? strings[1].trim() : null;
-			//if the input is not equal to 'get,'go' or 'drop' and there is an instruction,
-			//it means that the input is wrong
+
 			if (!input.equals("get") && !input.equals("go") && !input.equals("drop") && instruction != null) {
 				log.info(WRONG_COMMAND);
 			}else {
