@@ -19,7 +19,7 @@ public class GameController {
 	private GameService service;
 
 	@Autowired
-	public GameController(GameService service){
+	private GameController(GameService service){
 		this.service = service;
 	}
 
