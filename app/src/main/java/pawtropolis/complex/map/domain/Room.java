@@ -42,7 +42,7 @@ public class Room {
 			for (Animal animal : entry.getValue()) {
 				builder.append(animal.getName())
 						.append("(").append(entry.getKey().getSimpleName()).append(")");
-						builder.append(",");
+						builder.append(", ");
 			}
 		}
 		if (builder.toString().endsWith(", ")) {
