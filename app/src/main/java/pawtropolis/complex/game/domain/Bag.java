@@ -1,9 +1,10 @@
 package pawtropolis.complex.game.domain;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,24 +13,21 @@ import java.util.Map;
 @EqualsAndHashCode
 @ToString
 @Slf4j
-@PropertySource(value = "file:application.properties")
 public class Bag {
 
-	@Value("${CAPACITY}")
-	private int CAPACITY;
+	private static final int DEFAULT_CAPACITY = 20;
 	@Getter
 	@Setter
 	private int availableSlot;
 	private final Map<String, Item> items = new HashMap<>();
 
+	public Bag(){
+		this(DEFAULT_CAPACITY);
+	}
+
 	public Bag(int capacity){
 		this.availableSlot = capacity;
 	}
-
-	public Bag(){
-		this.availableSlot = CAPACITY;
-	}
-
 
 	public boolean addItem(Item item) {
 		if (item == null) return false;
