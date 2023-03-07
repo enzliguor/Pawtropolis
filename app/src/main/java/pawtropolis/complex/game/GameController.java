@@ -1,6 +1,8 @@
 package pawtropolis.complex.game;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,11 @@ import pawtropolis.complex.map.util.MapInitializer;
 @Component
 public class GameController {
 
+	@Getter
 	private final Player player;
 
+	@Getter
+	@Setter
 	private Room currentRoom;
 
 	private boolean gameEnded;
@@ -56,18 +61,6 @@ public class GameController {
 			}
 
 		}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public Room getCurrentRoom() {
-		return currentRoom;
-	}
-
-	public void setCurrentRoom(Room currentRoom) {
-		this.currentRoom = currentRoom;
-	}
 
 	public void exitGame(){
 		this.gameEnded = true;
