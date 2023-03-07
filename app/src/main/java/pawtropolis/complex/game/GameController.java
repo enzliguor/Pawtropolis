@@ -1,51 +1,46 @@
 package pawtropolis.complex.game;
 
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
+import pawtropolis.complex.game.command.domain.Command;
+import pawtropolis.complex.game.command.CommandManager;
 import pawtropolis.complex.game.console.InputController;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.domain.Player;
+import pawtropolis.complex.map.domain.Room;
+import pawtropolis.complex.map.util.MapInitializer;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Slf4j
 @ToString
-@Controller
+@Component
 public class GameController {
 
-	private GameService service;
+	private final Player player;
+
+	private Room currentRoom;
+
+	private boolean gameEnded;
+
+	private final CommandManager commandManager;
 
 	@Autowired
-	private GameController(GameService service){
-		this.service = service;
+	private GameController(CommandManager commandManager){
+		this.commandManager = commandManager;
+		this.player = new Player();
+		this.currentRoom = MapInitializer.populateMap();
+		this.gameEnded = false;
 	}
-
-	private static final String HELP = """
-				look             -> get a description of the current Room
-				bag              -> show the content of your bag
-				get 'item name'  -> collect an item from the room
-				drop 'item name' -> drop an item from your bag
-				go 'direction'   -> move into another adjacent room, if available (north, south, east, west)
-				exit             -> close the game
-				""";
-
-	private static final String WRONG_COMMAND =  """
-				Unrecognized command
-				Type 'help' for a list of available command
-				""";
 
 	public void runGame() {
 		log.info("Type player name:");
 		String playerName = InputController.readString();
-		service.setPlayerName(playerName);
-
-		boolean gameEnded = false;
+		this.player.setName(playerName);
 
 		log.info("Hello Player!\n");
-		service.look();
+		Command command = commandManager.getCommand("look");
+		command.execute();
 
 		log.info("Type help for a list of available command\n");
 
@@ -53,25 +48,28 @@ public class GameController {
 			log.info("Where are you going to go?");
 			log.info(">");
 
-			String [] strings = InputController.readString().split("\\s", 2);
-			String input = strings[0].trim();
-			String instruction = (strings.length>1)? strings[1].trim() : null;
+			command = commandManager.getCommand(InputController.readString());
+			if(command !=null){
+				command.execute();
+			}
 
-			if (!input.equals("get") && !input.equals("go") && !input.equals("drop") && instruction != null) {
-				log.info(WRONG_COMMAND);
-			}else {
-				switch (input) {
-					case "look"  ->	service.look();
-					case "bag"	 ->	service.showBagContent();
-					case "get"   -> service.collectItemByName(instruction);
-					case "drop"  -> service.dropItemByName(instruction);
-					case "go"	 ->	service.goToAnAdjacentRoom(instruction);
-					case "help"	 -> log.info(HELP);
-					case "exit"  -> gameEnded = true;
-					default      -> log.info(WRONG_COMMAND);
-				}
 			}
 
 		}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public Room getCurrentRoom() {
+		return currentRoom;
+	}
+
+	public void setCurrentRoom(Room currentRoom) {
+		this.currentRoom = currentRoom;
+	}
+
+	public void exitGame(){
+		this.gameEnded = true;
 	}
 }
