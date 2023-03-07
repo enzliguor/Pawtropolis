@@ -12,10 +12,6 @@ import pawtropolis.complex.game.command.domain.ParameterizedCommand;
 @Component
 public class CommandManager {
 
-    private static final String WRONG_COMMAND =  """
-				Unrecognized command
-				Type 'help' for a list of available command
-				""";
     private final ApplicationContext applicationContext;
 
     @Autowired
@@ -25,11 +21,11 @@ public class CommandManager {
 
     public Command getCommand(String input){
         String commandInput = getCommandFromString(input);
-        Command command= null;
+        Command command;
         try{
             command = applicationContext.getBean(commandInput, Command.class);
         }catch (NoSuchBeanDefinitionException exception){
-            log.info(WRONG_COMMAND);
+            command = applicationContext.getBean("wrongCommand", Command.class);
         }
         if(command instanceof ParameterizedCommand parameterizedCommand){
             String parameter = getParameterFromString(input);

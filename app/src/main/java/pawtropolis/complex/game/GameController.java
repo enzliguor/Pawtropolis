@@ -19,50 +19,47 @@ import pawtropolis.complex.map.util.MapInitializer;
 @Component
 public class GameController {
 
-	@Getter
-	private final Player player;
+    @Getter
+    private final Player player;
 
-	@Getter
-	@Setter
-	private Room currentRoom;
+    @Getter
+    @Setter
+    private Room currentRoom;
 
-	private boolean gameEnded;
+    private boolean gameEnded;
 
-	private final CommandManager commandManager;
+    private final CommandManager commandManager;
 
-	@Autowired
-	private GameController(CommandManager commandManager){
-		this.commandManager = commandManager;
-		this.player = new Player();
-		this.currentRoom = MapInitializer.populateMap();
-		this.gameEnded = false;
-	}
+    @Autowired
+    private GameController(CommandManager commandManager) {
+        this.commandManager = commandManager;
+        this.player = new Player();
+        this.currentRoom = MapInitializer.populateMap();
+        this.gameEnded = false;
+    }
 
-	public void runGame() {
-		log.info("Type player name:");
-		String playerName = InputController.readString();
-		this.player.setName(playerName);
+    public void runGame() {
+        log.info("Type player name:");
+        String playerName = InputController.readString();
+        this.player.setName(playerName);
 
-		log.info("Hello Player!\n");
-		Command command = commandManager.getCommand("look");
-		command.execute();
+        log.info("Hello Player!\n");
+        Command command = commandManager.getCommand("look");
+        command.execute();
 
-		log.info("Type help for a list of available command\n");
+        log.info("Type help for a list of available command\n");
 
-		while(!gameEnded) {
-			log.info("Where are you going to go?");
-			log.info(">");
+        while (!gameEnded) {
+            log.info("Where are you going to go?");
+            log.info(">");
 
-			command = commandManager.getCommand(InputController.readString());
-			if(command !=null){
-				command.execute();
-			}
+            command = commandManager.getCommand(InputController.readString());
+            command.execute();
+        }
 
-			}
+    }
 
-		}
-
-	public void exitGame(){
-		this.gameEnded = true;
-	}
+    public void exitGame() {
+        this.gameEnded = true;
+    }
 }
