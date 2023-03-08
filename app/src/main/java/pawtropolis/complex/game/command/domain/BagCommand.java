@@ -1,17 +1,18 @@
 package pawtropolis.complex.game.command.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.GameController;
+import pawtropolis.complex.game.service.GameService;
 
 @Component("bag")
 public class BagCommand extends Command{
-
-    protected BagCommand(GameController gameController) {
-        super(gameController);
+    @Autowired
+    protected BagCommand(GameService gameService) {
+        super(gameService);
     }
 
     @Override
     public void execute() {
-        this.gameController.getPlayer().showBagContent();
+        this.gameService.showBagContent();
     }
 }

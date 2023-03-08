@@ -2,17 +2,17 @@ package pawtropolis.complex.game.command.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.GameController;
+import pawtropolis.complex.game.service.GameService;
 
 @Component("look")
 public class LookCommand extends Command {
     @Autowired
-    protected LookCommand(GameController gameController) {
-        super(gameController);
+    protected LookCommand(GameService gameService) {
+        super(gameService);
     }
 
     @Override
     public void execute() {
-        this.gameController.getCurrentRoom().getRoomDescription();
+        this.gameService.look();
     }
 }
