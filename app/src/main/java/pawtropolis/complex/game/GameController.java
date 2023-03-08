@@ -39,12 +39,11 @@ public class GameController {
     }
 
     public void runGame() {
-        log.info("Type player name:");
-        String playerName = InputController.readString();
-        this.player.setName(playerName);
+        Command command = commandManager.getCommand("start");
+        command.execute();
 
         log.info("Hello Player!\n");
-        Command command = commandManager.getCommand("look");
+        command = commandManager.getCommand("look");
         command.execute();
 
         log.info("Type help for a list of available command\n");
