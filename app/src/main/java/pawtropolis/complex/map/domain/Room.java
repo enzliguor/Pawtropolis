@@ -87,6 +87,11 @@ public class Room {
 
 	public void linkRoom(CardinalPoint cardinalPoint, Room room){
 		this.adjacentRooms.put(cardinalPoint, room);
+		CardinalPoint opposite = cardinalPoint.getOpposite();
+		Room oppositeRoom = room.getAdjacentRoom(opposite);
+		if(oppositeRoom != this){
+			room.linkRoom(opposite, this);
+		}
 	}
 
 }
