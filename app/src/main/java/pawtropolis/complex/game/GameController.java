@@ -52,14 +52,14 @@ public class GameController {
         while (!gameEnded) {
             log.info("Where are you going to go?");
             log.info(">");
+            String commandInput = InputController.readString();
 
-            command = commandManager.getCommand(InputController.readString());
-            command.execute();
+            if(!commandInput.equals("exit")){
+                command = commandManager.getCommand(commandInput);
+                command.execute();
+            }else{
+                this.gameEnded = true;
+            }
         }
-
-    }
-
-    public void exitGame() {
-        this.gameEnded = true;
     }
 }
