@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.domain.Command;
 import pawtropolis.complex.game.command.CommandManager;
@@ -17,7 +19,7 @@ import pawtropolis.complex.map.util.MapInitializer;
 @Slf4j
 @ToString
 @Component
-public class GameController {
+public class GameController implements ApplicationRunner {
 
     @Getter
     private final Player player;
@@ -61,5 +63,10 @@ public class GameController {
 
     public void exitGame() {
         this.gameEnded = true;
+    }
+
+    @Override
+    public void run(ApplicationArguments args){
+        runGame();
     }
 }
