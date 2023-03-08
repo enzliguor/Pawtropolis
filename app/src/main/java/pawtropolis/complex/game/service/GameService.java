@@ -8,9 +8,6 @@ import pawtropolis.complex.map.domain.Room;
 import pawtropolis.complex.map.util.CardinalPoint;
 import pawtropolis.complex.map.util.MapInitializer;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 @Slf4j
 @Service
 public class GameService {
@@ -23,22 +20,32 @@ public class GameService {
         this.currentRoom = MapInitializer.populateMap();
     }
 
-    public void goToAnAdjacentRoom(String cardinalPoint) {
-        CardinalPoint direction = CardinalPoint.of(cardinalPoint);
-        if(direction == null){
-            log.info("Unrecognized direction\nWhere do you want to go? "
-                    + Arrays.stream(CardinalPoint.values())
-                    .map(c ->c.getName() +" - ")
-                    .collect(Collectors.joining())+ "\n");
-            return;
-        }
-        Room adjacentRoom = this.currentRoom.getAdjacentRoom(direction);
-        if (adjacentRoom == null) {
-            log.info("Nothing to show in this direction!\n");
-        } else {
-            this.currentRoom = adjacentRoom;
-            this.look();
-        }
+    public Room getAdjacentRoom(CardinalPoint cardinalPoint){
+        return this.currentRoom.getAdjacentRoom(cardinalPoint);
+    }
+
+    public void setCurrentRoom(Room room){
+        this.currentRoom = room;
+    }
+
+    public Item findItemInRoomByName(String itemName){
+        return this.currentRoom.findItemByName(itemName);
+    }
+
+    public boolean collectItem(Item item){
+        return this.player.addItem(item);
+    }
+
+    public void removeItemFromRoom(Item item){
+        this.currentRoom.removeItem(item);
+    }
+
+    public Item dropItemByName(String itemName){
+        return this.player.removeItemByName(itemName);
+    }
+
+    public void addItemInRoom(Item item){
+        this.currentRoom.addItem(item);
     }
 
     public void look() {
@@ -47,27 +54,6 @@ public class GameService {
 
     public void showBagContent() {
         this.player.showBagContent();
-    }
-
-    public void collectItemByName(String itemName) {
-        Item item = this.currentRoom.findItemByName(itemName);
-        if (item == null) {
-            log.info("Item not found\n");
-        } else {
-            if (this.player.addItem(item)) {
-                this.currentRoom.removeItem(item);
-            }
-
-        }
-    }
-
-    public void dropItemByName(String itemName) {
-        Item item = this.player.removeItemByName(itemName);
-        if (item == null) {
-            log.info("Item not found");
-        } else {
-            this.currentRoom.addItem(item);
-        }
     }
 
     public void setPlayerName(String name){

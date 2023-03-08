@@ -1,28 +1,27 @@
 package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.GameController;
 import pawtropolis.complex.game.domain.Item;
-import pawtropolis.complex.map.domain.Room;
+import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("get")
 public class GetCommand extends ParameterizedCommand{
-
-    protected GetCommand(GameController gameController) {
-        super(gameController);
+    @Autowired
+    protected GetCommand(GameService gameService) {
+        super(gameService);
     }
 
     @Override
     public void execute() {
-        Room currentRoom = this.gameController.getCurrentRoom();
-        Item item = currentRoom.findItemByName(parameter);
+        Item item = gameService.findItemInRoomByName(parameter);
         if (item == null) {
             log.info("Item not found\n");
         } else {
-            if (this.gameController.getPlayer().addItem(item)) {
-                currentRoom.removeItem(item);
+            if (this.gameService.collectItem(item)) {
+                this.gameService.removeItemFromRoom(item);
             }
 
         }
