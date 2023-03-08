@@ -1,30 +1,18 @@
 package pawtropolis.complex.game;
 
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.command.domain.Command;
 import pawtropolis.complex.game.command.CommandManager;
+import pawtropolis.complex.game.command.domain.Command;
 import pawtropolis.complex.game.console.InputController;
-import pawtropolis.complex.game.domain.Player;
-import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.util.MapInitializer;
 
 @Slf4j
 @ToString
 @Component
 public class GameController {
-
-    @Getter
-    private final Player player;
-
-    @Getter
-    @Setter
-    private Room currentRoom;
 
     private boolean gameEnded;
 
@@ -33,8 +21,6 @@ public class GameController {
     @Autowired
     private GameController(CommandManager commandManager) {
         this.commandManager = commandManager;
-        this.player = new Player();
-        this.currentRoom = MapInitializer.populateMap();
         this.gameEnded = false;
     }
 

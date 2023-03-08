@@ -1,13 +1,15 @@
 package pawtropolis.complex.game.command.domain;
 
-import pawtropolis.complex.game.GameController;
+import org.springframework.beans.factory.annotation.Autowired;
+import pawtropolis.complex.game.service.GameService;
 
 public abstract class Command {
 
-    protected GameController gameController;
+    protected GameService gameService;
 
-    protected Command(GameController gameController){
-        this.gameController = gameController;
+    @Autowired
+    protected Command(GameService gameService){
+        this.gameService = gameService;
     }
 
     public abstract void execute();

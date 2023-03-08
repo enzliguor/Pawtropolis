@@ -1,13 +1,15 @@
 package pawtropolis.complex.game.command.domain;
 
-import pawtropolis.complex.game.GameController;
+import org.springframework.beans.factory.annotation.Autowired;
+import pawtropolis.complex.game.service.GameService;
 
 public abstract class ParameterizedCommand extends Command {
 
     protected String parameter;
 
-    protected ParameterizedCommand(GameController gameController){
-        super(gameController);
+    @Autowired
+    protected ParameterizedCommand(GameService gameService) {
+        super(gameService);
     }
 
     @Override
