@@ -33,7 +33,6 @@ public class GoCommand extends ParameterizedGameCommand {
             log.info("Nothing to show in this direction!\n");
         } else {
             this.gameService.setCurrentRoom(adjacentRoom);
-            adjacentRoom.getRoomDescription();
         }
     }
 }
