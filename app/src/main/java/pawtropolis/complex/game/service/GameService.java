@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.map.domain.Room;
+import pawtropolis.complex.map.domain.RoomDescription;
 import pawtropolis.complex.map.maploader.MapInitializer;
 import pawtropolis.complex.map.util.CardinalPoint;
 
@@ -50,8 +51,8 @@ public class GameService {
         this.currentRoom.addItem(item);
     }
 
-    public void look() {
-        this.currentRoom.getRoomDescription();
+    public RoomDescription getRoomDescription() {
+       return this.currentRoom.getRoomDescription();
     }
 
     public void showBagContent() {
