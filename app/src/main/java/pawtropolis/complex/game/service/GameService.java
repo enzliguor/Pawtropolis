@@ -73,4 +73,9 @@ public class GameService {
         this.player.setName(name);
     }
 
+    public void setPlayerLifePoints(int lifePoints){this.player.setLifePoints(lifePoints);}
+
+    public void setPlayerBagCapacity(int bagCapacity){
+        this.player.setBagCapacity(bagCapacity);
+    }
 }

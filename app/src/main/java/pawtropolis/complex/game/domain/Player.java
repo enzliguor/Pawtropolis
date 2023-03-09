@@ -7,8 +7,6 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Player {
-
-	private static final int DEFAULT_LIFE_POINTS = 100;
 	@Getter
 	@Setter
 	private String name;
@@ -18,12 +16,12 @@ public class Player {
 	private final Bag bag;
 
 	public Player() {
-		this(DEFAULT_LIFE_POINTS);
+		this.bag = new Bag();
 	}
 
 	public Player(int lifePoints){
+		this();
 		this.lifePoints = lifePoints;
-		this.bag = new Bag();
 	}
 
 	public Player(String name){
@@ -50,4 +48,7 @@ public class Player {
 		return this.bag.removeItemByName(itemName);
 	}
 
+	public void setBagCapacity(int bagCapacity){
+		this.bag.setAvailableSlot(bagCapacity);
 	}
+}

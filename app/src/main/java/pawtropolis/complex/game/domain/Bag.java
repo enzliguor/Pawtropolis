@@ -16,14 +16,12 @@ import java.util.Map;
 @Slf4j
 public class Bag {
 
-	private static final int DEFAULT_CAPACITY = 20;
 	@Getter
 	@Setter
 	private int availableSlot;
 	private final Map<String, Item> items = new HashMap<>();
 
 	public Bag(){
-		this(DEFAULT_CAPACITY);
 	}
 
 	public Bag(int capacity){
