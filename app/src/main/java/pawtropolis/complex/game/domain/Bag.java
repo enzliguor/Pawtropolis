@@ -49,7 +49,7 @@ public class Bag {
 		return item;
 	}
 
-	public List<String> getItems(){
+	public List<String> getAllItemsName(){
 		return List.of(items.keySet().toString());
 	}
 }

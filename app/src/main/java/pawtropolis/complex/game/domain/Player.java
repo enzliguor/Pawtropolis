@@ -32,7 +32,7 @@ public class Player {
 	}
 
 	public List<String> getBagContent(){
-		return this.bag.getItems();
+		return this.bag.getAllItemsName();
 	}
 
 	public int getAvailableSlot(){
