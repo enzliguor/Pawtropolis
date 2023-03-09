@@ -8,85 +8,60 @@ import pawtropolis.complex.map.util.CardinalPoint;
 
 import java.util.*;
 
-@RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
 @Slf4j
 public class Room {
-	@NonNull
-	@Getter
-	@Setter
-	private String name;
-	private final Map<String, Item> items = new HashMap<>();
-	private final Map<Class<? extends Animal>, List<Animal>> animals = new HashMap<>();
+	private final RoomDescription roomDescription;
 	private final EnumMap<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
 
+	public Room(String roomName){
+		this.roomDescription = new RoomDescription(roomName);
+	}
 
 	public Room getAdjacentRoom(CardinalPoint cardinalPoint) {
 		return this.adjacentRooms.get(cardinalPoint);
 	}
 
-	public void getRoomDescription() {
-		StringBuilder builder = new StringBuilder("You are in " + this.name + ".\nItems: ");
-
-		for (String s: this.items.keySet()) {
-			builder.append(s).append(", ");
-		}
-		if (builder.toString().endsWith(", ")) {
-			builder.delete(builder.length()-2, builder.length()-1);
-		}
-
-		builder.append("\nNPC: ");
-
-		for (Map.Entry<Class<? extends Animal>, List<Animal>> entry : animals.entrySet()) {
-			for (Animal animal : entry.getValue()) {
-				builder.append(animal.getName())
-						.append("(").append(entry.getKey().getSimpleName()).append(")");
-						builder.append(", ");
-			}
-		}
-		if (builder.toString().endsWith(", ")) {
-			builder.delete(builder.length()-2, builder.length()-1);
-		}
-
-		log.info(builder + "\n");
+	public RoomDescription getRoomDescription() {
+		return this.roomDescription;
 	}
 
 	public Item findItemByName(String nameItem) {
-		return this.items.get(nameItem);
+		return this.roomDescription.findItemByName(nameItem);
 	}
 
 	public boolean removeItem(Item item) {
-		Item itemTemp = this.items.remove(item.getName());
-		return itemTemp != null;
+		return this.roomDescription.removeItem(item);
 	}
 
 	public boolean addItem(Item item) {
-		if(item != null){
-			this.items.put(item.getName(), item);
-			return true;
-		}
-		return false;
+		return this.roomDescription.addItem(item);
 	}
 
 	public void addAllItems(List<Item> items) {
-		items.forEach(this::addItem);
+		this.roomDescription.addAllItems(items);
 	}
 
 	public void addAnimal(Animal animal) {
-		this.animals.computeIfAbsent(animal.getClass(), k-> new ArrayList<>()).add(animal);
+		this.roomDescription.addAnimal(animal);
 	}
 
 	public void addAllAnimals(List<Animal> animals) {
-		animals.forEach(this::addAnimal);
+		this.roomDescription.addAllAnimals(animals);
 	}
 
 	public boolean removeAnimal(Animal animal) {
-		return animals.get(animal.getClass()).removeIf(a -> a.equals(animal));
+		return this.roomDescription.removeAnimal(animal);
 	}
 
 	public void linkRoom(CardinalPoint cardinalPoint, Room room){
 		this.adjacentRooms.put(cardinalPoint, room);
+		CardinalPoint opposite = cardinalPoint.getOpposite();
+		Room oppositeRoom = room.getAdjacentRoom(opposite);
+		if(oppositeRoom != this){
+			room.linkRoom(opposite, this);
+		}
 	}
 
 }

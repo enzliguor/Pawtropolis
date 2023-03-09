@@ -1,12 +1,14 @@
 package pawtropolis.complex.game.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.map.domain.Room;
+import pawtropolis.complex.map.domain.RoomDescription;
+import pawtropolis.complex.map.maploader.MapInitializer;
 import pawtropolis.complex.map.util.CardinalPoint;
-import pawtropolis.complex.map.util.MapInitializer;
 
 import java.util.List;
 
@@ -17,9 +19,10 @@ public class GameService {
     private final Player player;
     private Room currentRoom ;
 
-    private GameService() {
+    @Autowired
+    private GameService(MapInitializer mapInitializer) {
         this.player = new Player();
-        this.currentRoom = MapInitializer.populateMap();
+        this.currentRoom = mapInitializer.populateMap();
     }
 
     public Room getAdjacentRoom(CardinalPoint cardinalPoint){
@@ -50,8 +53,8 @@ public class GameService {
         this.currentRoom.addItem(item);
     }
 
-    public void look() {
-        this.currentRoom.getRoomDescription();
+    public RoomDescription getRoomDescription() {
+       return this.currentRoom.getRoomDescription();
     }
 
     public List<String> getPlayerBagContent(){
