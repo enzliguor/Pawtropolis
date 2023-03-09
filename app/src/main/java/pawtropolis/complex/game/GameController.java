@@ -39,17 +39,14 @@ public class GameController implements ApplicationRunner {
         while (!gameEnded) {
             log.info("Where are you going to go?");
             log.info(">");
-            String commandInput = InputController.readString();
 
-            if(!commandInput.equals("exit")){
-                command = commandManager.getCommand(commandInput);
-                command.execute();
-            }else{
-                this.gameEnded = true;
-            }
+            command = commandManager.getCommand(InputController.readString());
+            command.execute();
         }
     }
-
+    public void endGame() {
+        this.gameEnded = true;
+    }
     @Override
     public void run(ApplicationArguments args){
         runGame();
