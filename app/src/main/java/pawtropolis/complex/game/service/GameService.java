@@ -41,6 +41,10 @@ public class GameService {
         return this.player.addItem(item);
     }
 
+    public boolean checkItemFitsInPlayerBag(Item item){
+        return this.player.checkItemFitsinBag(item);
+    }
+
     public void removeItemFromRoom(Item item){
         this.currentRoom.removeItem(item);
     }

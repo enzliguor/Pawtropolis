@@ -30,15 +30,15 @@ public class Bag {
 		this.availableSlot = capacity;
 	}
 
-	public boolean addItem(Item item) {
+	public boolean addItem(Item item){
 		if (item == null) return false;
-		if (item.getSlotRequired() > this.availableSlot) {
-			log.info("Your Bag is too full! \nFree up " + (item.getSlotRequired() - this.availableSlot) + " slots to get this item\n");
-			return false;
-		}
 		this.items.put(item.getName(),item);
 		this.availableSlot -= item.getSlotRequired();
 		return true;
+	}
+
+	public boolean checkItemFits(Item item){
+		return item.getSlotRequired() < this.availableSlot;
 	}
 
 	public Item removeItemByName(String itemName) {

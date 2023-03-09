@@ -35,11 +35,14 @@ public class Player {
 		return this.bag.getAllItemsName();
 	}
 
+	public boolean checkItemFitsinBag(Item item){
+		return this.bag.checkItemFits(item);
+	}
 	public int getAvailableSlot(){
 		return this.bag.getAvailableSlot();
 	}
 
-	public boolean addItem(Item item) {
+	public boolean addItem(Item item){
 		return this.bag.addItem(item);
 	}
 

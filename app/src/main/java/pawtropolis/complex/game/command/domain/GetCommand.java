@@ -19,11 +19,14 @@ public class GetCommand extends ParameterizedGameCommand {
         Item item = gameService.findItemInRoomByName(parameter);
         if (item == null) {
             log.info("Item not found\n");
-        } else {
-            if (this.gameService.collectItem(item)) {
-                this.gameService.removeItemFromRoom(item);
-            }
-
+        }else if(this.gameService.checkItemFitsInPlayerBag(item)){
+            this.gameService.collectItem(item);
+            this.gameService.removeItemFromRoom(item);
+        }else{
+            log.info("Your Bag is too full! \n" +
+                    "Free up " +
+                    (item.getSlotRequired() - this.gameService.getAvailableSlot()) +
+                    " slots to get this item\n");
         }
     }
 }
