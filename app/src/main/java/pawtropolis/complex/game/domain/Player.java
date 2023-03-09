@@ -2,6 +2,8 @@ package pawtropolis.complex.game.domain;
 
 import lombok.*;
 
+import java.util.List;
+
 @ToString
 @EqualsAndHashCode
 public class Player {
@@ -29,8 +31,12 @@ public class Player {
 		this.name = name;
 	}
 
-	public void showBagContent() {
-		this.bag.showBagContent();
+	public List<String> getBagContent(){
+		return this.bag.getItems();
+	}
+
+	public int getAvailableSlot(){
+		return this.bag.getAvailableSlot();
 	}
 
 	public boolean addItem(Item item) {

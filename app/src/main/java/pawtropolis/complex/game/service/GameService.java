@@ -8,6 +8,8 @@ import pawtropolis.complex.map.domain.Room;
 import pawtropolis.complex.map.util.CardinalPoint;
 import pawtropolis.complex.map.util.MapInitializer;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class GameService {
@@ -52,8 +54,12 @@ public class GameService {
         this.currentRoom.getRoomDescription();
     }
 
-    public void showBagContent() {
-        this.player.showBagContent();
+    public List<String> getPlayerBagContent(){
+        return this.player.getBagContent();
+    }
+
+    public int getAvailableSlot(){
+        return this.player.getAvailableSlot();
     }
 
     public void setPlayerName(String name){

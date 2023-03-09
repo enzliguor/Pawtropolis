@@ -7,6 +7,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -48,17 +49,7 @@ public class Bag {
 		return item;
 	}
 
-	public void showBagContent() {
-		StringBuilder builder = new StringBuilder("In bag: ");
-
-		for (String s: this.items.keySet()) {
-			builder.append(s + ", ");
-		}
-		if (builder.toString().endsWith(", ")) {
-			builder.delete(builder.length()-2, builder.length()-1);
-		}
-
-		builder.append("   [Available Slot: " + this.availableSlot + "]");
-		log.info(builder + "\n");
+	public List<String> getItems(){
+		return List.of(items.keySet().toString());
 	}
 }
