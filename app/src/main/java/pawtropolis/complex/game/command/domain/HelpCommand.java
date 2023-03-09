@@ -7,7 +7,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("help")
-public class HelpCommand extends Command {
+public class HelpCommand extends GameCommand {
 
     private static final String HELP = """
 				look             -> get a description of the current Room

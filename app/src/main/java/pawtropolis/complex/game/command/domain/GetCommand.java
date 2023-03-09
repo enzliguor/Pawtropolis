@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("get")
-public class GetCommand extends ParameterizedCommand{
+public class GetCommand extends ParameterizedGameCommand {
     @Autowired
     protected GetCommand(GameService gameService) {
         super(gameService);

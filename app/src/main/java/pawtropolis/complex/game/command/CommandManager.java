@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.domain.Command;
-import pawtropolis.complex.game.command.domain.ParameterizedCommand;
+import pawtropolis.complex.game.command.domain.ParameterizedGameCommand;
 
 @Slf4j
 @Component
@@ -27,7 +27,7 @@ public class CommandManager {
         }catch (NoSuchBeanDefinitionException exception){
             command = applicationContext.getBean("wrongCommand", Command.class);
         }
-        if(command instanceof ParameterizedCommand parameterizedCommand){
+        if(command instanceof ParameterizedGameCommand parameterizedCommand){
             String parameter = getParameterFromString(input);
             parameterizedCommand.setParameter(parameter);
         }

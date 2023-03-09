@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component("bag")
 @Slf4j
-public class BagCommand extends Command{
+public class BagCommand extends GameCommand {
     @Autowired
     protected BagCommand(GameService gameService) {
         super(gameService);

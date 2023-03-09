@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("drop")
-public class DropCommand extends ParameterizedCommand{
+public class DropCommand extends ParameterizedGameCommand {
     @Autowired
     protected DropCommand(GameService gameService) {
         super(gameService);

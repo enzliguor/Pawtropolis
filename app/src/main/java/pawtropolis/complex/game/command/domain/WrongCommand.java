@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component
-public class WrongCommand extends Command {
+public class WrongCommand extends GameCommand {
 
     private static final String WRONG_COMMAND =  """
 				Unrecognized command

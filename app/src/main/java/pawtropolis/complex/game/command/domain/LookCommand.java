@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Slf4j
 @Component("look")
-public class LookCommand extends Command {
+public class LookCommand extends GameCommand {
     @Autowired
     protected LookCommand(GameService gameService) {
         super(gameService);

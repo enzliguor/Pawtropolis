@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component("go")
-public class GoCommand extends ParameterizedCommand{
+public class GoCommand extends ParameterizedGameCommand {
     @Autowired
     protected GoCommand(GameService gameService) {
         super(gameService);

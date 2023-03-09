@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Component("start")
 @Slf4j
-public class StartCommand extends Command {
+public class StartCommand extends GameCommand {
     @Autowired
     protected StartCommand(GameService gameService) {
         super(gameService);
