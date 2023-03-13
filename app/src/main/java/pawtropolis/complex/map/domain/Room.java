@@ -7,52 +7,57 @@ import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.map.util.CardinalPoint;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @EqualsAndHashCode
+@RequiredArgsConstructor
 @ToString
 @Slf4j
 public class Room {
-	private final RoomDescription roomDescription;
-	private final EnumMap<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
+	@NonNull
+	@Getter
+	@Setter
+	private String name;
+	private final Map<String, Item> items = new HashMap<>();
+	private final Map<Class<? extends Animal>, List<Animal>> animals = new HashMap<>();
 
-	public Room(String roomName){
-		this.roomDescription = new RoomDescription(roomName);
-	}
+	private final EnumMap<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
 
 	public Room getAdjacentRoom(CardinalPoint cardinalPoint) {
 		return this.adjacentRooms.get(cardinalPoint);
 	}
 
-	public RoomDescription getRoomDescription() {
-		return this.roomDescription;
-	}
-
 	public Item findItemByName(String nameItem) {
-		return this.roomDescription.findItemByName(nameItem);
+		return this.items.get(nameItem);
 	}
 
 	public boolean removeItem(Item item) {
-		return this.roomDescription.removeItem(item);
+		Item itemTemp = this.items.remove(item.getName());
+		return itemTemp != null;
 	}
 
 	public boolean addItem(Item item) {
-		return this.roomDescription.addItem(item);
+		if(item != null){
+			this.items.put(item.getName(), item);
+			return true;
+		}
+		return false;
 	}
 
 	public void addAllItems(List<Item> items) {
-		this.roomDescription.addAllItems(items);
+		items.forEach(this::addItem);
 	}
 
 	public void addAnimal(Animal animal) {
-		this.roomDescription.addAnimal(animal);
+		this.animals.computeIfAbsent(animal.getClass(), k-> new ArrayList<>()).add(animal);
 	}
 
 	public void addAllAnimals(List<Animal> animals) {
-		this.roomDescription.addAllAnimals(animals);
+		animals.forEach(this::addAnimal);
 	}
 
 	public boolean removeAnimal(Animal animal) {
-		return this.roomDescription.removeAnimal(animal);
+		return animals.get(animal.getClass()).removeIf(a -> a.equals(animal));
 	}
 
 	public void linkRoom(CardinalPoint cardinalPoint, Room room){
@@ -62,6 +67,20 @@ public class Room {
 		if(oppositeRoom != this){
 			room.linkRoom(opposite, this);
 		}
+	}
+	public List<String> getItemsName(){
+		return List.of(items.keySet().toString());
+	}
+
+	public  Map<Class<? extends Animal>, List<String>> getAnimalsName(){
+		return  this.animals.entrySet().stream()
+				.collect(Collectors.toMap(
+						Map.Entry::getKey,
+						entry -> entry.getValue()
+								.stream()
+								.map(Animal::getName)
+								.toList()
+				));
 	}
 
 }

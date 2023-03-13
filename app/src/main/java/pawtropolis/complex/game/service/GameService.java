@@ -3,14 +3,15 @@ package pawtropolis.complex.game.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pawtropolis.complex.animals.domain.Animal;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.domain.RoomDescription;
 import pawtropolis.complex.map.maploader.MapInitializer;
 import pawtropolis.complex.map.util.CardinalPoint;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -57,9 +58,17 @@ public class GameService {
         this.currentRoom.addItem(item);
     }
 
-    public RoomDescription getRoomDescription() {
-       return this.currentRoom.getRoomDescription();
-    }
+   public List<String> getRoomItemsName(){
+        return this.currentRoom.getItemsName();
+   }
+
+   public Map<Class<? extends Animal>, List<String>> getRoomAnimalsName(){
+        return this.currentRoom.getAnimalsName();
+   }
+
+   public String getRoomName(){
+        return this.currentRoom.getName();
+   }
 
     public List<String> getPlayerBagContent(){
         return this.player.getBagContent();
