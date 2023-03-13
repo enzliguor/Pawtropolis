@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import pawtropolis.complex.animals.domain.Animal;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.service.GameService;
-import pawtropolis.complex.map.domain.RoomDescription;
 
 import java.util.List;
 import java.util.Map;
@@ -22,12 +21,10 @@ public class LookCommand extends GameCommand {
     @Override
     public void execute() {
 
-        RoomDescription description = this.gameService.getRoomDescription();
+        Map<String, Item> itemsName = this.gameService.getRoomItems();
+        Map<Class<? extends Animal>, List<Animal>> animals = this.gameService.getRoomAnimals();
 
-        Map<String, Item> itemsName = description.getItems();
-        Map<Class<? extends Animal>, List<Animal>> animals = description.getAnimals();
-
-        StringBuilder builder = new StringBuilder("You are in " + description.getName() + ".\nItems: ");
+        StringBuilder builder = new StringBuilder("You are in " + this.gameService.getRoomName() + ".\nItems: ");
 
         for (String itemName: itemsName.keySet()) {
             builder.append(itemName).append(", ");
