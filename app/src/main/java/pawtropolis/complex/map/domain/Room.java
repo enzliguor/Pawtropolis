@@ -7,7 +7,6 @@ import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.map.util.CardinalPoint;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @EqualsAndHashCode
 @RequiredArgsConstructor
@@ -27,22 +26,16 @@ public class Room {
 		return this.adjacentRooms.get(cardinalPoint);
 	}
 
-	public Item findItemByName(String itemName) {
-		return this.items.stream()
-				.filter(i -> i.getName().equals(itemName))
-				.findFirst()
-				.orElse(null);
+	public List<Item> getItems(){
+		return List.copyOf(this.items);
 	}
 
-	public boolean removeItem(Item item) {
-		 return this.items.remove(item);
+	public void removeItem(Item item) {
+		this.items.remove(item);
 	}
 
-	public boolean addItem(Item item) {
-		if(item != null){
-			return this.items.add(item);
-		}
-		return false;
+	public void addItem(Item item) {
+		this.items.add(item);
 	}
 
 	public void addAllItems(List<Item> items) {
@@ -69,17 +62,8 @@ public class Room {
 			room.linkRoom(opposite, this);
 		}
 	}
-	public List<String> getItemsName(){
-		return this.items.stream()
-				.map(Item::getName)
-				.toList();
-	}
 
-	public  Map<Class<? extends Animal>, List<String>> getAnimalsName(){
-		return  this.animals.stream()
-				.collect(Collectors.groupingBy(
-						Animal::getClass,
-						Collectors.mapping(Animal::getName, Collectors.toList())
-				));
+	public  List<Animal> getAnimals(){
+		return this.animals;
 	}
 }

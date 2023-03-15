@@ -12,6 +12,7 @@ import pawtropolis.complex.map.util.CardinalPoint;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -35,7 +36,11 @@ public class GameService {
     }
 
     public Item findItemInRoomByName(String itemName){
-        return this.currentRoom.findItemByName(itemName);
+        List<Item> items = this.currentRoom.getItems();
+        return items.stream()
+                .filter(i -> i.getName().equals(itemName))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean collectItem(Item item){
@@ -55,15 +60,25 @@ public class GameService {
     }
 
     public void addItemInRoom(Item item){
-        this.currentRoom.addItem(item);
+        if (item!=null){
+            this.currentRoom.addItem(item);
+        }
     }
 
    public List<String> getRoomItemsName(){
-        return this.currentRoom.getItemsName();
+        List<Item> items = this.currentRoom.getItems();
+        return items.stream()
+                .map(Item::getName)
+                .toList();
    }
 
    public Map<Class<? extends Animal>, List<String>> getRoomAnimalsName(){
-        return this.currentRoom.getAnimalsName();
+        List<Animal> animals = this.currentRoom.getAnimals();
+       return  animals.stream()
+               .collect(Collectors.groupingBy(
+                       Animal::getClass,
+                       Collectors.mapping(Animal::getName, Collectors.toList())
+               ));
    }
 
    public String getRoomName(){
