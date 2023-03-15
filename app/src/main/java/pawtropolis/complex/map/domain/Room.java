@@ -19,9 +19,9 @@ public class Room {
 	@Setter
 	private String name;
 	private final List<Item> items = new ArrayList<>();
-	private final Map<Class<? extends Animal>, List<Animal>> animals = new HashMap<>();
+	private final List<Animal> animals = new ArrayList<>();
 
-	private final EnumMap<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
+	private final Map<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
 
 	public Room getAdjacentRoom(CardinalPoint cardinalPoint) {
 		return this.adjacentRooms.get(cardinalPoint);
@@ -50,15 +50,15 @@ public class Room {
 	}
 
 	public void addAnimal(Animal animal) {
-		this.animals.computeIfAbsent(animal.getClass(), k-> new ArrayList<>()).add(animal);
+		this.animals.add(animal);
 	}
 
 	public void addAllAnimals(List<Animal> animals) {
 		animals.forEach(this::addAnimal);
 	}
 
-	public boolean removeAnimal(Animal animal) {
-		return animals.get(animal.getClass()).removeIf(a -> a.equals(animal));
+	public void removeAnimal(Animal animal) {
+		animals.remove(animal);
 	}
 
 	public void linkRoom(CardinalPoint cardinalPoint, Room room){
@@ -76,14 +76,10 @@ public class Room {
 	}
 
 	public  Map<Class<? extends Animal>, List<String>> getAnimalsName(){
-		return  this.animals.entrySet().stream()
-				.collect(Collectors.toMap(
-						Map.Entry::getKey,
-						entry -> entry.getValue()
-								.stream()
-								.map(Animal::getName)
-								.toList()
+		return  this.animals.stream()
+				.collect(Collectors.groupingBy(
+						Animal::getClass,
+						Collectors.mapping(Animal::getName, Collectors.toList())
 				));
 	}
-
 }
