@@ -27,31 +27,22 @@ public class Bag {
 		this.availableSlot = capacity;
 	}
 
-	public boolean addItem(Item item){
-		if (item == null) return false;
-		this.items.add(item);
-		this.availableSlot -= item.getSlotRequired();
-		return true;
+	public List<Item> getItems(){
+		return this.items;
 	}
 
-	public boolean checkItemFits(Item item){
-		return item.getSlotRequired() < this.availableSlot;
+	public void addItem(Item item){
+		if(item!=null) {
+			this.items.add(item);
+			this.availableSlot -= item.getSlotRequired();
+		}
 	}
 
-	public Item removeItemByName(String itemName) {
-		Item item = this.items.stream()
-				.filter(i -> i.getName().equals(itemName))
-				.findFirst()
-				.orElse(null);
+	public Item removeItem(Item item) {
 		if (item != null) {
+			this.items.remove(item);
 			this.availableSlot += item.getSlotRequired();
 		}
 		return item;
-	}
-
-	public List<String> getAllItemsName(){
-		return this.items.stream()
-				.map(Item::getName)
-				.toList();
 	}
 }

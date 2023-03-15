@@ -43,12 +43,12 @@ public class GameService {
                 .orElse(null);
     }
 
-    public boolean collectItem(Item item){
-        return this.player.addItem(item);
+    public void collectItem(Item item){
+        this.player.addItem(item);
     }
 
     public boolean checkItemFitsInPlayerBag(Item item){
-        return this.player.checkItemFitsinBag(item);
+        return item.getSlotRequired() < getAvailableSlot();
     }
 
     public void removeItemFromRoom(Item item){
@@ -56,7 +56,13 @@ public class GameService {
     }
 
     public Item dropItemByName(String itemName){
-        return this.player.removeItemByName(itemName);
+        List<Item> items = this.player.getBagContent();
+        Item item = items.stream()
+                .filter(i -> i.getName().equals(itemName))
+                .findFirst()
+                .orElse(null);
+        return this.player.removeItem(item);
+
     }
 
     public void addItemInRoom(Item item){
@@ -86,7 +92,10 @@ public class GameService {
    }
 
     public List<String> getPlayerBagContent(){
-        return this.player.getBagContent();
+        List<Item> items = this.player.getBagContent();
+        return items.stream()
+                .map(Item::getName)
+                .toList();
     }
 
     public int getAvailableSlot(){

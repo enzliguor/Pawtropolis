@@ -29,23 +29,20 @@ public class Player {
 		this.name = name;
 	}
 
-	public List<String> getBagContent(){
-		return this.bag.getAllItemsName();
+	public List<Item> getBagContent(){
+		return this.bag.getItems();
 	}
 
-	public boolean checkItemFitsinBag(Item item){
-		return this.bag.checkItemFits(item);
-	}
 	public int getAvailableSlot(){
 		return this.bag.getAvailableSlot();
 	}
 
-	public boolean addItem(Item item){
-		return this.bag.addItem(item);
+	public void addItem(Item item){
+		this.bag.addItem(item);
 	}
 
-	public Item removeItemByName(String itemName) {
-		return this.bag.removeItemByName(itemName);
+	public Item removeItem(Item item) {
+		return this.bag.removeItem(item);
 	}
 
 	public void setBagCapacity(int bagCapacity){
