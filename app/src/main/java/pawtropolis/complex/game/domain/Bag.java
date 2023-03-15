@@ -6,9 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @EqualsAndHashCode
@@ -19,7 +18,7 @@ public class Bag {
 	@Getter
 	@Setter
 	private int availableSlot;
-	private final Map<String, Item> items = new HashMap<>();
+	private final List<Item> items = new ArrayList<>();
 
 	public Bag(){
 	}
@@ -30,7 +29,7 @@ public class Bag {
 
 	public boolean addItem(Item item){
 		if (item == null) return false;
-		this.items.put(item.getName(),item);
+		this.items.add(item);
 		this.availableSlot -= item.getSlotRequired();
 		return true;
 	}
@@ -40,7 +39,10 @@ public class Bag {
 	}
 
 	public Item removeItemByName(String itemName) {
-		Item item = this.items.remove(itemName);
+		Item item = this.items.stream()
+				.filter(i -> i.getName().equals(itemName))
+				.findFirst()
+				.orElse(null);
 		if (item != null) {
 			this.availableSlot += item.getSlotRequired();
 		}
@@ -48,6 +50,8 @@ public class Bag {
 	}
 
 	public List<String> getAllItemsName(){
-		return List.of(items.keySet().toString());
+		return this.items.stream()
+				.map(Item::getName)
+				.toList();
 	}
 }

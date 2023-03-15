@@ -18,7 +18,7 @@ public class Room {
 	@Getter
 	@Setter
 	private String name;
-	private final Map<String, Item> items = new HashMap<>();
+	private final List<Item> items = new ArrayList<>();
 	private final Map<Class<? extends Animal>, List<Animal>> animals = new HashMap<>();
 
 	private final EnumMap<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
@@ -27,19 +27,20 @@ public class Room {
 		return this.adjacentRooms.get(cardinalPoint);
 	}
 
-	public Item findItemByName(String nameItem) {
-		return this.items.get(nameItem);
+	public Item findItemByName(String itemName) {
+		return this.items.stream()
+				.filter(i -> i.getName().equals(itemName))
+				.findFirst()
+				.orElse(null);
 	}
 
 	public boolean removeItem(Item item) {
-		Item itemTemp = this.items.remove(item.getName());
-		return itemTemp != null;
+		 return this.items.remove(item);
 	}
 
 	public boolean addItem(Item item) {
 		if(item != null){
-			this.items.put(item.getName(), item);
-			return true;
+			return this.items.add(item);
 		}
 		return false;
 	}
@@ -69,7 +70,9 @@ public class Room {
 		}
 	}
 	public List<String> getItemsName(){
-		return List.of(items.keySet().toString());
+		return this.items.stream()
+				.map(Item::getName)
+				.toList();
 	}
 
 	public  Map<Class<? extends Animal>, List<String>> getAnimalsName(){
