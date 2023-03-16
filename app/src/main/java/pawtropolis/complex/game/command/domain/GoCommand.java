@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component("go")
-public class GoCommand extends ParameterizedGameCommand {
+public class GoCommand extends ParameterizedCommand {
     @Autowired
     protected GoCommand(GameService gameService) {
         super(gameService);
@@ -22,7 +22,7 @@ public class GoCommand extends ParameterizedGameCommand {
     public void execute() {
         CardinalPoint direction = CardinalPoint.of(parameter);
         if(direction == null){
-            log.info("Unrecognized direction\nWhere do you want to go? "
+            log.info("\nUnrecognized direction\nWhere do you want to go? "
                     + Arrays.stream(CardinalPoint.values())
                     .map(c ->c.getName() +" - ")
                     .collect(Collectors.joining())+ "\n");
@@ -30,7 +30,7 @@ public class GoCommand extends ParameterizedGameCommand {
         }
         Room adjacentRoom = this.gameService.getAdjacentRoom(direction);
         if (adjacentRoom == null) {
-            log.info("Nothing to show in this direction!\n");
+            log.info("\nNothing to show in this direction!\n");
         } else {
             this.gameService.setCurrentRoom(adjacentRoom);
         }

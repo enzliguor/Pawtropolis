@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("drop")
-public class DropCommand extends ParameterizedGameCommand {
+public class DropCommand extends ParameterizedCommand {
     @Autowired
     protected DropCommand(GameService gameService) {
         super(gameService);
@@ -18,7 +18,7 @@ public class DropCommand extends ParameterizedGameCommand {
     public void execute() {
         Item item = gameService.dropItemByName(parameter);
         if (item == null) {
-            log.info("Item not found");
+            log.info("\nItem not found");
         } else {
             this.gameService.addItemInRoom(item);
         }

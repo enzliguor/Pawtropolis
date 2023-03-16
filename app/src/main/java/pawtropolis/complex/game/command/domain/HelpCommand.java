@@ -7,9 +7,10 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("help")
-public class HelpCommand extends GameCommand {
+public class HelpCommand extends Command {
 
     private static final String HELP = """
+				
 				look             -> get a description of the current Room
 				bag              -> show the content of your bag
 				get 'item name'  -> collect an item from the room

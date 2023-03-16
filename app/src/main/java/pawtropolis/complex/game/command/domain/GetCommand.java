@@ -8,7 +8,7 @@ import pawtropolis.complex.game.service.GameService;
 
 @Slf4j
 @Component("get")
-public class GetCommand extends ParameterizedGameCommand {
+public class GetCommand extends ParameterizedCommand {
     @Autowired
     protected GetCommand(GameService gameService) {
         super(gameService);
@@ -18,12 +18,12 @@ public class GetCommand extends ParameterizedGameCommand {
     public void execute() {
         Item item = gameService.findItemInRoomByName(parameter);
         if (item == null) {
-            log.info("Item not found\n");
+            log.info("\nItem not found\n");
         }else if(this.gameService.checkItemFitsInPlayerBag(item)){
             this.gameService.collectItem(item);
             this.gameService.removeItemFromRoom(item);
         }else{
-            log.info("Your Bag is too full! \n" +
+            log.info("\nYour Bag is too full! \n" +
                     "Free up " +
                     (item.getSlotRequired() - this.gameService.getAvailableSlot()) +
                     " slots to get this item\n");

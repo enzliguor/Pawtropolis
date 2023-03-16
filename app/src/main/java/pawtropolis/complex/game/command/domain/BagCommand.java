@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component("bag")
 @Slf4j
-public class BagCommand extends GameCommand {
+public class BagCommand extends Command {
     @Autowired
     protected BagCommand(GameService gameService) {
         super(gameService);
@@ -18,7 +18,7 @@ public class BagCommand extends GameCommand {
     public void execute() {
         List<String> items = this.gameService.getPlayerBagContent();
 
-        StringBuilder builder = new StringBuilder("In bag: ");
+        StringBuilder builder = new StringBuilder("\nIn bag: ");
 
         for (String s: items) {
             builder.append(s + ", ");

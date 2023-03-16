@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Slf4j
 @Component("look")
-public class LookCommand extends GameCommand {
+public class LookCommand extends Command {
     @Autowired
     protected LookCommand(GameService gameService) {
         super(gameService);
@@ -23,7 +23,7 @@ public class LookCommand extends GameCommand {
         List<String> itemsName = this.gameService.getRoomItemsName();
         Map<Class<? extends Animal>, List<String>> animals = this.gameService.getRoomAnimalsName();
 
-        StringBuilder builder = new StringBuilder("You are in " + this.gameService.getRoomName() + ".\nItems: ");
+        StringBuilder builder = new StringBuilder("\nYou are in " + this.gameService.getRoomName() + ".\nItems: ");
 
         for (String itemName: itemsName) {
             builder.append(itemName).append(", ");
