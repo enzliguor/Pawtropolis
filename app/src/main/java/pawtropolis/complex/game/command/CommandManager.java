@@ -20,6 +20,10 @@ public class CommandManager {
     }
 
     public void execute(String input){
+        Command command = getCommand(input);
+        command.execute();
+    }
+    public Command getCommand(String input){
         String commandInput = getCommandFromString(input);
         Command command;
         try{
@@ -31,7 +35,7 @@ public class CommandManager {
             String parameter = getParameterFromString(input);
             parameterizedCommand.setParameter(parameter);
         }
-        command.execute();
+        return command;
     }
 
     private String getCommandFromString(String input){
