@@ -3,12 +3,12 @@ package pawtropolis.complex.game.command.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import pawtropolis.complex.game.service.GameService;
 
-public abstract class ParameterizedGameCommand extends GameCommand {
+public abstract class ParameterizedCommand extends Command {
 
     protected String parameter;
 
     @Autowired
-    protected ParameterizedGameCommand(GameService gameService) {
+    protected ParameterizedCommand(GameService gameService) {
         super(gameService);
     }
 
