@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.domain.Command;
-import pawtropolis.complex.game.command.domain.ParameterizedGameCommand;
+import pawtropolis.complex.game.command.domain.ParameterizedCommand;
 
 @Slf4j
 @Component
@@ -19,7 +19,7 @@ public class CommandManager {
         this.applicationContext = applicationContext;
     }
 
-    public Command getCommand(String input){
+    public void execute(String input){
         String commandInput = getCommandFromString(input);
         Command command;
         try{
@@ -27,16 +27,16 @@ public class CommandManager {
         }catch (NoSuchBeanDefinitionException exception){
             command = applicationContext.getBean("wrongCommand", Command.class);
         }
-        if(command instanceof ParameterizedGameCommand parameterizedCommand){
+        if(command instanceof ParameterizedCommand parameterizedCommand){
             String parameter = getParameterFromString(input);
             parameterizedCommand.setParameter(parameter);
         }
-        return command;
+        command.execute();
     }
 
     private String getCommandFromString(String input){
         String [] strings = input.split("\\s", 2);
-        return strings[0].trim();
+        return strings[0].trim().toLowerCase();
     }
 
     private String getParameterFromString(String input){

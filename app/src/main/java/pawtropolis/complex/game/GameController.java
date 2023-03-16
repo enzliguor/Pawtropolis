@@ -9,7 +9,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.CommandManager;
-import pawtropolis.complex.game.command.domain.Command;
 import pawtropolis.complex.game.console.InputController;
 
 @Slf4j
@@ -26,23 +25,13 @@ public class GameController implements ApplicationRunner {
         this.commandManager = commandManager;
         this.gameRunning = false;
     }
-
     public void runGame() {
-        Command command = commandManager.getCommand("start");
-        command.execute();
+        log.info("Type HELP for a list of available command");
 
-        log.info("Hello Player!\n");
-        command = commandManager.getCommand("look");
-        command.execute();
+        while (gameRunning) {
+            log.info("Where are you going to go?>");
 
-        log.info("Type help for a list of available command\n");
-
-        while (!gameEnded) {
-            log.info("Where are you going to go?");
-            log.info(">");
-
-            command = commandManager.getCommand(InputController.readString());
-            command.execute();
+            commandManager.execute(InputController.readString());
         }
     }
     public void endGame() {
