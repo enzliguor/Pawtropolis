@@ -1,6 +1,7 @@
 package pawtropolis.complex.game;
 
 
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,15 @@ import pawtropolis.complex.game.console.InputController;
 @ToString
 @Component
 public class GameController implements ApplicationRunner {
-
-    private boolean gameEnded;
+    @Getter
+    private boolean gameRunning;
 
     private final CommandManager commandManager;
 
     @Autowired
     private GameController(CommandManager commandManager) {
         this.commandManager = commandManager;
-        this.gameEnded = false;
+        this.gameRunning = false;
     }
 
     public void runGame() {
@@ -45,10 +46,14 @@ public class GameController implements ApplicationRunner {
         }
     }
     public void endGame() {
-        this.gameEnded = true;
+        this.gameRunning = false;
+    }
+    public void startGame(){
+        this.gameRunning = true;
+        runGame();
     }
     @Override
     public void run(ApplicationArguments args){
-        runGame();
+        commandManager.execute("start");
     }
 }
