@@ -64,6 +64,6 @@ public class Room {
 	}
 
 	public  List<Animal> getAnimals(){
-		return this.animals;
+		return List.copyOf(this.animals);
 	}
 }

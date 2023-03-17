@@ -28,7 +28,7 @@ public class Bag {
 	}
 
 	public List<Item> getItems(){
-		return this.items;
+		return List.copyOf(this.items);
 	}
 
 	public void addItem(Item item){
