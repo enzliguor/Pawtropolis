@@ -1,15 +1,13 @@
 package pawtropolis.complex.game.command.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
 
 public abstract class ParameterizedCommand extends Command {
 
     protected String parameter;
 
-    @Autowired
-    protected ParameterizedCommand(GameService gameService) {
-        super(gameService);
+    protected ParameterizedCommand(MapInitializer mapInitializer) {
+        super(mapInitializer);
     }
 
     public void setParameter(String parameter){

@@ -2,9 +2,8 @@ package pawtropolis.complex.game.command.domain;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
 
 @Slf4j
 @Component
@@ -15,9 +14,9 @@ public class WrongCommand extends Command {
 				Unrecognized command
 				Type 'help' for a list of available command
 				""";
-    @Autowired
-    protected WrongCommand(GameService gameService) {
-        super(gameService);
+
+    protected WrongCommand(MapInitializer mapInitializer) {
+        super(mapInitializer);
     }
 
     @Override

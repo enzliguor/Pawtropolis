@@ -1,15 +1,14 @@
 package pawtropolis.complex.game.command.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.GameController;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
 
 @Component("exit")
 public class ExitCommand extends SystemCommand {
-    @Autowired
-    protected ExitCommand(GameService gameService, GameController gameController) {
-        super(gameService, gameController);
+
+    protected ExitCommand(MapInitializer mapInitializer, GameController gameController) {
+        super(mapInitializer, gameController);
     }
 
     @Override

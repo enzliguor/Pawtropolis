@@ -1,9 +1,8 @@
 package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
 
 @Slf4j
 @Component("help")
@@ -18,9 +17,9 @@ public class HelpCommand extends Command {
 				go 'direction'   -> move into another adjacent room, if available (north, south, east, west)
 				exit             -> close the game
 				""";
-    @Autowired
-    protected HelpCommand(GameService gameService) {
-        super(gameService);
+
+    protected HelpCommand(MapInitializer mapInitializer) {
+        super(mapInitializer);
     }
 
     @Override

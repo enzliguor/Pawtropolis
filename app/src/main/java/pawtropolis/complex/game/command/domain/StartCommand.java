@@ -1,12 +1,11 @@
 package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.GameController;
 import pawtropolis.complex.console.InputController;
-import pawtropolis.complex.game.service.GameService;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
 
 @Component("start")
 @Slf4j
@@ -17,9 +16,9 @@ public class StartCommand extends SystemCommand {
 
     @Value("${Bag.CAPACITY}")
     private int bagCapacity;
-    @Autowired
-    protected StartCommand(GameService gameService, GameController gameController) {
-        super(gameService, gameController);
+
+    protected StartCommand(MapInitializer mapInitializer, GameController gameController) {
+        super(mapInitializer, gameController);
     }
 
     @Override
@@ -27,13 +26,13 @@ public class StartCommand extends SystemCommand {
         if(this.gameController.isGameRunning()){
             log.info("\nType EXIT to quit the game");
         }else{
-            this.gameService.setPlayerLifePoints(defaultLifePoints);
+            this.player.setLifePoints(defaultLifePoints);
 
-            this.gameService.setPlayerBagCapacity(bagCapacity);
+            this.player.setBagCapacity(bagCapacity);
 
             log.info("\nType player name:");
             String playerName = InputController.readString();
-            this.gameService.setPlayerName(playerName);
+            this.player.setName(playerName);
 
             this.gameController.startGame();
             log.info("\nHello Player!\n");

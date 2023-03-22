@@ -31,6 +31,12 @@ public class Bag {
 		return List.copyOf(this.items);
 	}
 
+	public List<String> getItemsName(){
+		return this.items.stream()
+				.map(Item::getName)
+				.toList();
+	}
+
 	public void addItem(Item item){
 		if(item!=null) {
 			this.items.add(item);
@@ -44,5 +50,17 @@ public class Bag {
 			this.availableSlot += item.getSlotRequired();
 		}
 		return item;
+	}
+
+	public Item removeItemByName(String itemName) {
+		Item item = items.stream()
+				.filter(i -> i.getName().equals(itemName))
+				.findFirst()
+				.orElse(null);
+		return removeItem(item);
+	}
+
+	public boolean checkItemFits(Item item) {
+		return item.getSlotRequired() <= this.availableSlot;
 	}
 }
