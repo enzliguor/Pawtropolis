@@ -29,15 +29,15 @@ public class Player {
 		this.name = name;
 	}
 
-	public List<Item> getBagContent(){
-		return this.bag.getItems();
+	public List<String> getBagContent(){
+		return this.bag.getItemsName();
 	}
 
 	public int getAvailableSlot(){
 		return this.bag.getAvailableSlot();
 	}
 
-	public void addItem(Item item){
+	public void collectItem(Item item){
 		this.bag.addItem(item);
 	}
 
@@ -45,7 +45,15 @@ public class Player {
 		return this.bag.removeItem(item);
 	}
 
+	public Item dropItemByName(String itemName){
+		return this.bag.removeItemByName(itemName);
+	}
+
 	public void setBagCapacity(int bagCapacity){
 		this.bag.setAvailableSlot(bagCapacity);
+	}
+
+	public boolean checkItemFitsInBag(Item item) {
+		return this.bag.checkItemFits(item);
 	}
 }

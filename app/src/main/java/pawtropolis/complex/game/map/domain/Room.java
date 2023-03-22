@@ -7,6 +7,7 @@ import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @EqualsAndHashCode
 @RequiredArgsConstructor
@@ -65,5 +66,26 @@ public class Room {
 
 	public  List<Animal> getAnimals(){
 		return List.copyOf(this.animals);
+	}
+
+	public Item findItemByName(String itemName) {
+		return this.items.stream()
+				.filter(i -> i.getName().equals(itemName))
+				.findFirst()
+				.orElse(null);
+	}
+
+	public List<String> getItemsName() {
+		return this.items.stream()
+				.map(Item::getName)
+				.toList();
+	}
+
+	public Map<Class<? extends Animal>, List<String>> getAnimalsName() {
+		return this.animals.stream()
+				.collect(Collectors.groupingBy(
+						Animal::getClass,
+						Collectors.mapping(Animal::getName, Collectors.toList())
+						));
 	}
 }
