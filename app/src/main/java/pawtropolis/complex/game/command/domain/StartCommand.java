@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.GameController;
-import pawtropolis.complex.game.console.InputController;
+import pawtropolis.complex.console.InputController;
 import pawtropolis.complex.game.service.GameService;
 
 @Component("start")

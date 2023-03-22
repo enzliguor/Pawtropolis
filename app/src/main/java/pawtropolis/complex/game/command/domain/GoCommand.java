@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.service.GameService;
-import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.util.CardinalPoint;
+import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

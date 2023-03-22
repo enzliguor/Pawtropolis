@@ -3,12 +3,12 @@ package pawtropolis.complex.game.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pawtropolis.complex.animals.domain.Animal;
+import pawtropolis.complex.game.animals.domain.Animal;
 import pawtropolis.complex.game.domain.Item;
 import pawtropolis.complex.game.domain.Player;
-import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.maploader.MapInitializer;
-import pawtropolis.complex.map.util.CardinalPoint;
+import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.util.List;
 import java.util.Map;

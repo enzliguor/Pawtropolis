@@ -9,7 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.CommandManager;
-import pawtropolis.complex.game.console.InputController;
+import pawtropolis.complex.console.InputController;
 
 @Slf4j
 @ToString

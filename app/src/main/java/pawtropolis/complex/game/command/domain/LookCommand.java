@@ -3,7 +3,7 @@ package pawtropolis.complex.game.command.domain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.animals.domain.Animal;
+import pawtropolis.complex.game.animals.domain.Animal;
 import pawtropolis.complex.game.service.GameService;
 
 import java.util.List;

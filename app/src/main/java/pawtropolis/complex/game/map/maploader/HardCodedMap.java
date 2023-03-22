@@ -1,15 +1,15 @@
-package pawtropolis.complex.map.maploader;
+package pawtropolis.complex.game.map.maploader;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.animals.domain.Animal;
-import pawtropolis.complex.animals.domain.Eagle;
-import pawtropolis.complex.animals.domain.Lion;
-import pawtropolis.complex.animals.domain.Tiger;
+import pawtropolis.complex.game.animals.domain.Animal;
+import pawtropolis.complex.game.animals.domain.Eagle;
+import pawtropolis.complex.game.animals.domain.Lion;
+import pawtropolis.complex.game.animals.domain.Tiger;
 import pawtropolis.complex.game.domain.Item;
-import pawtropolis.complex.map.domain.Room;
-import pawtropolis.complex.map.util.CardinalPoint;
+import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.time.LocalDate;
 import java.util.List;
