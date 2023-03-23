@@ -1,4 +1,4 @@
-package pawtropolis.complex.game.map.maploader;
+package pawtropolis.complex.game.map.mapinitializer;
 
 import pawtropolis.complex.game.map.domain.Room;
 
