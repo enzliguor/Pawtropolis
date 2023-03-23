@@ -29,6 +29,11 @@ public class Player {
 		this.name = name;
 	}
 
+	public Player(String name, int lifePoints){
+		this(name);
+		this.lifePoints = lifePoints;
+	}
+
 	public List<String> getBagContent(){
 		return this.bag.getItemsName();
 	}
