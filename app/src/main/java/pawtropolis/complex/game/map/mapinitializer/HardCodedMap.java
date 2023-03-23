@@ -1,4 +1,4 @@
-package pawtropolis.complex.game.map.maploader;
+package pawtropolis.complex.game.map.mapinitializer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
