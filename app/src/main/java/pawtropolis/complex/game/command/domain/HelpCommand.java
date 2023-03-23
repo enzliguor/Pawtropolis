@@ -2,10 +2,10 @@ package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.GameController;
 
 @Slf4j
-@Component("help")
+@Component
 public class HelpCommand extends Command {
 
     private static final String HELP = """
@@ -18,8 +18,8 @@ public class HelpCommand extends Command {
 				exit             -> close the game
 				""";
 
-    protected HelpCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected HelpCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override

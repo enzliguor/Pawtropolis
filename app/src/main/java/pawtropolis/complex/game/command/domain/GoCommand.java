@@ -2,7 +2,7 @@ package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.GameController;
 import pawtropolis.complex.game.map.domain.Room;
 import pawtropolis.complex.game.map.util.CardinalPoint;
 
@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Component("go")
+@Component
 public class GoCommand extends ParameterizedCommand {
 
-    protected GoCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected GoCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override
@@ -27,11 +27,12 @@ public class GoCommand extends ParameterizedCommand {
                     .collect(Collectors.joining())+ "\n");
             return;
         }
-        Room adjacentRoom = this.currentRoom.getAdjacentRoom(direction);
+        Room currentRoom = gameController.getCurrentRoom();
+        Room adjacentRoom = currentRoom.getAdjacentRoom(direction);
         if (adjacentRoom == null) {
             log.info("\nNothing to show in this direction!\n");
         } else {
-            this.currentRoom = adjacentRoom;
+            gameController.setCurrentRoom(adjacentRoom);
         }
     }
 }

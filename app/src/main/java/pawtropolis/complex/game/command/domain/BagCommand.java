@@ -2,21 +2,23 @@ package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.GameController;
+import pawtropolis.complex.game.domain.Player;
 
 import java.util.List;
 
-@Component("bag")
+@Component
 @Slf4j
 public class BagCommand extends Command {
 
-    protected BagCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected BagCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override
     public void execute() {
-        List<String> items = this.player.getBagContent();
+        Player player = this.gameController.getPlayer();
+        List<String> items = player.getBagContent();
 
         StringBuilder builder = new StringBuilder("\nIn bag: ");
 
@@ -27,7 +29,7 @@ public class BagCommand extends Command {
             builder.delete(builder.length()-2, builder.length()-1);
         }
 
-        builder.append("   [Available Slot: " + this.player.getAvailableSlot() + "]");
+        builder.append("   [Available Slot: " + player.getAvailableSlot() + "]");
         log.info(builder + "\n");
     }
 }

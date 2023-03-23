@@ -1,13 +1,13 @@
 package pawtropolis.complex.game.command.domain;
 
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.GameController;
 
 public abstract class ParameterizedCommand extends Command {
 
     protected String parameter;
 
-    protected ParameterizedCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected ParameterizedCommand(GameController gameController) {
+        super(gameController);
     }
 
     public void setParameter(String parameter){

@@ -2,29 +2,33 @@ package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.complex.game.GameController;
 import pawtropolis.complex.game.domain.Item;
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.domain.Player;
+import pawtropolis.complex.game.map.domain.Room;
 
 @Slf4j
-@Component("get")
+@Component
 public class GetCommand extends ParameterizedCommand {
 
-    protected GetCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected GetCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override
     public void execute() {
-        Item item = this.currentRoom.findItemByName(parameter);
+        Room currentRoom = this.gameController.getCurrentRoom();
+        Player player = this.gameController.getPlayer();
+        Item item = currentRoom.findItemByName(parameter);
         if (item == null) {
             log.info("\nItem not found\n");
-        }else if(this.player.checkItemFitsInBag(item)){
-            this.player.collectItem(item);
-            this.currentRoom.removeItem(item);
+        }else if(player.checkItemFitsInBag(item)){
+            player.collectItem(item);
+            currentRoom.removeItem(item);
         }else{
             log.info("\nYour Bag is too full! \n" +
                     "Free up " +
-                    (item.getSlotRequired() - this.player.getAvailableSlot()) +
+                    (item.getSlotRequired() - player.getAvailableSlot()) +
                     " slots to get this item\n");
         }
     }

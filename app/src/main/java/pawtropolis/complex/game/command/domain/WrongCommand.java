@@ -3,7 +3,7 @@ package pawtropolis.complex.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.map.maploader.MapInitializer;
+import pawtropolis.complex.game.GameController;
 
 @Slf4j
 @Component
@@ -15,8 +15,8 @@ public class WrongCommand extends Command {
 				Type 'help' for a list of available command
 				""";
 
-    protected WrongCommand(MapInitializer mapInitializer) {
-        super(mapInitializer);
+    protected WrongCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override
