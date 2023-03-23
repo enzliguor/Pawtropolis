@@ -22,29 +22,25 @@ import pawtropolis.complex.game.map.mapinitializer.MapInitializer;
 public class GameController implements ApplicationRunner {
     @Getter
     private Player player;
-
     @Getter
     @Setter
     private Room currentRoom;
-
     @Getter
     private boolean gameRunning;
-
     private final CommandManager commandManager;
-
     @Value("${Player.DEFAULT_LIFE_POINTS}")
     private int defaultLifePoints;
-
     @Value("${Bag.CAPACITY}")
     private int bagCapacity;
 
     @Autowired
     private GameController(MapInitializer mapInitializer, CommandManager commandManager) {
-        this.gameRunning = true;
+        this.gameRunning = false;
         this.currentRoom = mapInitializer.populateMap();
         this.commandManager = commandManager;
     }
     public void runGame() {
+        this.gameRunning = true;
         log.info("\nType player name:");
         String playerName = InputController.readString();
         this.player = new Player(playerName, defaultLifePoints);
