@@ -32,14 +32,25 @@ public class GameController implements ApplicationRunner {
 
     private final CommandManager commandManager;
 
+    @Value("${Player.DEFAULT_LIFE_POINTS}")
+    private int defaultLifePoints;
+
+    @Value("${Bag.CAPACITY}")
+    private int bagCapacity;
+
     @Autowired
     private GameController(MapInitializer mapInitializer, CommandManager commandManager) {
         this.gameRunning = true;
         this.currentRoom = mapInitializer.populateMap();
         this.commandManager = commandManager;
-        this.gameRunning = false;
     }
     public void runGame() {
+        log.info("\nType player name:");
+        String playerName = InputController.readString();
+        this.player = new Player(playerName, defaultLifePoints);
+        this.player.setBagCapacity(bagCapacity);
+
+        log.info("\nHello Player!\n");
         log.info("Type HELP for a list of available command");
 
         while (gameRunning) {
@@ -51,12 +62,9 @@ public class GameController implements ApplicationRunner {
     public void endGame() {
         this.gameRunning = false;
     }
-    public void startGame(){
-        this.gameRunning = true;
-        runGame();
-    }
+
     @Override
     public void run(ApplicationArguments args){
-        commandManager.execute("start");
+        runGame();
     }
 }
