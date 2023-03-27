@@ -1,0 +1,7 @@
+FROM postgres:alpine
+
+LABEL author="Vincenzo Liguori"
+LABEL description="Postgres Image for Pawtropolis"
+LABEL version="1.0"
+
+COPY *.sql /docker-entrypoint-initdb.d/

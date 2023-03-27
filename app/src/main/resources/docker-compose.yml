@@ -1,0 +1,17 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: "pawtropolis-tutorial"
+    container_name: pawtropolis_DB
+    environment:
+      POSTGRES_DB: pawtropolis
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: admin
+      PGDATA: /data/pawtropolis_DB
+    volumes:
+     - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
