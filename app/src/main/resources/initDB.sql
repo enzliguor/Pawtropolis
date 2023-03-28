@@ -28,12 +28,6 @@ CREATE TABLE room
     name VARCHAR(50)
 );
 
-CREATE TABLE cardinal_point
-(
-    id   serial PRIMARY KEY,
-    name VARCHAR(20)
-);
-
 CREATE TABLE items_in_bag
 (
     id_item INT NOT NULL,
@@ -55,16 +49,14 @@ CREATE TABLE items_in_room
     FOREIGN KEY (id_room)
         REFERENCES room (id)
 );
-CREATE TABLE linked_room
+CREATE TABLE linked_rooms
 (
     id_room           INT NOT NULL,
-    id_cardinal_point INT NOT NULL,
+    adjacent_rooms_key VARCHAR(50) NOT NULL,
     id_adjacent_room  INT NOT NULL,
-    PRIMARY KEY (id_room, id_cardinal_point),
+    PRIMARY KEY (id_room, adjacent_rooms_key),
     FOREIGN KEY (id_room)
         REFERENCES room (id),
-    FOREIGN KEY (id_cardinal_point)
-        REFERENCES cardinal_point (id),
     FOREIGN KEY (id_adjacent_room)
         REFERENCES room (id)
 );
