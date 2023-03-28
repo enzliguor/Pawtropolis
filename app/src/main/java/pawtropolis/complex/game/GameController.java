@@ -14,7 +14,7 @@ import pawtropolis.complex.game.command.CommandManager;
 import pawtropolis.complex.console.InputController;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.game.map.domain.Room;
-import pawtropolis.complex.game.map.mapinitializer.MapInitializer;
+import pawtropolis.complex.game.map.mapinitializer.MapLoader;
 
 @Slf4j
 @ToString
@@ -34,7 +34,7 @@ public class GameController implements ApplicationRunner {
     private int bagCapacity;
 
     @Autowired
-    private GameController(MapInitializer mapInitializer, CommandManager commandManager) {
+    private GameController(MapLoader mapInitializer, CommandManager commandManager) {
         this.gameRunning = false;
         this.currentRoom = mapInitializer.populateMap();
         this.commandManager = commandManager;

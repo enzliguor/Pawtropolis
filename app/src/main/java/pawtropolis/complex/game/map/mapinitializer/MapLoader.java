@@ -2,7 +2,7 @@ package pawtropolis.complex.game.map.mapinitializer;
 
 import pawtropolis.complex.game.map.domain.Room;
 
-public interface MapInitializer {
+public interface MapLoader {
 
     Room populateMap();
 }

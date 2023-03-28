@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class HardCodedMap implements  MapInitializer{
+public class HardCodedMap implements MapLoader {
     @Override
     public Room populateMap() {
         Item ball = new Item("ball", "ball", 6);
