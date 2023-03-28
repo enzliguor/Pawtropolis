@@ -1,5 +1,6 @@
 package pawtropolis.complex.game.map.domain;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import pawtropolis.complex.game.animals.domain.Animal;
@@ -10,18 +11,43 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 @Slf4j
+@Entity
+@Table(name = "room")
 public class Room {
-	@NonNull
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Getter
 	@Setter
+	@Column(name = "name")
 	private String name;
+	@OneToMany
+	@JoinTable(name = "items_in_room",
+			joinColumns = {@JoinColumn(name = "id_item", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")})
 	private final List<Item> items = new ArrayList<>();
+	@OneToMany
+	@JoinTable(name = "animals_in_room",
+			joinColumns = {@JoinColumn(name = "id_animal", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")})
 	private final List<Animal> animals = new ArrayList<>();
-
+	@ManyToMany
+	@JoinTable(name= "linked_rooms",
+			joinColumns = {
+					@JoinColumn(name = "id_room", referencedColumnName = "id")},
+			inverseJoinColumns = {
+					@JoinColumn(name = "id_adjacent_room", referencedColumnName = "id")
+			})
+	@MapKeyEnumerated(value = EnumType.STRING)
 	private final Map<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
+
+	public Room(String name) {
+		this.name = name;
+	}
 
 	public Room getAdjacentRoom(CardinalPoint cardinalPoint) {
 		return this.adjacentRooms.get(cardinalPoint);

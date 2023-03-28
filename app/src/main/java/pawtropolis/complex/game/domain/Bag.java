@@ -1,9 +1,7 @@
 package pawtropolis.complex.game.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -13,11 +11,19 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Slf4j
+@Entity
+@Table(name = "bag")
 public class Bag {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Getter
 	@Setter
 	private int availableSlot;
+	@OneToMany
+	@JoinTable(name = "items_in_bag",
+			joinColumns = {@JoinColumn(name = "id_bag", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "id_item", referencedColumnName = "id")})
 	private final List<Item> items = new ArrayList<>();
 
 	public Bag(){
@@ -40,14 +46,14 @@ public class Bag {
 	public void addItem(Item item){
 		if(item!=null) {
 			this.items.add(item);
-			this.availableSlot -= item.getSlotRequired();
+			this.availableSlot -= item.getSlotsRequired();
 		}
 	}
 
 	public Item removeItem(Item item) {
 		if (item != null) {
 			this.items.remove(item);
-			this.availableSlot += item.getSlotRequired();
+			this.availableSlot += item.getSlotsRequired();
 		}
 		return item;
 	}
@@ -61,6 +67,6 @@ public class Bag {
 	}
 
 	public boolean checkItemFits(Item item) {
-		return item.getSlotRequired() <= this.availableSlot;
+		return item.getSlotsRequired() <= this.availableSlot;
 	}
 }

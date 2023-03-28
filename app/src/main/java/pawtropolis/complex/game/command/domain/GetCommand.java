@@ -28,7 +28,7 @@ public class GetCommand extends ParameterizedCommand {
         }else{
             log.info("\nYour Bag is too full! \n" +
                     "Free up " +
-                    (item.getSlotRequired() - player.getAvailableSlot()) +
+                    (item.getSlotsRequired() - player.getAvailableSlot()) +
                     " slots to get this item\n");
         }
     }

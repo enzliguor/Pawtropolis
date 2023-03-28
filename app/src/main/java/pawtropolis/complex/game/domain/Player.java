@@ -1,18 +1,28 @@
 package pawtropolis.complex.game.domain;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
 @ToString
 @EqualsAndHashCode
+@Entity
+@Table(name = "player")
 public class Player {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Getter
 	@Setter
+	@Column(name = "name")
 	private String name;
 	@Getter
 	@Setter
+	@Column(name = "life_points")
 	private int lifePoints;
+	@OneToOne
+	@PrimaryKeyJoinColumn(name = "id_bag")
 	private final Bag bag;
 
 	public Player() {
