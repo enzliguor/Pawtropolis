@@ -71,16 +71,8 @@ CREATE TABLE animal
     weight        FLOAT,
     height        FLOAT,
     tail_length   FLOAT,
-    wingspan      FLOAT
-);
-
-CREATE TABLE animals_in_room
-(
-    id_animal INT NOT NULL,
-    id_room   INT NOT NULL,
-    PRIMARY KEY (id_animal, id_room),
-    FOREIGN KEY (id_animal)
-        REFERENCES animal (id),
+    wingspan      FLOAT,
+    id_room       INT NOT NULL,
     FOREIGN KEY (id_room)
         REFERENCES room (id)
 );

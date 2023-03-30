@@ -31,9 +31,7 @@ public class Room {
 			inverseJoinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")})
 	private final List<Item> items = new ArrayList<>();
 	@OneToMany
-	@JoinTable(name = "animals_in_room",
-			joinColumns = {@JoinColumn(name = "id_animal", referencedColumnName = "id")},
-			inverseJoinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")})
+	@JoinColumn(name = "id_room", referencedColumnName = "id")
 	private final List<Animal> animals = new ArrayList<>();
 	@ManyToMany
 	@JoinTable(name= "linked_rooms",
