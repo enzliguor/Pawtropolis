@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @EqualsAndHashCode
@@ -14,59 +13,84 @@ import java.util.List;
 @Entity
 @Table(name = "bag")
 public class Bag {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Getter
-	@Setter
-	private int availableSlot;
-	@OneToMany
-	@JoinTable(name = "items_in_bag",
-			joinColumns = {@JoinColumn(name = "id_bag", referencedColumnName = "id")},
-			inverseJoinColumns = {@JoinColumn(name = "id_item", referencedColumnName = "id")})
-	private final List<Item> items = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Getter
+    @Setter
+    private int availableSlot;
+    @ElementCollection
+    @CollectionTable(name = "items_in_bag",
+            joinColumns = {@JoinColumn(name = "id_bag", referencedColumnName = "id")})
+    @MapKeyJoinColumn(name = "id_item", referencedColumnName = "id")
+    @Column(name = "quantity")
+    private final Map<Item, Integer> items = new HashMap<>();
 
-	public Bag(){
-	}
+    public Bag() {
+    }
 
-	public Bag(int capacity){
-		this.availableSlot = capacity;
-	}
+    public Bag(int capacity) {
+        this.availableSlot = capacity;
+    }
 
-	public List<Item> getItems(){
-		return List.copyOf(this.items);
-	}
+    public Map<Item, Integer> getItems() {
+        return Map.copyOf(this.items);
+    }
 
-	public List<String> getItemsName(){
-		return this.items.stream()
-				.map(Item::getName)
-				.toList();
-	}
+    public List<String> getItemsName() {
+        return this.items.keySet().stream()
+                .map(Item::getName)
+                .toList();
+    }
 
-	public void addItem(Item item){
-		if(item!=null) {
-			this.items.add(item);
-			this.availableSlot -= item.getSlotsRequired();
-		}
-	}
+    public void addItem(Item item) {
+        addItem(item, 1);
+    }
 
-	public Item removeItem(Item item) {
-		if (item != null) {
-			this.items.remove(item);
-			this.availableSlot += item.getSlotsRequired();
-		}
-		return item;
-	}
+    public void addItem(Item item, Integer integer) {
+        if (item != null && checkItemsFits(item, integer)) {
+            this.items.put(item, this.items.getOrDefault(item, 0) + integer);
+        }
+    }
 
-	public Item removeItemByName(String itemName) {
-		Item item = items.stream()
-				.filter(i -> i.getName().equals(itemName))
-				.findFirst()
-				.orElse(null);
-		return removeItem(item);
-	}
+    public Item removeItem(Item item) {
+        return removeItem(item, 1);
+    }
 
-	public boolean checkItemFits(Item item) {
-		return item.getSlotsRequired() <= this.availableSlot;
-	}
+    public Item removeItem(Item item, Integer integer) {
+        if (item != null && this.items.containsKey(item) && getItemQuantity(item) >= integer) {
+            addItem(item, getItemQuantity(item) - integer);
+            if (getItemQuantity(item) == 0) {
+                this.items.remove(item);
+            }
+            this.availableSlot += item.getSlotsRequired() * integer;
+            return item;
+        }
+        return null;
+    }
+
+    public Item removeItemByName(String itemName) {
+        Item item = findItemByName(itemName);
+        return removeItem(item);
+    }
+
+    public boolean checkItemFits(Item item) {
+        return checkItemsFits(item, 1);
+    }
+
+    public boolean checkItemsFits(Item item, Integer integer) {
+        return item.getSlotsRequired() * integer <= this.availableSlot;
+    }
+
+    public Integer getItemQuantity(Item item) {
+        return this.items.get(item);
+    }
+
+    public Item findItemByName(String itemName) {
+        return this.items.keySet().stream()
+                .filter(i -> i.getName().equals(itemName))
+                .findFirst()
+                .orElse(null);
+    }
+
 }
