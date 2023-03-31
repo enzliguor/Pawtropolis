@@ -43,25 +43,25 @@ VALUES ('tiger', 'Tigger', 'steak', 5, '2018-03-01', 200.0, 1.2, 1.0, null, 1),
        ('eagle', 'Artemis', 'meat', 2, '2021-02-12', 2.3, 0.68, null, 1.1, 5),
        ('eagle', 'Ares', 'fish', 1, '2022-01-01', 1.8, 0.49, null, 0.9, 5);
 
-INSERT INTO items_in_room (id_item, id_room)
-VALUES (1, 1),
-       (2, 1),
-       (3, 1),
-       (4, 2),
-       (5, 2),
-       (6, 2),
-       (7, 3),
-       (8, 3),
-       (9, 3),
-       (10, 4),
-       (11, 4),
-       (12, 4),
-       (13, 5),
-       (14, 5),
-       (15, 5),
-       (16, 5);
+INSERT INTO items_in_room (id_item, id_room, quantity)
+VALUES (1, 1, 1),
+       (2, 1, 2),
+       (3, 1, 1),
+       (4, 2, 3),
+       (5, 2, 1),
+       (6, 2, 2),
+       (7, 3, 1),
+       (8, 3, 3),
+       (9, 3, 1),
+       (10, 4, 2),
+       (11, 4, 1),
+       (12, 4, 1),
+       (13, 5, 3),
+       (14, 5, 2),
+       (15, 5, 1),
+       (16, 5, 1);
 
-INSERT INTO linked_rooms (id_room, adjacent_rooms_key, id_adjacent_room)
+INSERT INTO linked_rooms (id_room, cardinal_point, id_adjacent_room)
 VALUES (1, 'north', 2),
        (2, 'south', 1),
        (1, 'west', 3),

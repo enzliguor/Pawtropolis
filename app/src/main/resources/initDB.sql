@@ -32,6 +32,7 @@ CREATE TABLE items_in_bag
 (
     id_item INT NOT NULL,
     id_bag  INT NOT NULL,
+    quantity  INT,
     PRIMARY KEY (id_item, id_bag),
     FOREIGN KEY (id_item)
         REFERENCES item (id),
@@ -43,6 +44,7 @@ CREATE TABLE items_in_room
 (
     id_item INT NOT NULL,
     id_room INT NOT NULL,
+    quantity  INT,
     PRIMARY KEY (id_item, id_room),
     FOREIGN KEY (id_item)
         REFERENCES item (id),
@@ -52,9 +54,9 @@ CREATE TABLE items_in_room
 CREATE TABLE linked_rooms
 (
     id_room           INT NOT NULL,
-    adjacent_rooms_key VARCHAR(50) NOT NULL,
+    cardinal_point VARCHAR(50) NOT NULL,
     id_adjacent_room  INT NOT NULL,
-    PRIMARY KEY (id_room, adjacent_rooms_key),
+    PRIMARY KEY (id_room, cardinal_point),
     FOREIGN KEY (id_room)
         REFERENCES room (id),
     FOREIGN KEY (id_adjacent_room)
