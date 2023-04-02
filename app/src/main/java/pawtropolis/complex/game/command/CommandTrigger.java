@@ -13,7 +13,7 @@ public enum CommandTrigger {
     GO("go", GoCommand.class),
     HELP("help", HelpCommand.class),
     LOOK("look", LookCommand.class),
-    WRONG_COMMAND("wrong command", WrongCommand.class);
+    WRONG_COMMAND("", WrongCommand.class);
 
     @Getter
     private final String trigger;
