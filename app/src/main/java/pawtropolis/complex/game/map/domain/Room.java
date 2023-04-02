@@ -64,7 +64,7 @@ public class Room {
 
     public void removeItems(Item item, Integer integer) {
         if (item != null && this.items.containsKey(item) && getItemQuantity(item) >= integer) {
-            addItem(item, getItemQuantity(item) - integer);
+            this.items.put(item, getItemQuantity(item) - integer);
             if (getItemQuantity(item) == 0) {
                 this.items.remove(item);
             }

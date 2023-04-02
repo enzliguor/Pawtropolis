@@ -50,6 +50,7 @@ public class Bag {
     public void addItem(Item item, Integer integer) {
         if (item != null && checkItemsFits(item, integer)) {
             this.items.put(item, this.items.getOrDefault(item, 0) + integer);
+            this.availableSlot -= item.getSlotsRequired() * integer;
         }
     }
 
@@ -59,7 +60,7 @@ public class Bag {
 
     public Item removeItem(Item item, Integer integer) {
         if (item != null && this.items.containsKey(item) && getItemQuantity(item) >= integer) {
-            addItem(item, getItemQuantity(item) - integer);
+            this.items.put(item, getItemQuantity(item) - integer);
             if (getItemQuantity(item) == 0) {
                 this.items.remove(item);
             }
