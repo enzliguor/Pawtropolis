@@ -3,7 +3,7 @@ package pawtropolis.complex.game.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Map;
 
 @ToString
 @EqualsAndHashCode
@@ -44,7 +44,7 @@ public class Player {
 		this.lifePoints = lifePoints;
 	}
 
-	public List<String> getBagContent(){
+	public Map<String, Integer> getBagContent(){
 		return this.bag.getItemsName();
 	}
 

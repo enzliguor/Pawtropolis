@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @EqualsAndHashCode
@@ -37,10 +38,12 @@ public class Bag {
         return Map.copyOf(this.items);
     }
 
-    public List<String> getItemsName() {
-        return this.items.keySet().stream()
-                .map(Item::getName)
-                .toList();
+    public Map<String, Integer> getItemsName() {
+        return this.items.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getName(),
+                        Map.Entry::getValue
+                ));
     }
 
     public void addItem(Item item) {
