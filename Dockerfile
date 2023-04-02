@@ -10,4 +10,4 @@ ENV POSTGRES_DB pawtropolis
 
 EXPOSE 5432
 
-COPY *.sql /docker-entrypoint-initdb.d/
+COPY app/src/main/resources/sql/*.sql /docker-entrypoint-initdb.d/
