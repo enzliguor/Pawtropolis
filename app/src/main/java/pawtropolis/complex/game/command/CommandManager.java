@@ -40,7 +40,7 @@ public class CommandManager {
 
     public Command getCommand(String input) {
         if (commands == null) init();
-        String commandInput = getCommandFromString(input);
+        String commandInput = getCommandNameFromString(input);
         Command command = commands.get(CommandTrigger.of(commandInput));
 
         if (command instanceof ParameterizedCommand parameterizedCommand) {
@@ -49,8 +49,7 @@ public class CommandManager {
         }
         return command;
     }
-
-    private String getCommandFromString(String input) {
+    private String getCommandNameFromString(String input) {
         String[] strings = input.split("\\s", 2);
         return strings[0].trim();
     }
