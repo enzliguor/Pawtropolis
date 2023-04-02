@@ -8,7 +8,6 @@ import pawtropolis.complex.game.map.domain.Room;
 
 import java.util.List;
 import java.util.Map;
-
 @Slf4j
 @Component
 public class LookCommand extends Command {
@@ -19,13 +18,15 @@ public class LookCommand extends Command {
     @Override
     public void execute() {
         Room currentRoom = gameController.getCurrentRoom();
-        List<String> itemsName = currentRoom.getItemsName();
+        Map<String, Integer> itemsName = currentRoom.getItemsName();
         Map<Class<? extends Animal>, List<String>> animals = currentRoom.getAnimalsName();
 
         StringBuilder builder = new StringBuilder("\nYou are in " + currentRoom.getName() + ".\nItems: ");
 
-        for (String itemName: itemsName) {
-            builder.append(itemName).append(", ");
+        for (Map.Entry<String, Integer> entry : itemsName.entrySet()) {
+            builder.append(entry.getKey())
+                    .append("(x").append(entry.getValue())
+                    .append("), ");
         }
         if (builder.toString().endsWith(", ")) {
             builder.delete(builder.length()-2, builder.length()-1);

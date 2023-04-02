@@ -121,10 +121,12 @@ public class Room {
         return this.items.get(item);
     }
 
-    public List<String> getItemsName() {
-        return this.items.keySet().stream()
-                .map(Item::getName)
-                .toList();
+    public Map<String, Integer> getItemsName() {
+        return this.items.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getName(),
+                        Map.Entry::getValue
+                ));
     }
 
     public Map<Class<? extends Animal>, List<String>> getAnimalsName() {
