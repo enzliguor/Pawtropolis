@@ -21,7 +21,7 @@ public class Player {
 	@Setter
 	@Column(name = "life_points")
 	private int lifePoints;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "id_bag")
 	private final Bag bag;
 
