@@ -20,7 +20,7 @@ public class Bag {
     @Getter
     @Setter
     private int availableSlot;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "items_in_bag",
             joinColumns = {@JoinColumn(name = "id_bag", referencedColumnName = "id")})
     @MapKeyJoinColumn(name = "id_item", referencedColumnName = "id")
