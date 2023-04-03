@@ -26,16 +26,16 @@ public class Room {
     @Column(name = "name")
     private String name;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "items_in_room",
             joinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")})
     @MapKeyJoinColumn(name = "id_item", referencedColumnName = "id")
     @Column(name = "quantity")
     private Map<Item, Integer> items = new HashMap<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_room", referencedColumnName = "id")
     private final List<Animal> animals = new ArrayList<>();
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "linked_rooms",
             joinColumns = {
                     @JoinColumn(name = "id_room", referencedColumnName = "id")},
