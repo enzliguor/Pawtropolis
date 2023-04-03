@@ -14,7 +14,7 @@ import pawtropolis.complex.game.command.CommandManager;
 import pawtropolis.complex.console.InputController;
 import pawtropolis.complex.game.domain.Player;
 import pawtropolis.complex.game.map.domain.Room;
-import pawtropolis.complex.game.map.mapinitializer.MapLoader;
+import pawtropolis.complex.game.map.initializer.MapInitializer;
 
 @Slf4j
 @ToString

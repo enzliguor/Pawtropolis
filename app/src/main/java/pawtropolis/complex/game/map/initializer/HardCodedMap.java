@@ -1,4 +1,4 @@
-package pawtropolis.complex.game.map.mapinitializer;
+package pawtropolis.complex.game.map.initializer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class HardCodedMap implements MapLoader {
+public class HardCodedMap implements MapInitializer {
     @Override
     public Room populateMap() {
         Item ball = new Item("ball", "ball", 6);
