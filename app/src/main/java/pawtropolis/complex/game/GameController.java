@@ -34,7 +34,7 @@ public class GameController implements ApplicationRunner {
     private int bagCapacity;
 
     @Autowired
-    private GameController(MapLoader mapInitializer, CommandManager commandManager) {
+    private GameController(MapInitializer mapInitializer, CommandManager commandManager) {
         this.gameRunning = false;
         this.currentRoom = mapInitializer.populateMap();
         this.commandManager = commandManager;
