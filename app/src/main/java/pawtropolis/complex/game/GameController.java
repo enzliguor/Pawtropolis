@@ -6,14 +6,13 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.command.CommandManager;
 import pawtropolis.complex.console.InputController;
-import pawtropolis.complex.game.domain.Player;
-import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.domain.PlayerBO;
+import pawtropolis.complex.game.map.domain.RoomBO;
 import pawtropolis.complex.game.map.initializer.MapInitializer;
 
 @Slf4j
@@ -21,17 +20,13 @@ import pawtropolis.complex.game.map.initializer.MapInitializer;
 @Component
 public class GameController implements ApplicationRunner {
     @Getter
-    private Player player;
+    private PlayerBO player;
     @Getter
     @Setter
-    private Room currentRoom;
+    private RoomBO currentRoom;
     @Getter
     private boolean gameRunning;
     private final CommandManager commandManager;
-    @Value("${Player.DEFAULT_LIFE_POINTS}")
-    private int defaultLifePoints;
-    @Value("${Bag.CAPACITY}")
-    private int bagCapacity;
 
     @Autowired
     private GameController(MapInitializer mapInitializer, CommandManager commandManager) {
@@ -43,10 +38,9 @@ public class GameController implements ApplicationRunner {
         this.gameRunning = true;
         log.info("\nType player name:");
         String playerName = InputController.readString();
-        this.player = new Player(playerName, defaultLifePoints);
-        this.player.setBagCapacity(bagCapacity);
+        this.player = PlayerBO.builder().name(playerName).build();
 
-        log.info("\nHello Player!\n");
+        log.info("\nHello " + playerName + "!\n");
         log.info("Type HELP for a list of available command");
 
         while (gameRunning) {
