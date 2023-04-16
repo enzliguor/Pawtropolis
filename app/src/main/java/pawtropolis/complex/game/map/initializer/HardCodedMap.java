@@ -3,12 +3,12 @@ package pawtropolis.complex.game.map.initializer;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.animals.domain.Animal;
-import pawtropolis.complex.game.animals.domain.Eagle;
-import pawtropolis.complex.game.animals.domain.Lion;
-import pawtropolis.complex.game.animals.domain.Tiger;
-import pawtropolis.complex.game.domain.Item;
-import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.animals.domain.AnimalBO;
+import pawtropolis.complex.game.animals.domain.EagleBO;
+import pawtropolis.complex.game.animals.domain.LionBO;
+import pawtropolis.complex.game.animals.domain.TigerBO;
+import pawtropolis.complex.game.domain.ItemBO;
+import pawtropolis.complex.game.map.domain.RoomBO;
 import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.time.LocalDate;
@@ -18,29 +18,59 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HardCodedMap implements MapInitializer {
     @Override
-    public Room populateMap() {
-        Item ball = new Item("ball", "ball", 6);
-        Item sword = new Item("sword", "sharpened", 10);
-        Item glasses = new Item("glasses", "red", 6);
-        Item hat = new Item("hat", "hat", 7);
-        Item book = new Item("book", "book", 5);
-        Item parruccaPlatinet = new Item("Parrucca di Platinet", "book", 5);
+    public RoomBO populateMap() {
+        ItemBO ball = ItemBO.builder()
+                .name("ball").description("ball")
+                .slotsRequired(6).build();
+        ItemBO sword = ItemBO.builder()
+                .name("sword").description("sharpened")
+                .slotsRequired(10).build();
+        ItemBO glasses = ItemBO.builder()
+                .name("glasses").description("red")
+                .slotsRequired(6).build();
+        ItemBO hat = ItemBO.builder()
+                .name("hat").description("hat")
+                .slotsRequired(7).build();
+        ItemBO book = ItemBO.builder()
+                .name("book").description("book")
+                .slotsRequired(5).build();
+        ItemBO parruccaPlatinet = ItemBO.builder()
+                .name("Parrucca di Platinet").description("parrucca")
+                .slotsRequired(5).build();
 
-        Animal eva = new Tiger("Eva", "human", 4, LocalDate.now(), 135.4, 1.55, 0.51);
-        Animal gina = new Tiger("Gina", "lollipop", 4, LocalDate.now(), 124.0, 1.45, 0.53);
-        Animal titina = new Tiger("Titina", "hamburgher", 4, LocalDate.now(), 121.0, 1.39, 0.5);
-        Animal lio = new Lion("Lio", "confetti", 4, LocalDate.now(), 130.0, 1.1, 0.49);
-        Animal beppe = new Lion("Beppe", "gricia", 4, LocalDate.now(), 129.0, 1.18, 0.43);
-        Animal tom = new Lion("Tom", "human", 4, LocalDate.now(), 124.0, 1.15, 0.39);
-        Animal pandora = new Eagle("Pandora", "mouse", 4, LocalDate.now(), 30.0, 1.05, 1.9);
-        Animal teodora = new Eagle("Teodora", "rabbit", 4, LocalDate.now(), 35.0, 0.89, 1.88);
-        Animal margareth = new Eagle("Margareth", "rabbit", 4, LocalDate.now(), 28.0, 0.92, 2.1);
+        AnimalBO eva = TigerBO.builder().name("Eva").favoriteFood("human")
+                .age(4).joinDate(LocalDate.now()).weight(135.4)
+                .height(1.55).tailLength(0.51).build();
+        AnimalBO gina = TigerBO.builder().name("Gina").favoriteFood("lollipop")
+                .age(4).joinDate(LocalDate.now()).weight(124.0)
+                .height(1.45).tailLength(0.53).build();
+        AnimalBO titina = TigerBO.builder().name("Titina").favoriteFood("hamburgher")
+                .age(4).joinDate(LocalDate.now()).weight(121.0)
+                .height(1.39).tailLength(0.5).build();
+        AnimalBO lio = LionBO.builder().name("Lio").favoriteFood("confetti")
+                .age(4).joinDate(LocalDate.now()).weight(130.0)
+                .height(1.1).tailLength(0.49).build();
+        AnimalBO beppe = LionBO.builder().name("Beppe").favoriteFood("gricia")
+                .age(4).joinDate(LocalDate.now()).weight(129.0)
+                .height(1.18).tailLength(0.43).build();
+        AnimalBO tom = LionBO.builder().name("Tom").favoriteFood("human")
+                .age(4).joinDate(LocalDate.now()).weight(124.0)
+                .height(1.15).tailLength(0.39).build();
+        AnimalBO pandora = EagleBO.builder().name("Pandora").favoriteFood("mouse")
+                .age(4).joinDate(LocalDate.now()).weight(30.0)
+                .height(1.05).wingspan(1.9).build();
+        AnimalBO teodora = EagleBO.builder().name("Teodora").favoriteFood("rabbit")
+                .age(4).joinDate(LocalDate.now()).weight(35.0)
+                .height(0.89).wingspan(1.88).build();
+        AnimalBO margareth = EagleBO.builder().name("Margareth").favoriteFood("rabbit")
+                .age(4).joinDate(LocalDate.now()).weight(28.0)
+                .height(0.92).wingspan(2.1).build();
 
-        Room starterRoom = new Room("Starter Room");
-        Room roomSouth = new Room("Room South");
-        Room roomNorth = new Room("Room North");
-        Room roomEast = new Room("Room East");
-        Room roomWest = new Room("Room West");
+        RoomBO starterRoom = RoomBO.builder().name("Starter RoomBO").build();
+        RoomBO roomSouth = RoomBO.builder().name("Room SOUTH").build();
+        RoomBO roomNorth = RoomBO.builder().name("Room NORTH").build();
+        RoomBO roomEast = RoomBO.builder().name("Room EAST").build();
+        RoomBO roomWest = RoomBO.builder().name("Room WEST").build();
 
         starterRoom.addAllAnimals(List.of(eva, gina, teodora));
         roomSouth.addAllAnimals(List.of(lio, beppe));
