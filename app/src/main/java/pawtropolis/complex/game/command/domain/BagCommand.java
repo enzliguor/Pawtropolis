@@ -3,7 +3,7 @@ package pawtropolis.complex.game.command.domain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.GameController;
-import pawtropolis.complex.game.domain.Player;
+import pawtropolis.complex.game.domain.PlayerBO;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class BagCommand extends Command {
 
     @Override
     public void execute() {
-        Player player = this.gameController.getPlayer();
+        PlayerBO player = this.gameController.getPlayer();
         Map<String, Integer> items = player.getBagContent();
 
         StringBuilder builder = new StringBuilder("\nIn bag: ");

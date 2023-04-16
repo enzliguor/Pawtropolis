@@ -3,9 +3,9 @@ package pawtropolis.complex.game.animals;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import pawtropolis.complex.game.animals.domain.Animal;
-import pawtropolis.complex.game.animals.domain.AnimalWithTail;
-import pawtropolis.complex.game.animals.domain.AnimalWithWings;
+import pawtropolis.complex.game.animals.domain.AnimalBO;
+import pawtropolis.complex.game.animals.domain.AnimalWithTailBO;
+import pawtropolis.complex.game.animals.domain.AnimalWithWingsBO;
 
 import java.util.*;
 
@@ -14,14 +14,14 @@ import java.util.*;
 @ToString
 public class ZooController {
 
-private final Map<Class<? extends Animal>, List<Animal>> animals= new HashMap<>();
+private final Map<Class<? extends AnimalBO>, List<AnimalBO>> animals= new HashMap<>();
 
-	public void addAnimal(Animal animal) {
+	public void addAnimal(AnimalBO animal) {
 		animals.computeIfAbsent(animal.getClass(), k -> new ArrayList<>()).add(animal);
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T extends Animal> List<T> getAnimalsByClass(Class<T> clazz) {
+	private <T extends AnimalBO> List<T> getAnimalsByClass(Class<T> clazz) {
 		if (animals.get(clazz) != null) {
 			return (List<T>) animals.get(clazz);
 		}
@@ -32,47 +32,47 @@ private final Map<Class<? extends Animal>, List<Animal>> animals= new HashMap<>(
 				.toList();
 	}
 
-	private List<AnimalWithTail> getAllAnimalsWithTail() {
-		return getAnimalsByClass(AnimalWithTail.class);
+	private List<AnimalWithTailBO> getAllAnimalsWithTail() {
+		return getAnimalsByClass(AnimalWithTailBO.class);
 	}
 
-	public AnimalWithTail getAnimalWithLongestTail() {
+	public AnimalWithTailBO getAnimalWithLongestTail() {
 		return getAllAnimalsWithTail().stream()
-				.max(Comparator.comparing(AnimalWithTail::getTailLength))
+				.max(Comparator.comparing(AnimalWithTailBO::getTailLength))
 				.orElse(null);
 	}
 
-	public List<AnimalWithWings> getAllAnimalsWithWings() {
-		return getAnimalsByClass(AnimalWithWings.class);
+	public List<AnimalWithWingsBO> getAllAnimalsWithWings() {
+		return getAnimalsByClass(AnimalWithWingsBO.class);
 	}
 
-	public AnimalWithWings getAnimalWithWidestWingspan() {
+	public AnimalWithWingsBO getAnimalWithWidestWingspan() {
 		return getAllAnimalsWithWings().stream()
-				.max(Comparator.comparing(AnimalWithWings::getWingspan))
+				.max(Comparator.comparing(AnimalWithWingsBO::getWingspan))
 				.orElse(null);
 	}
 
-	public <T extends Animal> T getTallestAnimalByClass(Class<T> clazz) {
+	public <T extends AnimalBO> T getTallestAnimalByClass(Class<T> clazz) {
 		return getAnimalsByClass(clazz).stream()
-				.max(Comparator.comparing(Animal::getHeight))
+				.max(Comparator.comparing(AnimalBO::getHeight))
 				.orElse(null);
 	}
 
-	public <T extends Animal> T getShortestAnimalByClass(Class<T> clazz) {
+	public <T extends AnimalBO> T getShortestAnimalByClass(Class<T> clazz) {
 		return getAnimalsByClass(clazz).stream()
-				.min(Comparator.comparing(Animal::getHeight))
+				.min(Comparator.comparing(AnimalBO::getHeight))
 				.orElse(null);
 	}
 
-	public <T extends Animal> T getHeaviestAnimalByClass(Class<T> clazz) {
+	public <T extends AnimalBO> T getHeaviestAnimalByClass(Class<T> clazz) {
 		return getAnimalsByClass(clazz).stream()
-				.max(Comparator.comparing(Animal::getWeight))
+				.max(Comparator.comparing(AnimalBO::getWeight))
 				.orElse(null);
 	}
 
-	public <T extends Animal> T getLightestAnimalByClass(Class<T> clazz) {
+	public <T extends AnimalBO> T getLightestAnimalByClass(Class<T> clazz) {
 		return getAnimalsByClass(clazz).stream()
-				.min(Comparator.comparing(Animal::getWeight))
+				.min(Comparator.comparing(AnimalBO::getWeight))
 				.orElse(null);
 	}
 }

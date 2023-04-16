@@ -3,7 +3,7 @@ package pawtropolis.complex.game.command.domain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.game.GameController;
-import pawtropolis.complex.game.map.domain.Room;
+import pawtropolis.complex.game.map.domain.RoomBO;
 import pawtropolis.complex.game.map.util.CardinalPoint;
 
 import java.util.Arrays;
@@ -27,8 +27,8 @@ public class GoCommand extends ParameterizedCommand {
                     .collect(Collectors.joining())+ "\n");
             return;
         }
-        Room currentRoom = gameController.getCurrentRoom();
-        Room adjacentRoom = currentRoom.getAdjacentRoom(direction);
+        RoomBO currentRoom = gameController.getCurrentRoom();
+        RoomBO adjacentRoom = currentRoom.getAdjacentRoom(direction);
         if (adjacentRoom == null) {
             log.info("\nNothing to show in this direction!\n");
         } else {
