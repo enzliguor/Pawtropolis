@@ -1,4 +1,4 @@
-package pawtropolis.complex.game.animals;
+package pawtropolis.complex.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

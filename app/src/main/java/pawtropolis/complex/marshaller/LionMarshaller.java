@@ -3,7 +3,7 @@ package pawtropolis.complex.marshaller;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-import pawtropolis.complex.game.animals.AnimalBuilderDirector;
+import pawtropolis.complex.utils.AnimalBuilderDirector;
 import pawtropolis.complex.game.animals.domain.LionBO;
 import pawtropolis.complex.persistence.entity.Lion;
 
