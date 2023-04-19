@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import pawtropolis.complex.persistence.entity.Bag;
-import pawtropolis.complex.game.BusinessObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class BagBO implements BusinessObject {
+public class BagBO {
     private Long id;
 
     private int availableSlot;
@@ -92,18 +90,5 @@ public class BagBO implements BusinessObject {
                 .filter(i -> i.getName().equals(itemName))
                 .findFirst()
                 .orElse(null);
-    }
-
-    @Override
-    public Bag parseToPO() {
-        return Bag.builder()
-                .id(this.id)
-                .availableSlot(this.availableSlot)
-                .items(this.items.entrySet().stream()
-                        .collect(Collectors.toMap(
-                                entry -> entry.getKey().parseToPO(),
-                                Map.Entry::getValue
-                        )))
-                .build();
     }
 }

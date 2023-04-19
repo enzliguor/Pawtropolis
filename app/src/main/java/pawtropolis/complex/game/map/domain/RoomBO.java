@@ -1,11 +1,12 @@
 package pawtropolis.complex.game.map.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import pawtropolis.complex.game.animals.domain.AnimalBO;
 import pawtropolis.complex.game.domain.ItemBO;
 import pawtropolis.complex.game.map.util.CardinalPoint;
-import pawtropolis.complex.persistence.entity.Room;
-import pawtropolis.complex.game.BusinessObject;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class RoomBO implements BusinessObject {
+public class RoomBO {
     private Long id;
     private final String name;
     private  final Map<ItemBO, Integer> items;
@@ -114,26 +115,5 @@ public class RoomBO implements BusinessObject {
                         AnimalBO::getClass,
                         Collectors.mapping(AnimalBO::getName, Collectors.toList())
                 ));
-    }
-
-    @Override
-    public Room parseToPO() {
-        return Room.builder()
-                .id(this.id)
-                .name(this.name)
-                .items(this.items.entrySet().stream()
-                        .collect(Collectors.toMap(
-                                entry -> entry.getKey().parseToPO(),
-                                Map.Entry::getValue
-                        )))
-                .animals(this.animals.stream()
-                        .map(AnimalBO::parseToPO)
-                        .toList())
-                .adjacentRooms(this.adjacentRooms.entrySet().stream()
-                        .collect(Collectors.toMap(
-                                Map.Entry::getKey,
-                                entry -> entry.getValue().parseToPO()
-                        )))
-                .build();
     }
 }

@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import pawtropolis.complex.persistence.entity.Player;
-import pawtropolis.complex.game.BusinessObject;
 
 import java.util.Map;
 
@@ -13,7 +11,7 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class PlayerBO implements BusinessObject{
+public class PlayerBO{
 	private Long id;
 
 	private String name;
@@ -55,13 +53,4 @@ public class PlayerBO implements BusinessObject{
 		return this.bag.checkItemFits(item);
 	}
 
-	@Override
-	public Player parseToPO() {
-		return Player.builder()
-				.id(this.id)
-				.name(this.name)
-				.lifePoints(this.lifePoints)
-				.bag(this.bag.parseToPO())
-				.build();
-	}
 }

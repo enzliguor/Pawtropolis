@@ -4,8 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import pawtropolis.complex.persistence.entity.Animal;
-import pawtropolis.complex.game.BusinessObject;
 
 import java.time.LocalDate;
 
@@ -14,7 +12,7 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 @SuperBuilder
-public abstract class AnimalBO implements BusinessObject {
+public abstract class AnimalBO {
 	private Long id;
 	private String name;
 	private String favoriteFood;
@@ -22,8 +20,5 @@ public abstract class AnimalBO implements BusinessObject {
 	private LocalDate joinDate;
 	private double weight;
 	private double height;
-
-	@Override
-	public abstract Animal parseToPO();
 }
 
