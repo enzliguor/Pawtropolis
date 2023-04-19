@@ -6,8 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import pawtropolis.complex.game.animals.domain.AnimalBO;
-import pawtropolis.complex.persistence.PersistentObject;
 
 import java.time.LocalDate;
 
@@ -22,13 +20,13 @@ import java.time.LocalDate;
         discriminatorType = DiscriminatorType.STRING
 )
 @Table(name = "animal")
-public abstract class Animal implements PersistentObject{
+public abstract class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name="favorite_food")
+    @Column(name = "favorite_food")
     private String favoriteFood;
     @Column(name = "age")
     private int age;
@@ -38,7 +36,4 @@ public abstract class Animal implements PersistentObject{
     private double weight;
     @Column(name = "height")
     private double height;
-
-    @Override
-    public abstract AnimalBO parseToBO();
 }
