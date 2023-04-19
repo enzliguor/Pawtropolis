@@ -1,8 +1,9 @@
-package pawtropolis.complex.marshaller;
+package pawtropolis.complex.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import pawtropolis.complex.marshaller.Marshaller;
 
 import java.util.HashMap;
 import java.util.List;
