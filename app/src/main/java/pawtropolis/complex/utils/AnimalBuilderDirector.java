@@ -8,7 +8,7 @@ import pawtropolis.complex.persistence.entity.*;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnimalBuilderDirector {
 
-    public static<A extends  AnimalBO, B extends AnimalBO.AnimalBOBuilder<A, B>> A builderAnimalBO(AnimalBO.AnimalBOBuilder<A, B> animalBOBuilder, Animal animal){
+    public static<A extends  AnimalBO, B extends AnimalBO.AnimalBOBuilder<A, B>> A buildAnimalBO(AnimalBO.AnimalBOBuilder<A, B> animalBOBuilder, Animal animal){
         return animalBOBuilder
                 .id(animal.getId())
                 .favoriteFood(animal.getFavoriteFood())
@@ -20,7 +20,7 @@ public class AnimalBuilderDirector {
                 .build();
     }
 
-    public static<A extends  Animal, B extends Animal.AnimalBuilder<A, B>> A builderAnimal(Animal.AnimalBuilder<A, B> animalBuilder, AnimalBO animalBO){
+    public static<A extends  Animal, B extends Animal.AnimalBuilder<A, B>> A buildAnimal(Animal.AnimalBuilder<A, B> animalBuilder, AnimalBO animalBO){
         return animalBuilder
                 .id(animalBO.getId())
                 .favoriteFood(animalBO.getFavoriteFood())
@@ -32,26 +32,26 @@ public class AnimalBuilderDirector {
                 .build();
     }
 
-    public static<A extends AnimalWithWingsBO, B extends AnimalWithWingsBO.AnimalWithWingsBOBuilder<A, B>> A builderAnimalWithWingsBO(AnimalWithWingsBO.AnimalWithWingsBOBuilder<A, B> animalWithWingsBOBuilder, AnimalWithWings animalWithWings){
-                return  builderAnimalBO(
+    public static<A extends AnimalWithWingsBO, B extends AnimalWithWingsBO.AnimalWithWingsBOBuilder<A, B>> A buildAnimalWithWingsBO(AnimalWithWingsBO.AnimalWithWingsBOBuilder<A, B> animalWithWingsBOBuilder, AnimalWithWings animalWithWings){
+                return  buildAnimalBO(
                         animalWithWingsBOBuilder.wingspan(animalWithWings.getWingspan()),
                         animalWithWings);
     }
 
-    public static<A extends AnimalWithWings, B extends AnimalWithWings.AnimalWithWingsBuilder<A, B>> A builderAnimalWithWings(AnimalWithWings.AnimalWithWingsBuilder<A, B> animalWithWingsBuilder, AnimalWithWingsBO animalWithWingsBO){
-        return  builderAnimal(
+    public static<A extends AnimalWithWings, B extends AnimalWithWings.AnimalWithWingsBuilder<A, B>> A buildAnimalWithWings(AnimalWithWings.AnimalWithWingsBuilder<A, B> animalWithWingsBuilder, AnimalWithWingsBO animalWithWingsBO){
+        return  buildAnimal(
                 animalWithWingsBuilder.wingspan(animalWithWingsBO.getWingspan()),
                 animalWithWingsBO);
     }
 
-    public static<A extends AnimalWithTailBO, B extends AnimalWithTailBO.AnimalWithTailBOBuilder<A, B>>  A builderAnimalWithTailBO(AnimalWithTailBO.AnimalWithTailBOBuilder<A, B> animalWithTailBOBuilder, AnimalWithTail animalWithTail){
-        return  builderAnimalBO(
+    public static<A extends AnimalWithTailBO, B extends AnimalWithTailBO.AnimalWithTailBOBuilder<A, B>>  A buildAnimalWithTailBO(AnimalWithTailBO.AnimalWithTailBOBuilder<A, B> animalWithTailBOBuilder, AnimalWithTail animalWithTail){
+        return  buildAnimalBO(
                 animalWithTailBOBuilder.tailLength(animalWithTail.getTailLength()),
                 animalWithTail);
     }
 
-    public static<A extends AnimalWithTail, B extends AnimalWithTail.AnimalWithTailBuilder<A, B>> A builderAnimalWithTail(AnimalWithTail.AnimalWithTailBuilder<A, B> animalWithTailBuilder, AnimalWithTailBO animalWithTailBO){
-        return  builderAnimal(
+    public static<A extends AnimalWithTail, B extends AnimalWithTail.AnimalWithTailBuilder<A, B>> A buildAnimalWithTail(AnimalWithTail.AnimalWithTailBuilder<A, B> animalWithTailBuilder, AnimalWithTailBO animalWithTailBO){
+        return  buildAnimal(
                 animalWithTailBuilder.tailLength(animalWithTailBO.getTailLength()),
                 animalWithTailBO);
     }
