@@ -56,28 +56,28 @@ public class AnimalBuilderDirector {
                 animalWithTailBO);
     }
 
-    public static Eagle buildEagle(EagleBO eagleBO){
-        return builderAnimalWithWings(Eagle.builder(), eagleBO);
+    public static Eagle build(EagleBO eagleBO){
+        return buildAnimalWithWings(Eagle.builder(), eagleBO);
     }
 
-    public static EagleBO buildEagleBO(Eagle eagle){
-        return builderAnimalWithWingsBO(EagleBO.builder(), eagle);
+    public static EagleBO build(Eagle eagle){
+        return buildAnimalWithWingsBO(EagleBO.builder(), eagle);
     }
 
-    public static Tiger buildTiger(TigerBO tigerBO){
-        return builderAnimalWithTail(Tiger.builder(), tigerBO);
+    public static Tiger build(TigerBO tigerBO){
+        return buildAnimalWithTail(Tiger.builder(), tigerBO);
     }
 
-    public static TigerBO buildTigerBO(Tiger tiger){
-        return builderAnimalWithTailBO(TigerBO.builder(), tiger);
+    public static TigerBO build(Tiger tiger){
+        return buildAnimalWithTailBO(TigerBO.builder(), tiger);
     }
 
-    public static Lion buildLion(LionBO lionBO){
-        return builderAnimalWithTail(Lion.builder(), lionBO);
+    public static Lion build(LionBO lionBO){
+        return buildAnimalWithTail(Lion.builder(), lionBO);
     }
 
-    public static LionBO buildLionBO(Lion lion){
-        return builderAnimalWithTailBO(LionBO.builder(), lion);
+    public static LionBO build(Lion lion){
+        return buildAnimalWithTailBO(LionBO.builder(), lion);
     }
 
 

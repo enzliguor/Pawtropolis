@@ -13,11 +13,11 @@ public class EagleMarshaller implements Marshaller<Eagle, EagleBO> {
 
     @Override
     public Eagle marshall(EagleBO eagleBO) {
-        return AnimalBuilderDirector.buildEagle(eagleBO);
+        return AnimalBuilderDirector.build(eagleBO);
     }
     @Override
     public EagleBO unmarshall(Eagle eagle) {
-        return AnimalBuilderDirector.buildEagleBO(eagle);
+        return AnimalBuilderDirector.build(eagle);
     }
 
     @Override

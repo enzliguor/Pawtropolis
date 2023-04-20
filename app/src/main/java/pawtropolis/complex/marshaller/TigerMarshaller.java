@@ -12,12 +12,12 @@ import pawtropolis.complex.persistence.entity.Tiger;
 public class TigerMarshaller implements Marshaller<Tiger, TigerBO> {
     @Override
     public Tiger marshall(TigerBO tigerBO) {
-        return AnimalBuilderDirector.buildTiger(tigerBO);
+        return AnimalBuilderDirector.build(tigerBO);
     }
 
     @Override
     public TigerBO unmarshall(Tiger tiger) {
-        return AnimalBuilderDirector.buildTigerBO(tiger);
+        return AnimalBuilderDirector.build(tiger);
     }
 
     @Override
