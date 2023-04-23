@@ -3,6 +3,7 @@ package pawtropolis.complex.utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+import pawtropolis.complex.exception.MarshallerNotFoundException;
 import pawtropolis.complex.marshaller.Marshaller;
 
 import java.util.HashMap;
@@ -46,14 +47,24 @@ public class MarshallerManager {
         if (e == null) {
             return null;
         }
-        return marshaller.marshall(obj);
+        if (marshaller == null) {
+            throw new MarshallerNotFoundException("you don't have a marshaller for this target class");
+        } else if (marshaller.getBoClass() != e.getClass()) {
+            throw new MarshallerNotFoundException("you don't have a marshaller that handles this conversion");
+        }
+        return targetClass.cast(marshaller.marshall(e));
     }
 
     private <T, E> E unmarshall(T t, Marshaller<T, E> marshaller, Class<E> targetClass) {
         if (t == null) {
             return null;
         }
-        return marshaller.unmarshall(obj);
+        if (marshaller == null) {
+            throw new MarshallerNotFoundException("you don't have an unmarshaller for this target class");
+        } else if (marshaller.getEntityClass() != t.getClass()) {
+            throw new MarshallerNotFoundException("you don't have an unmarshaller that handles this conversion");
+        }
+        return targetClass.cast(marshaller.unmarshall(t));
     }
 
     public <T, E> List<T> marshall(List<E> e, Class<T> targetClass) {
