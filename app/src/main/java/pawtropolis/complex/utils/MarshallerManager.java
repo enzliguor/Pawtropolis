@@ -12,17 +12,17 @@ import java.util.Map;
 @Component
 public class MarshallerManager {
 
-    private final Map<Class<?>, Marshaller<Object, Object>> marshallers;
+    private final Map<Class<?>, Marshaller<?, ?>> marshallers;
 
-    private final Map<Class<?>, Marshaller<Object, Object>> unmarshallers;
+    private final Map<Class<?>, Marshaller<?, ?>> unmarshallers;
 
     @Autowired
     private MarshallerManager(ApplicationContext applicationContext) {
         this.marshallers = new HashMap<>();
         this.unmarshallers = new HashMap<>();
         applicationContext.getBeansOfType(Marshaller.class).values().forEach(marshaller -> {
-            this.marshallers.put(marshaller.getBoClass(), marshaller);
-            this.unmarshallers.put(marshaller.getEntityClass(), marshaller);
+            this.marshallers.put(marshaller.getEntityClass(), marshaller);
+            this.unmarshallers.put(marshaller.getBoClass(), marshaller);
         });
     }
 
