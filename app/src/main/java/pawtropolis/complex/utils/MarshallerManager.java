@@ -26,45 +26,45 @@ public class MarshallerManager {
         });
     }
 
-    public Object marshall(Object obj) {
-        if (obj == null) {
+    public <T, E> T marshall(E e, Class<T> targetClass) {
+        if (e == null) {
             return null;
         }
-        Marshaller<Object, Object> marshaller = this.marshallers.get(obj.getClass());
-        return marshall(obj, marshaller);
+        Marshaller<T, E> marshaller = (Marshaller<T, E>) this.marshallers.get(targetClass);
+        return marshall(e, marshaller, targetClass);
     }
 
-    public Object unmarshall(Object obj) {
-        if (obj == null) {
+    public <T, E> E unmarshall(T t, Class<E> targetClass) {
+        if (t == null) {
             return null;
         }
-        Marshaller<Object, Object> marshaller = this.unmarshallers.get(obj.getClass());
-        return unmarshall(obj, marshaller);
+        Marshaller<T, E> marshaller = (Marshaller<T, E>) this.unmarshallers.get(targetClass);
+        return unmarshall(t, marshaller, targetClass);
     }
 
-    public Object marshall(Object obj, Marshaller<Object, Object> marshaller) {
-        if (marshaller == null || obj == null || marshaller.getBoClass() != obj.getClass()) {
+    private <T, E> T marshall(E e, Marshaller<T, E> marshaller, Class<T> targetClass) {
+        if (e == null) {
             return null;
         }
         return marshaller.marshall(obj);
     }
 
-    public Object unmarshall(Object obj, Marshaller<Object, Object> marshaller) {
-        if (marshaller == null || obj == null || marshaller.getEntityClass() != obj.getClass()) {
+    private <T, E> E unmarshall(T t, Marshaller<T, E> marshaller, Class<E> targetClass) {
+        if (t == null) {
             return null;
         }
         return marshaller.unmarshall(obj);
     }
 
-    public List<Object> marshall(List<Object> objects) {
-        return objects.stream()
-                .map(this::marshall)
+    public <T, E> List<T> marshall(List<E> e, Class<T> targetClass) {
+        return e.stream()
+                .map(obj -> marshall(obj, targetClass))
                 .toList();
     }
 
-    public List<Object> unmarshall(List<Object> objects) {
-        return objects.stream()
-                .map(this::unmarshall)
+    public <T, E> List<E> unmarshall(List<T> t, Class<E> targetClass) {
+        return t.stream()
+                .map(obj -> unmarshall(obj, targetClass))
                 .toList();
     }
 }
