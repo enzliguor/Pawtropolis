@@ -20,9 +20,9 @@ public class RoomBO {
     private final String name;
     private  final Map<ItemBO, Integer> items;
     private final List<AnimalBO> animals;
-    private final Map<CardinalPoint, RoomBO> adjacentRooms;
+    private final EnumMap<CardinalPoint, RoomBO> adjacentRooms;
 
-    private RoomBO(Long id, String name, Map<ItemBO, Integer> items, List<AnimalBO> animals, Map<CardinalPoint, RoomBO> adjacentRooms) {
+    private RoomBO(Long id, String name, Map<ItemBO, Integer> items, List<AnimalBO> animals, EnumMap<CardinalPoint, RoomBO> adjacentRooms) {
         this.id = id;
         this.name = name;
         this.items = (items != null) ? items : new HashMap<>();
