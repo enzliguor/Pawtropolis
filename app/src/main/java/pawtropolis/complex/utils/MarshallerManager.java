@@ -49,7 +49,7 @@ public class MarshallerManager {
         }
         if (marshaller == null) {
             throw new MarshallerNotFoundException("you don't have a marshaller for this target class");
-        } else if (marshaller.getBoClass() != e.getClass()) {
+        } else if (marshaller.getBoClass() != e.getClass() && !marshaller.getBoClass().isAssignableFrom(e.getClass())) {
             throw new MarshallerNotFoundException("you don't have a marshaller that handles this conversion");
         }
         return targetClass.cast(marshaller.marshall(e));
@@ -61,7 +61,7 @@ public class MarshallerManager {
         }
         if (marshaller == null) {
             throw new MarshallerNotFoundException("you don't have an unmarshaller for this target class");
-        } else if (marshaller.getEntityClass() != t.getClass()) {
+        } else if (marshaller.getEntityClass() != t.getClass() && !marshaller.getEntityClass().isAssignableFrom(t.getClass())) {
             throw new MarshallerNotFoundException("you don't have an unmarshaller that handles this conversion");
         }
         return targetClass.cast(marshaller.unmarshall(t));
