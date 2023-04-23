@@ -40,7 +40,7 @@ public class Room {
             })
     @MapKeyEnumerated(value = EnumType.STRING)
     @MapKeyColumn(name = "cardinal_point")
-    private Map<CardinalPoint, Room> adjacentRooms = new EnumMap<>(CardinalPoint.class);
+    private EnumMap<CardinalPoint, Room> adjacentRooms;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "linked_rooms",
@@ -51,5 +51,5 @@ public class Room {
             })
     @MapKeyEnumerated(value = EnumType.STRING)
     @MapKeyColumn(name = "cardinal_point")
-    private Map<CardinalPoint, Room> adjacentRoomsOf = new EnumMap<>(CardinalPoint.class);
+    private EnumMap<CardinalPoint, Room> adjacentRoomsOf;
 }
