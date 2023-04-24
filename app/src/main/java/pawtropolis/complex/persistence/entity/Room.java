@@ -11,6 +11,8 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(exclude = {"adjacentRooms", "adjacentRoomsOf"})
+@ToString(exclude = {"adjacentRooms", "adjacentRoomsOf"})
 @Entity
 @Table(name = "room")
 @Builder
