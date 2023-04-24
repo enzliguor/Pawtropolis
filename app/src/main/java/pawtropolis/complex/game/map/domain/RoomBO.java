@@ -12,8 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode(exclude = "adjacentRooms")
+@ToString(exclude = "adjacentRooms")
 @Builder
 public class RoomBO {
     private Long id;
