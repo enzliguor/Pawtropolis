@@ -37,7 +37,7 @@ public class LookCommand extends Command {
         for (Map.Entry<Class<? extends AnimalBO>, List<String>> entry : animals.entrySet()) {
             for (String animalName : entry.getValue()) {
                 builder.append(animalName)
-                        .append("(").append(entry.getKey().getSimpleName()).append(")");
+                        .append("(").append(entry.getKey().getSimpleName().replaceAll("BO$","")).append(")");
                 builder.append(", ");
             }
         }
