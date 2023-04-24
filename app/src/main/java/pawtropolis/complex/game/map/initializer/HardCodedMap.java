@@ -66,7 +66,7 @@ public class HardCodedMap implements MapInitializer {
                 .age(4).joinDate(LocalDate.now()).weight(28.0)
                 .height(0.92).wingspan(2.1).build();
 
-        RoomBO starterRoom = RoomBO.builder().name("Starter RoomBO").build();
+        RoomBO starterRoom = RoomBO.builder().name("Starter Room").build();
         RoomBO roomSouth = RoomBO.builder().name("Room SOUTH").build();
         RoomBO roomNorth = RoomBO.builder().name("Room NORTH").build();
         RoomBO roomEast = RoomBO.builder().name("Room EAST").build();
