@@ -11,8 +11,8 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = {"adjacentRooms", "adjacentRoomsOf"})
-@ToString(exclude = {"adjacentRooms", "adjacentRoomsOf"})
+@EqualsAndHashCode(exclude = {"adjacentRooms"})
+@ToString(exclude = {"adjacentRooms"})
 @Entity
 @Table(name = "room")
 @Builder
@@ -42,16 +42,5 @@ public class Room implements EntityDB{
             })
     @MapKeyEnumerated(value = EnumType.STRING)
     @MapKeyColumn(name = "cardinal_point")
-    private EnumMap<CardinalPoint, Room> adjacentRooms;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "linked_rooms",
-            joinColumns = {
-                    @JoinColumn(name = "id_adjacent_room", referencedColumnName = "id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "id_room", referencedColumnName = "id")
-            })
-    @MapKeyEnumerated(value = EnumType.STRING)
-    @MapKeyColumn(name = "cardinal_point")
-    private EnumMap<CardinalPoint, Room> adjacentRoomsOf;
+    private Map<CardinalPoint, Room> adjacentRooms;
 }
