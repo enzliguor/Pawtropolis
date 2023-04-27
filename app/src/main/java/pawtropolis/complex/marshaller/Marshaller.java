@@ -1,12 +1,15 @@
 package pawtropolis.complex.marshaller;
 
-public interface Marshaller<T, E> {
+import pawtropolis.complex.game.BusinessObject;
+import pawtropolis.complex.persistence.entity.EntityDB;
 
-    T marshall(E e);
+public interface Marshaller<E extends EntityDB, B extends BusinessObject> {
 
-    E unmarshall(T t);
+    E marshall(B businessObject);
 
-    Class<T> getEntityClass();
+    B unmarshall(E entity);
 
-    Class<E> getBoClass();
+    Class<E> getEntityClass();
+
+    Class<B> getBoClass();
 }
