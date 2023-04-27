@@ -28,7 +28,7 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
         return super.saveOrUpdate(roomBO);
     }
 
-    private void saveItemsInRoom(RoomBO roomBO){
+    public void saveItemsInRoom(RoomBO roomBO){
         if(roomBO == null){
             return;
         }

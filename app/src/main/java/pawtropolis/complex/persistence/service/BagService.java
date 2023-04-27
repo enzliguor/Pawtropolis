@@ -10,7 +10,7 @@ import pawtropolis.complex.utils.MarshallerManager;
 public class BagService extends AbstractService<Bag, Long, BagBO>{
 
     @Autowired
-    private BagService(JpaRepository<Bag, Long> dao, MarshallerManager marshallerManager) {
+    public BagService(JpaRepository<Bag, Long> dao, MarshallerManager marshallerManager, ItemService itemService) {
         super(dao, marshallerManager);
     }
 }

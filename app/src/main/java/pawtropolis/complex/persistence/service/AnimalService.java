@@ -11,7 +11,7 @@ import pawtropolis.complex.utils.MarshallerManager;
 public class AnimalService extends AbstractService<Animal, Long, AnimalBO>{
 
     @Autowired
-    private AnimalService(JpaRepository<Animal, Long> dao, MarshallerManager marshallerManager) {
+    public AnimalService(JpaRepository<Animal, Long> dao, MarshallerManager marshallerManager) {
         super(dao, marshallerManager);
     }
 }

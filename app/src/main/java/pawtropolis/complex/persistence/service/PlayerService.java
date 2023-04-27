@@ -10,7 +10,7 @@ import pawtropolis.complex.utils.MarshallerManager;
 public class PlayerService extends AbstractService<Player, Long, PlayerBO>{
 
     @Autowired
-    private PlayerService(JpaRepository<Player, Long> dao, MarshallerManager marshallerManager) {
+    public PlayerService(JpaRepository<Player, Long> dao, MarshallerManager marshallerManager) {
         super(dao, marshallerManager);
     }
 }
