@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
 
-    private final Map<Class<?>, Marshaller<Object, Object>> animalmarshallers;
+    private final Map<Class<?>, Marshaller<Animal, AnimalBO>> animalmarshallers;
 
     @Autowired
     private AnimalMarshaller(ApplicationContext applicationContext) {
@@ -32,8 +32,8 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
         if (animalBO == null) {
             return null;
         }
-        Marshaller<Object, Object> marshaller = this.animalmarshallers.get(animalBO.getClass());
-        return (marshaller != null)? (Animal) marshaller.marshall(marshaller.getBoClass().cast(animalBO)) : null;
+        Marshaller<Animal, AnimalBO> marshaller = this.animalmarshallers.get(animalBO.getClass());
+        return (marshaller != null)? marshaller.marshall(marshaller.getBoClass().cast(animalBO)) : null;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
         if (animal == null) {
             return null;
         }
-        Marshaller<Object, Object> marshaller = this.animalmarshallers.get(animal.getClass());
-        return (AnimalBO) marshaller.unmarshall(marshaller.getEntityClass().cast(animal));
+        Marshaller<Animal, AnimalBO> marshaller = this.animalmarshallers.get(animal.getClass());
+        return marshaller.unmarshall(marshaller.getEntityClass().cast(animal));
 
     }
 
