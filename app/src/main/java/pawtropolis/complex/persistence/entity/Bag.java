@@ -12,7 +12,7 @@ import java.util.Map;
 @Entity
 @Table(name = "bag")
 @Builder
-public class Bag {
+public class Bag implements EntityDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -20,7 +20,7 @@ import java.time.LocalDate;
         discriminatorType = DiscriminatorType.STRING
 )
 @Table(name = "animal")
-public abstract class Animal {
+public abstract class Animal implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

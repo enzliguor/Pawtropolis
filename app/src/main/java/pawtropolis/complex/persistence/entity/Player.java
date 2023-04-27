@@ -9,7 +9,7 @@ import lombok.*;
 @Entity
 @Table(name = "player")
 @Builder
-public class Player {
+public class Player implements EntityDB{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

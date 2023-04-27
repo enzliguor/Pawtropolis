@@ -16,7 +16,7 @@ import java.util.Map;
 @Entity
 @Table(name = "room")
 @Builder
-public class Room {
+public class Room implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
