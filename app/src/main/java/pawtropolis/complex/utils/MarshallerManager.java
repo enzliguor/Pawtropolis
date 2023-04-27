@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pawtropolis.complex.exception.MarshallerNotFoundException;
+import pawtropolis.complex.game.BusinessObject;
 import pawtropolis.complex.marshaller.Marshaller;
+import pawtropolis.complex.persistence.entity.EntityDB;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ public class MarshallerManager {
         });
     }
 
-    public <T, E> T marshall(E e, Class<T> targetClass) {
+    public <T extends EntityDB, E extends BusinessObject> T marshall(E e, Class<T> targetClass) {
         if (e == null) {
             return null;
         }
@@ -35,7 +37,7 @@ public class MarshallerManager {
         return marshall(e, marshaller, targetClass);
     }
 
-    public <T, E> E unmarshall(T t, Class<E> targetClass) {
+    public <T extends EntityDB, E extends BusinessObject> E unmarshall(T t, Class<E> targetClass) {
         if (t == null) {
             return null;
         }
@@ -43,7 +45,7 @@ public class MarshallerManager {
         return unmarshall(t, marshaller, targetClass);
     }
 
-    private <T, E> T marshall(E e, Marshaller<T, E> marshaller, Class<T> targetClass) {
+    private <T extends EntityDB, E extends BusinessObject> T marshall(E e, Marshaller<T, E> marshaller, Class<T> targetClass) {
         if (e == null) {
             return null;
         }
@@ -55,7 +57,7 @@ public class MarshallerManager {
         return targetClass.cast(marshaller.marshall(e));
     }
 
-    private <T, E> E unmarshall(T t, Marshaller<T, E> marshaller, Class<E> targetClass) {
+    private <T extends EntityDB, E extends BusinessObject> E unmarshall(T t, Marshaller<T, E> marshaller, Class<E> targetClass) {
         if (t == null) {
             return null;
         }
@@ -67,13 +69,13 @@ public class MarshallerManager {
         return targetClass.cast(marshaller.unmarshall(t));
     }
 
-    public <T, E> List<T> marshall(List<E> e, Class<T> targetClass) {
+    public <T extends EntityDB, E extends BusinessObject> List<T> marshall(List<E> e, Class<T> targetClass) {
         return e.stream()
                 .map(obj -> marshall(obj, targetClass))
                 .toList();
     }
 
-    public <T, E> List<E> unmarshall(List<T> t, Class<E> targetClass) {
+    public <T extends EntityDB, E extends BusinessObject> List<E> unmarshall(List<T> t, Class<E> targetClass) {
         return t.stream()
                 .map(obj -> unmarshall(obj, targetClass))
                 .toList();
