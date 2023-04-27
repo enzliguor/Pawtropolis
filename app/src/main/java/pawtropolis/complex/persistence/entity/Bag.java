@@ -9,6 +9,8 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "bag")
 @Builder
