@@ -78,12 +78,12 @@ public class RoomBO implements BusinessObject {
         animals.remove(animal);
     }
 
-    public void linkRoom(CardinalPoint cardinalPoint, RoomBO room) {
-        this.adjacentRooms.put(cardinalPoint, room);
+    public void linkRoom(CardinalPoint cardinalPoint, RoomBO roomBO) {
+        this.adjacentRooms.put(cardinalPoint, roomBO);
         CardinalPoint opposite = cardinalPoint.getOpposite();
-        RoomBO oppositeRoom = room.getAdjacentRoom(opposite);
+        RoomBO oppositeRoom = roomBO.getAdjacentRoom(opposite);
         if (oppositeRoom != this) {
-            room.linkRoom(opposite, this);
+            roomBO.linkRoom(opposite, this);
         }
     }
 
