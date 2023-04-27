@@ -17,9 +17,9 @@ CREATE TABLE player
     id          serial PRIMARY KEY,
     name        VARCHAR(50),
     life_points INT,
-    id_bag      INT,
+    id_bag      INT NOT NULL,
     FOREIGN KEY (id_bag)
-        REFERENCES bag(id)
+        REFERENCES bag (id)
 );
 
 CREATE TABLE room
