@@ -9,6 +9,8 @@ import pawtropolis.complex.persistence.entity.Animal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
@@ -46,13 +48,13 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
 
     }
 
-    public List<Animal> marshall(List<AnimalBO> animalBoList) {
+    public Set<Animal> marshall(List<AnimalBO> animalBoList) {
         return animalBoList.stream()
                 .map(this::marshall)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
-    public List<AnimalBO> unmarshall(List<Animal> animals) {
+    public List<AnimalBO> unmarshall(Set<Animal> animals) {
         return animals.stream()
                 .map(this::unmarshall)
                 .toList();
