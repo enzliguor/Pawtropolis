@@ -61,6 +61,8 @@ CREATE TABLE linked_rooms
         REFERENCES room (id),
     FOREIGN KEY (id_adjacent_room)
         REFERENCES room (id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 CREATE TABLE animal
 (
