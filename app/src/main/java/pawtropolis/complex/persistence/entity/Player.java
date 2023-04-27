@@ -25,6 +25,6 @@ public class Player implements EntityDB{
     @Column(name = "life_points")
     private int lifePoints;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn(name = "id_bag", referencedColumnName = "id")
+    @JoinColumn(name = "id_bag", referencedColumnName = "id")
     private Bag bag;
 }
