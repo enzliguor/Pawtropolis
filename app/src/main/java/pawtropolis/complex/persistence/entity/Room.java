@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import pawtropolis.complex.game.map.util.CardinalPoint;
 
-import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -30,10 +29,14 @@ public class Room implements EntityDB{
     @MapKeyJoinColumn(name = "id_item", referencedColumnName = "id")
     @Column(name = "quantity")
     private Map<Item, Integer> items;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_room", referencedColumnName = "id")
-    private List<Animal> animals;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "animals_in_room",
+            joinColumns = {@JoinColumn(name = "id_room", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_animal", referencedColumnName = "id")})
+    private Set<Animal> animals;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "linked_rooms",
             joinColumns = {
                     @JoinColumn(name = "id_room", referencedColumnName = "id")},
