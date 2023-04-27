@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import pawtropolis.complex.game.BusinessObject;
 import pawtropolis.complex.game.animals.domain.AnimalBO;
 import pawtropolis.complex.game.domain.ItemBO;
 import pawtropolis.complex.game.map.util.CardinalPoint;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(exclude = "adjacentRooms")
 @ToString(exclude = "adjacentRooms")
 @Builder
-public class RoomBO {
+public class RoomBO implements BusinessObject {
     private Long id;
     private final String name;
     private  final Map<ItemBO, Integer> items;

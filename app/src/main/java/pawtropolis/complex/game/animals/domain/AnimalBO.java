@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import pawtropolis.complex.game.BusinessObject;
 
 import java.time.LocalDate;
 
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 @SuperBuilder
-public abstract class AnimalBO {
+public abstract class AnimalBO implements BusinessObject {
 	private Long id;
 	private String name;
 	private String favoriteFood;

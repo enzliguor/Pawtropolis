@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import pawtropolis.complex.game.BusinessObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class BagBO {
+public class BagBO implements BusinessObject {
     private Long id;
 
     private int availableSlot;

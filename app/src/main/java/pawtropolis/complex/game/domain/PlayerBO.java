@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import pawtropolis.complex.game.BusinessObject;
 
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class PlayerBO{
+public class PlayerBO implements BusinessObject {
 	private Long id;
 
 	private String name;

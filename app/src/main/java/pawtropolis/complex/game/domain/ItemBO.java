@@ -4,12 +4,13 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import pawtropolis.complex.game.BusinessObject;
 
 @Getter
 @ToString
 @EqualsAndHashCode
 @Builder
-public class ItemBO{
+public class ItemBO implements BusinessObject {
 
 	private Long id;
 	private String name;
