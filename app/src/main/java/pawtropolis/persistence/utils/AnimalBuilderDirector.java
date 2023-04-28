@@ -2,8 +2,6 @@ package pawtropolis.persistence.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pawtropolis.complex.game.domain.animals.domain.*;
-import pawtropolis.complex.persistence.entity.*;
 import pawtropolis.game.domain.animals.domain.*;
 import pawtropolis.persistence.entity.*;
 
