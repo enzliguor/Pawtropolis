@@ -6,14 +6,13 @@ import org.springframework.stereotype.Service;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.persistence.dao.PlayerDAO;
 import pawtropolis.persistence.entity.Player;
-import pawtropolis.persistence.utils.MarshallerManager;
+import pawtropolis.persistence.marshaller.Marshaller;
 
 @Service
 public class PlayerService extends AbstractService<Player, Long, PlayerBO>{
-
     @Autowired
-    public PlayerService(JpaRepository<Player, Long> dao, MarshallerManager marshallerManager) {
-        super(dao, marshallerManager);
+    public PlayerService(JpaRepository<Player, Long> dao, Marshaller<Player, PlayerBO> marshaller) {
+        super(dao, marshaller);
     }
 
     public boolean existsByName(String name){

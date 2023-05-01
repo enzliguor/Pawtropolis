@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.persistence.entity.Room;
-import pawtropolis.persistence.utils.MarshallerManager;
+import pawtropolis.persistence.marshaller.Marshaller;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
     private  final ItemService itemService;
 
     @Autowired
-    public RoomService(JpaRepository<Room, Long> dao, MarshallerManager marshallerManager, ItemService itemService) {
+    public RoomService(JpaRepository<Room, Long> dao, Marshaller<Room, RoomBO> marshallerManager, ItemService itemService) {
         super(dao, marshallerManager);
         this.itemService = itemService;
     }

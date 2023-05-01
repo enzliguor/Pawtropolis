@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pawtropolis.game.domain.BagBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.persistence.entity.Bag;
-import pawtropolis.persistence.utils.MarshallerManager;
+import pawtropolis.persistence.marshaller.Marshaller;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ public class BagService extends AbstractService<Bag, Long, BagBO>{
     private  final ItemService itemService;
 
     @Autowired
-    public BagService(JpaRepository<Bag, Long> dao, MarshallerManager marshallerManager, ItemService itemService) {
+    public BagService(JpaRepository<Bag, Long> dao, Marshaller<Bag, BagBO> marshallerManager, ItemService itemService) {
         super(dao, marshallerManager);
         this.itemService=itemService;
     }

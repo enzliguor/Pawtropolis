@@ -4,9 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import pawtropolis.game.domain.BusinessObject;
 import pawtropolis.persistence.entity.EntityDB;
-import pawtropolis.persistence.utils.MarshallerManager;
+import pawtropolis.persistence.marshaller.Marshaller;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -15,24 +14,18 @@ public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
 
     protected final JpaRepository<E, ID> dao;
 
-    protected final MarshallerManager marshallerManager;
+    protected final Marshaller<E, B> marshaller;
 
-    protected final Class<E> entityClass;
-
-    protected final Class<B> businessObjectClass;
-
-    public AbstractService(JpaRepository<E, ID> dao, MarshallerManager marshallerManager) {
+    public AbstractService(JpaRepository<E, ID> dao, Marshaller<E, B> marshaller) {
         this.dao = dao;
-        this.marshallerManager = marshallerManager;
-        this.entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        this.businessObjectClass = (Class<B>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[2];
+        this.marshaller = marshaller;
     }
 
     public E saveOrUpdate(B businessObject){
         if(businessObject == null){
             return null;
         }
-        E entity = marshallerManager.marshall(businessObject, entityClass);
+        E entity = marshaller.marshall(businessObject);
         return dao.save(entity);
     }
     @Transactional
@@ -41,13 +34,13 @@ public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
             return null;
         }
         Optional<E> entityOpt = dao.findById(id);
-        return marshallerManager.unmarshall(entityOpt.orElse(null), businessObjectClass);
+        return marshaller.unmarshall(entityOpt.orElse(null));
     }
     @Transactional
     public List<B> findAll(){
         Iterable<E> collection = dao.findAll();
         List<E> list = StreamSupport.stream(collection.spliterator(), true).toList();
-        return marshallerManager.unmarshall(list, businessObjectClass);
+        return marshaller.unmarshall(list);
     }
 
     public void deleteById(ID id){
