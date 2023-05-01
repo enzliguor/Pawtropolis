@@ -28,7 +28,7 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
         return super.saveOrUpdate(roomBO);
     }
 
-    public void saveItemsInRoom(RoomBO roomBO){
+    private void saveItemsInRoom(RoomBO roomBO){
         if(roomBO == null){
             return;
         }
@@ -36,12 +36,7 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
                 .filter(entry -> entry.getKey().getId() == null)
                 .collect(Collectors.toMap( Map.Entry::getKey, Map.Entry::getValue));
         if (itemsToSave.size()>0){
-            itemsToSave.forEach((key, value) -> {
-                roomBO.removeItems(key, value);
-                roomBO.addItem(
-                        marshallerManager.unmarshall(itemService.saveOrUpdate(key), ItemBO.class)
-                        , value);
-            });
+            itemsToSave.forEach((key, value) -> key.setId(itemService.saveOrUpdate(key).getId()));
         }
     }
 
