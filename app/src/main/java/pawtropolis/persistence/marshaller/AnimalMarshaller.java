@@ -21,8 +21,7 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
     private AnimalMarshaller(ApplicationContext applicationContext) {
         this.animalMarshallers = new HashMap<>();
         applicationContext.getBeansOfType(Marshaller.class).values().stream()
-                .filter(marshaller -> Animal.class.isAssignableFrom(marshaller.getEntityClass()) ||
-                        AnimalBO.class.isAssignableFrom(marshaller.getBoClass()))
+                .filter(marshaller -> Animal.class.isAssignableFrom(marshaller.getEntityClass()))
                 .forEach(marshaller -> {
                     this.animalMarshallers.put(marshaller.getEntityClass(), marshaller);
                     this.animalMarshallers.put(marshaller.getBoClass(), marshaller);
@@ -48,13 +47,25 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
 
     }
 
-    public Set<Animal> marshall(List<AnimalBO> animalBoList) {
+    public List<Animal> marshall(List<AnimalBO> animalBoList) {
+        return animalBoList.stream()
+                .map(this::marshall)
+                .toList();
+    }
+
+    public List<AnimalBO> unmarshall(List<Animal> animals) {
+        return animals.stream()
+                .map(this::unmarshall)
+                .toList();
+    }
+
+    public Set<Animal> marshallToSet(List<AnimalBO> animalBoList) {
         return animalBoList.stream()
                 .map(this::marshall)
                 .collect(Collectors.toSet());
     }
 
-    public List<AnimalBO> unmarshall(Set<Animal> animals) {
+    public List<AnimalBO> unmarshallFromSet(Set<Animal> animals) {
         return animals.stream()
                 .map(this::unmarshall)
                 .toList();
