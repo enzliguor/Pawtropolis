@@ -36,12 +36,7 @@ public class BagService extends AbstractService<Bag, Long, BagBO>{
                 .filter(entry -> entry.getKey().getId() == null)
                 .collect(Collectors.toMap( Map.Entry::getKey, Map.Entry::getValue));
         if (itemsToSave.size()>0){
-            itemsToSave.forEach((key, value) -> {
-                bagBO.removeItem(key, value);
-                bagBO.addItem(
-                        marshallerManager.unmarshall(itemService.saveOrUpdate(key), ItemBO.class)
-                        , value);
-            });
+            itemsToSave.forEach((key, value) -> key.setId(itemService.saveOrUpdate(key).getId()));
         }
     }
 }
