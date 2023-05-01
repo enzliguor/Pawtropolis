@@ -6,4 +6,7 @@ import pawtropolis.persistence.entity.Player;
 
 @Repository
 public interface PlayerDAO extends JpaRepository<Player, Long> {
+
+    boolean existsByName(String name);
+
 }
