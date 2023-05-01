@@ -61,7 +61,7 @@ public class RoomMarshaller implements Marshaller<Room, RoomBO> {
                                 Map.Entry::getValue
                         )))
                 .adjacentRooms(new EnumMap<>(CardinalPoint.class))
-                .animals(this.animalMarshaller.marshall(roomBO.getAnimals()))
+                .animals(this.animalMarshaller.marshallToSet(roomBO.getAnimals()))
                 .build();
     }
 
@@ -98,7 +98,7 @@ public class RoomMarshaller implements Marshaller<Room, RoomBO> {
                                 entry -> this.itemConverter.unmarshall(entry.getKey()),
                                 Map.Entry::getValue
                         )))
-                .animals(this.animalMarshaller.unmarshall(room.getAnimals()))
+                .animals(this.animalMarshaller.unmarshallFromSet(room.getAnimals()))
                 .adjacentRooms(new EnumMap<>(CardinalPoint.class))
                 .build();
     }
