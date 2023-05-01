@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
 @Component
 public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
 
-    private final Map<Class<?>, Marshaller<Animal, AnimalBO>> animalmarshallers;
+    private final Map<Class<?>, Marshaller<Animal, AnimalBO>> animalMarshallers;
 
     @Autowired
     private AnimalMarshaller(ApplicationContext applicationContext) {
-        this.animalmarshallers = new HashMap<>();
+        this.animalMarshallers = new HashMap<>();
         applicationContext.getBeansOfType(Marshaller.class).values().stream()
                 .filter(marshaller -> Animal.class.isAssignableFrom(marshaller.getEntityClass()) ||
                         AnimalBO.class.isAssignableFrom(marshaller.getBoClass()))
                 .forEach(marshaller -> {
-                    this.animalmarshallers.put(marshaller.getEntityClass(), marshaller);
-                    this.animalmarshallers.put(marshaller.getBoClass(), marshaller);
+                    this.animalMarshallers.put(marshaller.getEntityClass(), marshaller);
+                    this.animalMarshallers.put(marshaller.getBoClass(), marshaller);
                 });
     }
 
@@ -34,7 +34,7 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
         if (animalBO == null) {
             return null;
         }
-        Marshaller<Animal, AnimalBO> marshaller = this.animalmarshallers.get(animalBO.getClass());
+        Marshaller<Animal, AnimalBO> marshaller = this.animalMarshallers.get(animalBO.getClass());
         return (marshaller != null)? marshaller.marshall(marshaller.getBoClass().cast(animalBO)) : null;
     }
 
@@ -43,7 +43,7 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
         if (animal == null) {
             return null;
         }
-        Marshaller<Animal, AnimalBO> marshaller = this.animalmarshallers.get(animal.getClass());
+        Marshaller<Animal, AnimalBO> marshaller = this.animalMarshallers.get(animal.getClass());
         return marshaller.unmarshall(marshaller.getEntityClass().cast(animal));
 
     }
