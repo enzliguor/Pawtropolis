@@ -1,17 +1,15 @@
 package pawtropolis.game.domain;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
 @EqualsAndHashCode
 @Builder
 public class ItemBO implements BusinessObject {
-
+	@Setter
 	private Long id;
+
 	private String name;
 
 	private String description;
