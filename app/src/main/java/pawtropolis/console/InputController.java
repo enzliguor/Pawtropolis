@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.function.Predicate;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -22,4 +24,30 @@ public final class InputController {
 			return "";
 		}
 	}
+	public static String readChoice(String message, List<String> options) {
+		String input;
+		StringBuilder stringBuilder = new StringBuilder("\n>").append(message);
+		for (String option : options) {
+			stringBuilder.append("\n- ").append(option);
+		}
+		do {
+			log.info(stringBuilder.toString());
+			input = InputController.readString().trim();
+		} while (!options.contains(input));
+		return input;
+	}
+	public static String evaluateInput(String message, Predicate<String> condition, String errorMessage) {
+		String input;
+		boolean isValidInput;
+		do {
+			log.info("\n>" + message);
+			input = InputController.readString().trim();
+			isValidInput = condition.test(input);
+			if (!isValidInput) {
+				log.error("\n>" + errorMessage);
+			}
+		} while (!isValidInput);
+		return input;
+	}
+
 }
