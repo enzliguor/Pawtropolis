@@ -2,11 +2,10 @@ package pawtropolis.game.command.domain;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.GameController;
 
 @Slf4j
 @Component
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
 
     private static final String HELP = """
 				
@@ -15,12 +14,9 @@ public class HelpCommand extends Command {
 				get 'item name'  -> collect an item from the room
 				drop 'item name' -> drop an item from your bag
 				go 'direction'   -> move into another adjacent room, if available (north, south, east, west)
+				start            -> pause/restart
 				exit             -> close the game
 				""";
-
-    protected HelpCommand(GameController gameController) {
-        super(gameController);
-    }
 
     @Override
     public void execute() {
