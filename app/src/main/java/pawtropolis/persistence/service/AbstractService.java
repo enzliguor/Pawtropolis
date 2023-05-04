@@ -21,12 +21,13 @@ public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
         this.marshaller = marshaller;
     }
 
-    public E saveOrUpdate(B businessObject){
+    public B saveOrUpdate(B businessObject){
         if(businessObject == null){
             return null;
         }
         E entity = marshaller.marshall(businessObject);
-        return dao.save(entity);
+        E savedEntity = dao.save(entity);
+        return marshaller.unmarshall(savedEntity);
     }
     @Transactional
     public B findById(ID id){
