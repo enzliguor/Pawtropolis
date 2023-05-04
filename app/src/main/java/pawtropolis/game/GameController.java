@@ -14,7 +14,7 @@ import pawtropolis.game.command.CommandManager;
 @Slf4j
 @ToString
 @Component
-public class GameController implements ApplicationRunner {
+public class GameController {
     @Getter
     private boolean gameRunning;
     private final CommandManager commandManager;
@@ -25,12 +25,10 @@ public class GameController implements ApplicationRunner {
         this.commandManager = commandManager;
     }
     public void runGame() {
-        commandManager.executeCommand("start");
-        log.info("\nType HELP for a list of available command");
         this.gameRunning = true;
 
         while (gameRunning) {
-            log.info("\nWhere are you going to go?>");
+            log.info("\n>Where are you going to go?");
 
             commandManager.executeCommand(InputController.readString());
         }
