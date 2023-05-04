@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.command.domain.Command;
-import pawtropolis.game.command.domain.ParameterizedCommand;
+import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.ParameterizedCommand;
 
 import java.util.Arrays;
 import java.util.EnumMap;
