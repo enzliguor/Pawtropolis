@@ -1,23 +1,23 @@
-package pawtropolis.game.command.domain;
+package pawtropolis.game.command.domain.gamecommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.GameController;
+import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.PlayerBO;
 
 import java.util.Map;
 
 @Component
 @Slf4j
-public class BagCommand extends Command {
+public class BagCommand extends GameCommand {
 
-    protected BagCommand(GameController gameController) {
-        super(gameController);
+    protected BagCommand(GameSessionBO gameSessionBO) {
+        super(gameSessionBO);
     }
 
     @Override
     public void execute() {
-        PlayerBO player = this.gameController.getPlayer();
+        PlayerBO player = this.gameSessionBO.getPlayer();
         Map<String, Integer> items = player.getBagContent();
 
         StringBuilder builder = new StringBuilder("\nIn bag: ");

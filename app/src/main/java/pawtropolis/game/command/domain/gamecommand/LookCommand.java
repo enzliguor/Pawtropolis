@@ -1,23 +1,24 @@
-package pawtropolis.game.command.domain;
+package pawtropolis.game.command.domain.gamecommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.GameController;
-import pawtropolis.game.domain.animals.domain.AnimalBO;
+import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
+import pawtropolis.game.domain.animals.domain.AnimalBO;
 
 import java.util.List;
 import java.util.Map;
 @Slf4j
 @Component
-public class LookCommand extends Command {
-    protected LookCommand(GameController gameController) {
-        super(gameController);
+public class LookCommand extends GameCommand {
+
+    protected LookCommand(GameSessionBO gameSessionBO) {
+        super(gameSessionBO);
     }
 
     @Override
     public void execute() {
-        RoomBO currentRoom = gameController.getCurrentRoom();
+        RoomBO currentRoom = gameSessionBO.getCurrentRoom();
         Map<String, Integer> itemsName = currentRoom.getItemsName();
         Map<Class<? extends AnimalBO>, List<String>> animals = currentRoom.getAnimalsName();
 
