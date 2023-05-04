@@ -9,7 +9,7 @@ import pawtropolis.persistence.marshaller.Marshaller;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
-
+@Transactional
 public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
 
     protected final JpaRepository<E, ID> dao;
@@ -29,7 +29,7 @@ public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
         E savedEntity = dao.save(entity);
         return marshaller.unmarshall(savedEntity);
     }
-    @Transactional
+
     public B findById(ID id){
         if(id == null){
             return null;
@@ -37,7 +37,7 @@ public class AbstractService<E extends EntityDB, ID, B extends BusinessObject> {
         Optional<E> entityOpt = dao.findById(id);
         return marshaller.unmarshall(entityOpt.orElse(null));
     }
-    @Transactional
+
     public List<B> findAll(){
         Iterable<E> collection = dao.findAll();
         List<E> list = StreamSupport.stream(collection.spliterator(), true).toList();
