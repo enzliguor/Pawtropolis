@@ -1,9 +1,6 @@
 package pawtropolis.game.domain;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.map.util.CardinalPoint;
 
@@ -15,6 +12,7 @@ import java.util.stream.Collectors;
 @ToString(exclude = "adjacentRooms")
 @Builder
 public class RoomBO implements BusinessObject {
+    @Setter
     private Long id;
     private final String name;
     private  final Map<ItemBO, Integer> items;
