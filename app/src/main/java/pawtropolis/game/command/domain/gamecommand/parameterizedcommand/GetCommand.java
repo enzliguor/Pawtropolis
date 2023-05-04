@@ -1,8 +1,8 @@
-package pawtropolis.game.command.domain;
+package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.GameController;
+import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.game.domain.RoomBO;
@@ -11,14 +11,14 @@ import pawtropolis.game.domain.RoomBO;
 @Component
 public class GetCommand extends ParameterizedCommand {
 
-    protected GetCommand(GameController gameController) {
-        super(gameController);
+    protected GetCommand(GameSessionBO gameSessionBO) {
+        super(gameSessionBO);
     }
 
     @Override
     public void execute() {
-        RoomBO currentRoom = this.gameController.getCurrentRoom();
-        PlayerBO player = this.gameController.getPlayer();
+        RoomBO currentRoom = this.gameSessionBO.getCurrentRoom();
+        PlayerBO player = this.gameSessionBO.getPlayer();
         ItemBO item = currentRoom.findItemByName(parameter);
         if (item == null) {
             log.info("\nItemBO not found\n");
