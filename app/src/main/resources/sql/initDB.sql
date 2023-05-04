@@ -15,11 +15,7 @@ CREATE TABLE bag
 CREATE TABLE player
 (
     id          serial PRIMARY KEY,
-    name        VARCHAR(50),
-    life_points INT,
-    id_bag      INT NOT NULL,
-    FOREIGN KEY (id_bag)
-        REFERENCES bag (id)
+    name        VARCHAR(50) UNIQUE
 );
 
 CREATE TABLE room
@@ -86,4 +82,21 @@ CREATE TABLE animals_in_room
         REFERENCES room (id),
     FOREIGN KEY (id_animal)
         REFERENCES animal (id)
+);
+
+CREATE TABLE game_session
+(
+    id            serial PRIMARY KEY,
+    session_name  VARCHAR(255),
+    id_player     INT,
+    id_room       INT,
+    id_bag      INT NOT NULL,
+    life_points INT,
+    last_save     TIMESTAMP,
+    FOREIGN KEY (id_room)
+        REFERENCES room (id),
+    FOREIGN KEY (id_player)
+        REFERENCES player (id),
+    FOREIGN KEY (id_bag)
+        REFERENCES bag (id)
 );
