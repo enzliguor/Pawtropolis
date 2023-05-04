@@ -1,13 +1,11 @@
 package pawtropolis.game.domain;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Map;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @Builder
@@ -53,4 +51,7 @@ public class PlayerBO implements BusinessObject {
 		return this.bag.checkItemFits(item);
 	}
 
+	public boolean isPersisted(){
+		return this.id!=null;
+	}
 }
