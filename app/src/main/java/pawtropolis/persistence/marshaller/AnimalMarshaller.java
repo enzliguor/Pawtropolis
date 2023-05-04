@@ -47,12 +47,13 @@ public class AnimalMarshaller implements Marshaller<Animal, AnimalBO> {
 
     }
 
+    @Override
     public List<Animal> marshall(List<AnimalBO> animalBoList) {
         return animalBoList.stream()
                 .map(this::marshall)
                 .toList();
     }
-
+    @Override
     public List<AnimalBO> unmarshall(List<Animal> animals) {
         return animals.stream()
                 .map(this::unmarshall)
