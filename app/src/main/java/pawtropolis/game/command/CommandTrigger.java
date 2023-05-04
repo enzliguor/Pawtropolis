@@ -1,18 +1,29 @@
 package pawtropolis.game.command;
 
 import lombok.Getter;
-import pawtropolis.game.command.domain.*;
+import pawtropolis.game.command.domain.Command;
+import pawtropolis.game.command.domain.HelpCommand;
+import pawtropolis.game.command.domain.WrongCommand;
+import pawtropolis.game.command.domain.gamecommand.*;
+import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.DropCommand;
+import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.GetCommand;
+import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.GoCommand;
+import pawtropolis.game.command.domain.gamecommand.systemcommand.ExitCommand;
+import pawtropolis.game.command.domain.gamecommand.SaveCommand;
+import pawtropolis.game.command.domain.gamecommand.systemcommand.StartCommand;
 
 import java.util.Arrays;
 
 public enum CommandTrigger {
     BAG("bag", BagCommand.class),
     DROP("drop", DropCommand.class),
-    EXIT("exit", ExitCommand.class),
     GET("get", GetCommand.class),
     GO("go", GoCommand.class),
     HELP("help", HelpCommand.class),
     LOOK("look", LookCommand.class),
+    START("start", StartCommand.class),
+    EXIT("exit", ExitCommand.class),
+    SAVE("save", SaveCommand.class),
     WRONG_COMMAND("", WrongCommand.class);
 
     @Getter
