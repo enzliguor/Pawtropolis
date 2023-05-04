@@ -3,7 +3,6 @@ package pawtropolis.persistence.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.persistence.entity.Room;
@@ -50,24 +49,4 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
             itemsToSave.forEach((key, value) -> key.setId(itemService.saveOrUpdate(key).getId()));
         }
     }
-
-    @Transactional
-    public RoomBO getCopy(Long id){
-        RoomBO roomBO = super.findById(id);
-        if(roomBO != null){
-            removeIdFromAllRooms(roomBO, new ArrayList<>());
-        }
-        return roomBO;
-    }
-
-    private void removeIdFromAllRooms(RoomBO roomBO, List<RoomBO> list){
-        if(!list.contains(roomBO)){
-            roomBO.setId(null);
-            roomBO.getAnimals().forEach(animal -> animal.setId(null));
-            list.add(roomBO);
-            roomBO.getAdjacentRooms().forEach((key, value)->removeIdFromAllRooms(value, list));
-        }
-    }
-
-
 }
