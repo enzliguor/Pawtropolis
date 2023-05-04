@@ -16,15 +16,6 @@ public class Player implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Getter
-    @Setter
     @Column(name = "name")
     private String name;
-    @Getter
-    @Setter
-    @Column(name = "life_points")
-    private int lifePoints;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_bag", referencedColumnName = "id")
-    private Bag bag;
 }
