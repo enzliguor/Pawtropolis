@@ -23,7 +23,7 @@ public class BagService extends AbstractService<Bag, Long, BagBO>{
     }
 
     @Override
-    public Bag saveOrUpdate(BagBO bagBO) {
+    public BagBO saveOrUpdate(BagBO bagBO) {
         saveItemsInBag(bagBO);
         return super.saveOrUpdate(bagBO);
     }
