@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pawtropolis.console.InputController;
 import pawtropolis.game.command.CommandManager;
+
+import java.util.List;
 
 @Slf4j
 @ToString
@@ -35,21 +35,13 @@ public class GameController {
     }
     public void endGame() {
         this.gameRunning = false;
+        String choice = InputController.readChoice("Do you want to save before exit?", List.of("YES","NO"));
+        if (choice.equals("YES")) commandManager.executeCommand("save");
     }
 
     public void pause(){
-        String input = "";
-        while(!input.equals("start")){
-            log.info("""
-                     
+        InputController.evaluateInput("""
                      PAUSE
-            Type 'start' to continue""");
-            input = InputController.readString();
-        }
-    }
-
-    @Override
-    public void run(ApplicationArguments args){
-        runGame();
+            Type 'start' to continue""", input -> input.equals("start"), "");
     }
 }
