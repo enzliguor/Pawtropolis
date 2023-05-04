@@ -1,6 +1,5 @@
 package pawtropolis.persistence.marshaller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.persistence.entity.Player;
@@ -8,19 +7,11 @@ import pawtropolis.persistence.entity.Player;
 @Component
 public class PlayerMarshaller implements Marshaller<Player, PlayerBO> {
 
-    private final BagMarshaller bagConverter;
-    @Autowired
-    private PlayerMarshaller(BagMarshaller bagConverter) {
-        this.bagConverter = bagConverter;
-    }
-
     @Override
     public Player marshall(PlayerBO playerBO) {
         return Player.builder()
                 .id(playerBO.getId())
                 .name(playerBO.getName())
-                .lifePoints(playerBO.getLifePoints())
-                .bag(this.bagConverter.marshall(playerBO.getBag()))
                 .build();
     }
 
@@ -29,8 +20,6 @@ public class PlayerMarshaller implements Marshaller<Player, PlayerBO> {
         return PlayerBO.builder()
                 .id(player.getId())
                 .name(player.getName())
-                .lifePoints(player.getLifePoints())
-                .bag(this.bagConverter.unmarshall(player.getBag()))
                 .build();
     }
 
