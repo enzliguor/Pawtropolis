@@ -2,6 +2,7 @@ package pawtropolis.game.domain.animals.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.BusinessObject;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @SuperBuilder
 public abstract class AnimalBO implements BusinessObject {
+	@Setter
 	private Long id;
 	private String name;
 	private String favoriteFood;
