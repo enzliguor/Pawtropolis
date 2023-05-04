@@ -23,12 +23,20 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
     }
 
     @Override
-    public Room saveOrUpdate(RoomBO roomBO) {
-        saveItemsInRoom(roomBO);
+    public RoomBO saveOrUpdate(RoomBO roomBO) {
+        saveNewItemsInAllRooms(roomBO, new ArrayList<>());
         return super.saveOrUpdate(roomBO);
     }
 
-    private void saveItemsInRoom(RoomBO roomBO){
+    public void saveNewItemsInAllRooms(RoomBO roomBO, List<RoomBO> rooms){
+        if(!rooms.contains(roomBO)){
+            saveNewItemsInRoom(roomBO);
+            rooms.add(roomBO);
+            roomBO.getAdjacentRooms().forEach((cardinal, room)-> saveNewItemsInAllRooms(room, rooms));
+        }
+    }
+
+    public void saveNewItemsInRoom(RoomBO roomBO){
         if(roomBO == null){
             return;
         }
