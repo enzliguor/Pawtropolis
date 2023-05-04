@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.InputController;
 import pawtropolis.game.command.CommandManager;
 
 @Slf4j
@@ -24,6 +25,8 @@ public class GameController implements ApplicationRunner {
         this.commandManager = commandManager;
     }
     public void runGame() {
+        commandManager.executeCommand("start");
+        log.info("\nType HELP for a list of available command");
         this.gameRunning = true;
 
         while (gameRunning) {
@@ -34,6 +37,17 @@ public class GameController implements ApplicationRunner {
     }
     public void endGame() {
         this.gameRunning = false;
+    }
+
+    public void pause(){
+        String input = "";
+        while(!input.equals("start")){
+            log.info("""
+                     
+                     PAUSE
+            Type 'start' to continue""");
+            input = InputController.readString();
+        }
     }
 
     @Override
