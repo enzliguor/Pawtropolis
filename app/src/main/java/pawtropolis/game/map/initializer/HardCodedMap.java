@@ -2,19 +2,18 @@ package pawtropolis.game.map.initializer;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+import pawtropolis.game.domain.ItemBO;
+import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.domain.animals.domain.EagleBO;
 import pawtropolis.game.domain.animals.domain.LionBO;
 import pawtropolis.game.domain.animals.domain.TigerBO;
-import pawtropolis.game.domain.ItemBO;
-import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Component
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HardCodedMap implements MapInitializer {
     @Override
