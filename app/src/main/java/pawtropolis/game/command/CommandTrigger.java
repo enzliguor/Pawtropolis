@@ -8,9 +8,9 @@ import pawtropolis.game.command.domain.gamecommand.*;
 import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.DropCommand;
 import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.GetCommand;
 import pawtropolis.game.command.domain.gamecommand.parameterizedcommand.GoCommand;
-import pawtropolis.game.command.domain.gamecommand.systemcommand.ExitCommand;
+import pawtropolis.game.command.domain.systemcommand.ExitCommand;
 import pawtropolis.game.command.domain.gamecommand.SaveCommand;
-import pawtropolis.game.command.domain.gamecommand.systemcommand.StartCommand;
+import pawtropolis.game.command.domain.systemcommand.StartCommand;
 
 import java.util.Arrays;
 

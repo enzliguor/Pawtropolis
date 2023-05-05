@@ -1,15 +1,14 @@
-package pawtropolis.game.command.domain.gamecommand.systemcommand;
+package pawtropolis.game.command.domain.systemcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.GameController;
-import pawtropolis.game.domain.GameSessionBO;
 
 @Component
 @Slf4j
 public class StartCommand extends SystemCommand {
-    protected StartCommand(GameController gameController, GameSessionBO gameSessionBO) {
-        super(gameController, gameSessionBO);
+    protected StartCommand(GameController gameController) {
+        super(gameController);
     }
 
     @Override
