@@ -2,6 +2,7 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.game.command.domain.gamecommand.LookCommand;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
@@ -13,9 +14,13 @@ import java.util.stream.Collectors;
 @Component
 public class GoCommand extends ParameterizedCommand {
 
-    protected GoCommand(GameSessionBO gameSessionBO) {
+    private final LookCommand lookCommand;
+    protected GoCommand(GameSessionBO gameSessionBO, LookCommand lookCommand) {
         super(gameSessionBO);
+        this.lookCommand=lookCommand;
     }
+
+
     @Override
     public void execute() {
         CardinalPoint direction = CardinalPoint.of(parameter);
@@ -32,6 +37,7 @@ public class GoCommand extends ParameterizedCommand {
             log.info("\nNothing to show in this direction!\n");
         } else {
             gameSessionBO.setCurrentRoom(adjacentRoom);
+            this.lookCommand.execute();
         }
     }
 }
