@@ -2,6 +2,7 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.game.command.domain.gamecommand.BagCommand;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
@@ -11,8 +12,11 @@ import pawtropolis.game.domain.RoomBO;
 @Component
 public class GetCommand extends ParameterizedCommand {
 
-    protected GetCommand(GameSessionBO gameSessionBO) {
+    private final BagCommand bagCommand;
+
+    protected GetCommand(GameSessionBO gameSessionBO, BagCommand bagCommand) {
         super(gameSessionBO);
+        this.bagCommand=bagCommand;
     }
 
     @Override
@@ -25,6 +29,7 @@ public class GetCommand extends ParameterizedCommand {
         }else if(player.checkItemFitsInBag(item)){
             player.collectItem(item);
             currentRoom.removeItem(item);
+            this.bagCommand.execute();
         }else{
             log.info("\nYour BagBO is too full! \n" +
                     "Free up " +
