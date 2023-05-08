@@ -1,6 +1,5 @@
 package pawtropolis.game.map.initializer;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
@@ -14,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class HardCodedMap implements MapInitializer {
     @Override
     public RoomBO populateMap() {
