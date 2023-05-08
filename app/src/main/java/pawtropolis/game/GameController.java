@@ -26,6 +26,7 @@ public class GameController {
     }
     public void runGame() {
         this.gameRunning = true;
+        commandManager.executeCommand("look");
 
         while (gameRunning) {
             log.info("\n>Where are you going to go?");
