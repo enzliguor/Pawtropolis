@@ -1,13 +1,11 @@
 package pawtropolis.game.map.initializer;
 
-import org.springframework.stereotype.Component;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.persistence.service.RoomService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class MapFromDB implements MapInitializer{
 
     private final RoomService roomService;
