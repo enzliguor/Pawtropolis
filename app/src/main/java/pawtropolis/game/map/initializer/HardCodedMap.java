@@ -2,6 +2,7 @@ package pawtropolis.game.map.initializer;
 
 import lombok.NoArgsConstructor;
 import pawtropolis.game.domain.ItemBO;
+import pawtropolis.game.domain.LockedRoomBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.domain.animals.domain.EagleBO;
@@ -66,7 +67,7 @@ public class HardCodedMap implements MapInitializer {
 
         RoomBO starterRoom = RoomBO.builder().name("Starter Room").build();
         RoomBO roomSouth = RoomBO.builder().name("Room SOUTH").build();
-        RoomBO roomNorth = RoomBO.builder().name("Room NORTH").build();
+        LockedRoomBO roomNorth = LockedRoomBO.builder().name("Room NORTH").key(ball).build();
         RoomBO roomEast = RoomBO.builder().name("Room EAST").build();
         RoomBO roomWest = RoomBO.builder().name("Room WEST").build();
 
