@@ -28,7 +28,7 @@ public class PlayerBO implements BusinessObject {
 	}
 
 	public Map<String, Integer> getBagContent(){
-		return this.bag.getItemsName();
+		return this.bag.getContent();
 	}
 
 	public int getAvailableSlot(){
@@ -51,7 +51,7 @@ public class PlayerBO implements BusinessObject {
 		return this.bag.checkItemFits(item);
 	}
 
-	public boolean isPersisted(){
-		return this.id!=null;
+	public ItemBO getItemByName(String itemName){
+		return this.bag.findItemByName(itemName);
 	}
 }
