@@ -16,14 +16,14 @@ VALUES ('Spada di gomma', 1, 'Una spada dall''apparenza minacciosa, ma completam
        ('Cappello della Confusione', 1, 'Un cappello che ti fa dimenticare chi sei per un po'),
        ('Cucchiaio Telecinetico', 1, 'Un cucchiaio che ti permette di muovere oggetti con la mente');
 
-INSERT INTO room (name)
-VALUES ('Sala di Partenza'),
-       ('Stanza dei Biscotti'),
-       ('Sala del Tormento Matrimoniale'),
-       ('Camera da letto di Malgioglio'),
-       ('Cucina di Gerry Scotti');
+INSERT INTO room (type, name, key)
+VALUES ('room', 'Sala di Partenza', null),
+       ('locked room', 'Stanza dei Biscotti', 7),
+       ('room', 'Sala del Tormento Matrimoniale', null),
+       ('room', 'Camera da letto di Malgioglio', null),
+       ('room', 'Cucina di Gerry Scotti', null);
 
-INSERT INTO animal (specie, name, favorite_food, age, join_date, weight, height, tail_length, wingspan)
+INSERT INTO animal (species, name, favorite_food, age, join_date, weight, height, tail_length, wingspan)
 VALUES ('tiger', 'Tigger', 'steak', 5, '2018-03-01', 200.0, 1.2, 1.0, null),
        ('tiger', 'Simba', 'chicken', 4, '2019-04-15', 180.0, 1.1, 1.1, null),
        ('tiger', 'Tony', 'beef', 3, '2020-06-21', 150.0, 1.0, 0.9, null),

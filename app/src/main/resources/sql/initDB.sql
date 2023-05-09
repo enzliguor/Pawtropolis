@@ -1,7 +1,7 @@
 CREATE TABLE item
 (
     id             serial PRIMARY KEY,
-    name           VARCHAR(50),
+    name           VARCHAR(255),
     slots_required INT,
     description    VARCHAR(255)
 );
@@ -15,13 +15,17 @@ CREATE TABLE bag
 CREATE TABLE player
 (
     id          serial PRIMARY KEY,
-    name        VARCHAR(50) UNIQUE
+    name        VARCHAR(255) UNIQUE
 );
 
 CREATE TABLE room
 (
     id   serial PRIMARY KEY,
-    name VARCHAR(50)
+    type VARCHAR(255),
+    name VARCHAR(255),
+    key INT,
+    FOREIGN KEY (key)
+        REFERENCES item (id)
 );
 
 CREATE TABLE items_in_bag
@@ -50,7 +54,7 @@ CREATE TABLE items_in_room
 CREATE TABLE linked_rooms
 (
     id_room           INT NOT NULL,
-    cardinal_point VARCHAR(50) NOT NULL,
+    cardinal_point VARCHAR(255) NOT NULL,
     id_adjacent_room  INT NOT NULL,
     PRIMARY KEY (id_room, cardinal_point),
     FOREIGN KEY (id_room)
@@ -63,8 +67,8 @@ CREATE TABLE linked_rooms
 CREATE TABLE animal
 (
     id            serial PRIMARY KEY,
-    specie        VARCHAR(50),
-    name          VARCHAR(50),
+    species        VARCHAR(255),
+    name          VARCHAR(255),
     favorite_food VARCHAR(255),
     age           INT,
     join_date     DATE,
