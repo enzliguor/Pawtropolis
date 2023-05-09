@@ -33,7 +33,7 @@ public class BagBO implements BusinessObject {
         return Map.copyOf(this.items);
     }
 
-    public Map<String, Integer> getItemsName() {
+    public Map<String, Integer> getContent() {
         return this.items.entrySet().stream()
                 .collect(Collectors.toMap(
                         entry -> entry.getKey().getName(),
