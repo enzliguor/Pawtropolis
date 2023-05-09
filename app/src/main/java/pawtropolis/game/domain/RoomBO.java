@@ -1,6 +1,7 @@
 package pawtropolis.game.domain;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.map.util.CardinalPoint;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 @EqualsAndHashCode(exclude = "adjacentRooms")
 @ToString(exclude = "adjacentRooms")
-@Builder
+@SuperBuilder
 public class RoomBO implements BusinessObject {
     @Setter
     private Long id;
@@ -19,12 +20,12 @@ public class RoomBO implements BusinessObject {
     private final List<AnimalBO> animals;
     private final EnumMap<CardinalPoint, RoomBO> adjacentRooms;
 
-    private RoomBO(Long id, String name, Map<ItemBO, Integer> items, List<AnimalBO> animals, EnumMap<CardinalPoint, RoomBO> adjacentRooms) {
-        this.id = id;
-        this.name = name;
-        this.items = (items != null) ? items : new HashMap<>();
-        this.animals = (animals != null) ? animals : new ArrayList<>();
-        this.adjacentRooms = (adjacentRooms != null) ? adjacentRooms : new EnumMap<>(CardinalPoint.class);
+    protected RoomBO(RoomBOBuilder<?, ?> builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.items = (builder.items != null) ? builder.items : new HashMap<>();
+        this.animals = (builder.animals != null) ? builder.animals : new ArrayList<>();
+        this.adjacentRooms = (builder.adjacentRooms != null) ? builder.adjacentRooms : new EnumMap<>(CardinalPoint.class);
     }
 
     public RoomBO getAdjacentRoom(CardinalPoint cardinalPoint) {
