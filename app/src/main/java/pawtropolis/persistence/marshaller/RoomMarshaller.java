@@ -2,8 +2,10 @@ package pawtropolis.persistence.marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pawtropolis.game.domain.LockedRoomBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
+import pawtropolis.persistence.entity.LockedRoom;
 import pawtropolis.persistence.entity.Room;
 
 import java.util.EnumMap;
@@ -14,14 +16,17 @@ import java.util.stream.Collectors;
 @Component
 public class RoomMarshaller implements Marshaller<Room, RoomBO> {
 
-    private final ItemMarshaller itemConverter;
+    private final ItemMarshaller itemMarshaller;
 
     private final AnimalMarshaller animalMarshaller;
 
+    private final LockedRoomMarshaller lockedRoomMarshaller;
+
     @Autowired
-    private RoomMarshaller(ItemMarshaller itemConverter, AnimalMarshaller animalMarshaller) {
-        this.itemConverter = itemConverter;
+    public RoomMarshaller(ItemMarshaller itemMarshaller, AnimalMarshaller animalMarshaller, LockedRoomMarshaller lockedRoomMarshaller) {
+        this.itemMarshaller = itemMarshaller;
         this.animalMarshaller = animalMarshaller;
+        this.lockedRoomMarshaller = lockedRoomMarshaller;
     }
 
     @Override
@@ -52,12 +57,15 @@ public class RoomMarshaller implements Marshaller<Room, RoomBO> {
     }
 
     private Room marshallSingleRoomBO(RoomBO roomBO) {
+        if(roomBO instanceof LockedRoomBO lockedRoomBO){
+            return this.lockedRoomMarshaller.marshall(lockedRoomBO);
+        }
         return Room.builder()
                 .id(roomBO.getId())
                 .name(roomBO.getName())
                 .items(roomBO.getItems().entrySet().stream()
                         .collect(Collectors.toMap(
-                                entry -> this.itemConverter.marshall(entry.getKey()),
+                                entry -> this.itemMarshaller.marshall(entry.getKey()),
                                 Map.Entry::getValue
                         )))
                 .adjacentRooms(new EnumMap<>(CardinalPoint.class))
@@ -90,12 +98,15 @@ public class RoomMarshaller implements Marshaller<Room, RoomBO> {
 
 
     private RoomBO unmarshallSingleRoom(Room room) {
+        if(room instanceof  LockedRoom lockedRoom){
+            return this.lockedRoomMarshaller.unmarshall(lockedRoom);
+        }
         return RoomBO.builder()
                 .id(room.getId())
                 .name(room.getName())
                 .items(room.getItems().entrySet().stream()
                         .collect(Collectors.toMap(
-                                entry -> this.itemConverter.unmarshall(entry.getKey()),
+                                entry -> this.itemMarshaller.unmarshall(entry.getKey()),
                                 Map.Entry::getValue
                         )))
                 .animals(this.animalMarshaller.unmarshallFromSet(room.getAnimals()))
