@@ -2,6 +2,7 @@ package pawtropolis.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import pawtropolis.game.map.util.CardinalPoint;
 
 import java.util.Map;
@@ -13,8 +14,14 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = {"adjacentRooms"})
 @ToString(exclude = {"adjacentRooms"})
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name = "type",
+        discriminatorType = DiscriminatorType.STRING
+)
+@DiscriminatorValue(value = "room")
 @Table(name = "room")
-@Builder
+@SuperBuilder
 public class Room implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
