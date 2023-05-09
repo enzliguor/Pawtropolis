@@ -24,7 +24,7 @@ public class GameSession implements  EntityDB{
     @OneToOne(cascade =CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_player", referencedColumnName = "id")
     private Player player;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_room", referencedColumnName = "id")
     private Room currentRoom;
     @Column(name = "last_save", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
