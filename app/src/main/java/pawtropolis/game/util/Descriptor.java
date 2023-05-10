@@ -48,15 +48,12 @@ public class Descriptor {
         Map<String, Integer> items = playerBO.getBagContent();
 
         StringBuilder builder = new StringBuilder("\nIn bag: ");
+        StringJoiner itemJoiner = new StringJoiner(", ");
 
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
-            builder.append(entry.getKey())
-                    .append("(x").append(entry.getValue())
-                    .append("), ");
+            itemJoiner.add(entry.getKey() + "(x" + entry.getValue() + ")");
         }
-        if (builder.toString().endsWith(", ")) {
-            builder.delete(builder.length()-2, builder.length()-1);
-        }
+        builder.append(itemJoiner);
 
         builder.append("   [Available Slot: ")
                 .append(playerBO.getAvailableSlot())
