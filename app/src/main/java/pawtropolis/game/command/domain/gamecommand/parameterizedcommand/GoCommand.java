@@ -3,12 +3,12 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import pawtropolis.console.InputController;
-import pawtropolis.game.command.domain.gamecommand.LookCommand;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.LockedRoomBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
+import pawtropolis.game.util.Descriptor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +19,9 @@ import java.util.stream.Collectors;
 @Component
 public class GoCommand extends ParameterizedCommand {
 
-    private final LookCommand lookCommand;
-
-    protected GoCommand(GameSessionBO gameSessionBO, LookCommand lookCommand) {
+    protected GoCommand(GameSessionBO gameSessionBO) {
         super(gameSessionBO);
-        this.lookCommand = lookCommand;
     }
-
 
     @Override
     public void execute() {
@@ -48,7 +44,7 @@ public class GoCommand extends ParameterizedCommand {
         }
         if (adjacentRoom != null) {
             gameSessionBO.setCurrentRoom(adjacentRoom);
-            this.lookCommand.execute();
+            log.info(Descriptor.getRoomDescription(adjacentRoom));
         }
     }
 

@@ -2,20 +2,18 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.command.domain.gamecommand.BagCommand;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.game.domain.RoomBO;
+import pawtropolis.game.util.Descriptor;
 
 @Slf4j
 @Component
 public class DropCommand extends ParameterizedCommand {
 
-    private final BagCommand bagCommand;
-    protected DropCommand(GameSessionBO gameSessionBO, BagCommand bagCommand) {
+    protected DropCommand(GameSessionBO gameSessionBO) {
         super(gameSessionBO);
-        this.bagCommand=bagCommand;
     }
 
     @Override
@@ -27,7 +25,7 @@ public class DropCommand extends ParameterizedCommand {
         } else {
             RoomBO currentRoom = this.gameSessionBO.getCurrentRoom();
             currentRoom.addItem(item);
-            this.bagCommand.execute();
+            log.info(Descriptor.getBagDescription(player));
         }
     }
 }
