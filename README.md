@@ -1,16 +1,10 @@
 
 >[!SETUP]
 >
-> 1. **Create docker image**
->
->     *docker build -t pawtropolis_db .*
-> 2. **Choose an option:**
->   - **Create docker container postgres with a volume on our host**
->   
->      *docker run --name pawtropolis_DB -p 5432:5432 -v C:\Users\vliguori\Desktop\Pawtropolis\app\src\main\resources\pgdata:/var/lib/postgresql/data -d pawtropolis_db*
->   - **Create docker container postgres with a volume handled by Docker**
->   
->       *docker run --name pawtropolis_DB -p 5432:5432 -v pawtropolis_data:/var/lib/postgresql/data -d pawtropolis_db*
-> 3. [!Optional] **Create docker container pgadmin4 to have a graphical interface for our postgres db**
+> 1. **Creates the postgres image and creates the container that will hold the application's database.**
 > 
->      *docker run --name pgadmin4 -e PGADMIN_DEFAULT_EMAIL=enzo@domain.com -e PGADMIN_DEFAULT_PASSWORD=admin -p 5050:80 -d dpage/pgadmin4 -e PGADMIN_DEFAULT_SERVER=pawtropolis_DB*
+>    (Make sure you have Docker installed and running on your machine before executing the docker-compose up command)
+>
+> 
+>     docker-compose up -d
+

@@ -1,0 +1,16 @@
+version: '1'
+volumes:
+  pawtropolis-data:
+services:
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=pawtropolis
+    volumes:
+      - pawtropolis-data:/var/lib/postgresql/data
+      - ./app/src/main/resources/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+
