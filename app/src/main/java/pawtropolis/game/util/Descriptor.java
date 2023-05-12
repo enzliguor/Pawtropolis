@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 public class Descriptor {
 
     public static String getRoomDescription(RoomBO roomBO){
-        Map<String, Integer> itemsName = roomBO.getItemsName();
+        Map<String, Integer> itemsName = roomBO.getItemsNameAndQuantity();
         Map<Class<? extends AnimalBO>, List<String>> animals = roomBO.getAnimalsName();
         Map<CardinalPoint, RoomBO> adjacentRooms = roomBO.getAdjacentRooms();
 

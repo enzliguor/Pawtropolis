@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.map.util.CardinalPoint;
+import pawtropolis.game.util.GameUtility;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -89,22 +90,15 @@ public class RoomBO implements BusinessObject {
     }
 
     public ItemBO findItemByName(String itemName) {
-        return this.items.keySet().stream()
-                .filter(i -> i.getName().equals(itemName))
-                .findFirst()
-                .orElse(null);
+        return GameUtility.findItemByName(itemName, this.items.keySet());
     }
 
     public Integer getItemQuantity(ItemBO item) {
         return this.items.get(item);
     }
 
-    public Map<String, Integer> getItemsName() {
-        return this.items.entrySet().stream()
-                .collect(Collectors.toMap(
-                        entry -> entry.getKey().getName(),
-                        Map.Entry::getValue
-                ));
+    public Map<String, Integer> getItemsNameAndQuantity() {
+        return GameUtility.getItemsNameAndQuantity(this.items);
     }
 
     public Map<Class<? extends AnimalBO>, List<String>> getAnimalsName() {

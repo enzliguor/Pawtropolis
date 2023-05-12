@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import pawtropolis.game.util.GameUtility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,11 +35,7 @@ public class BagBO implements BusinessObject {
     }
 
     public Map<String, Integer> getContent() {
-        return this.items.entrySet().stream()
-                .collect(Collectors.toMap(
-                        entry -> entry.getKey().getName(),
-                        Map.Entry::getValue
-                ));
+        return GameUtility.getItemsNameAndQuantity(this.items);
     }
 
     public void addItem(ItemBO item) {
@@ -86,9 +83,6 @@ public class BagBO implements BusinessObject {
     }
 
     public ItemBO findItemByName(String itemName) {
-        return this.items.keySet().stream()
-                .filter(i -> i.getName().equals(itemName))
-                .findFirst()
-                .orElse(null);
+        return GameUtility.findItemByName(itemName, this.items.keySet());
     }
 }
