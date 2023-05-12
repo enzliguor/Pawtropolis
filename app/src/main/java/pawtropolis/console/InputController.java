@@ -25,16 +25,18 @@ public final class InputController {
 		}
 	}
 	public static String readChoice(String message, Collection<String> options) {
-		String input;
+		String choice;
 		StringBuilder stringBuilder = new StringBuilder("\n>").append(message);
-		for (String option : options) {
-			stringBuilder.append("\n- ").append(option);
-		}
+		options.forEach(option -> stringBuilder.append("\n- ").append(option));
 		do {
 			log.info(stringBuilder.toString());
-			input = InputController.readString().trim();
-		} while (!options.contains(input));
-		return input;
+			String input = readString().trim();
+			choice = options.stream()
+					.filter(opt -> opt.equalsIgnoreCase(input))
+					.findFirst()
+					.orElse(null);
+		} while (choice == null);
+		return choice;
 	}
 	public static String evaluateInput(String message, Predicate<String> condition, String errorMessage) {
 		String input;
