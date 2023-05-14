@@ -83,10 +83,10 @@ public class HardCodedMap implements MapInitializer {
         roomEast.addItem(book);
         roomWest.addItem(hat);
 
-        starterRoom.linkRoom(CardinalPoint.SOUTH, roomSouth);
-        starterRoom.linkRoom(CardinalPoint.NORTH, roomNorth);
-        starterRoom.linkRoom(CardinalPoint.EAST, roomEast);
-        starterRoom.linkRoom(CardinalPoint.WEST, roomWest);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.SOUTH, roomSouth);
+        starterRoom.linkRoomWithLockedDoor(CardinalPoint.NORTH, roomNorth, ball);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.EAST, roomEast);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.WEST, roomWest);
 
         return starterRoom;
     }
