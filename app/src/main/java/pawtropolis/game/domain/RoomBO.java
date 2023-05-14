@@ -3,6 +3,8 @@ package pawtropolis.game.domain;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
+import pawtropolis.game.domain.doorstate.LockedDoorState;
+import pawtropolis.game.domain.doorstate.UnlockedDoorState;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.GameUtility;
 
@@ -10,8 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
-@EqualsAndHashCode(exclude = "adjacentRooms")
-@ToString(exclude = "adjacentRooms")
+@EqualsAndHashCode(exclude = "doors")
+@ToString(exclude = "doors")
 @SuperBuilder
 public class RoomBO implements BusinessObject {
     @Setter
@@ -19,18 +21,18 @@ public class RoomBO implements BusinessObject {
     private final String name;
     private  final Map<ItemBO, Integer> items;
     private final List<AnimalBO> animals;
-    private final EnumMap<CardinalPoint, RoomBO> adjacentRooms;
+    private final EnumMap<CardinalPoint, DoorBO> doors;
 
     protected RoomBO(RoomBOBuilder<?, ?> builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.items = (builder.items != null) ? builder.items : new HashMap<>();
         this.animals = (builder.animals != null) ? builder.animals : new ArrayList<>();
-        this.adjacentRooms = (builder.adjacentRooms != null) ? builder.adjacentRooms : new EnumMap<>(CardinalPoint.class);
+        this.doors = (builder.doors != null) ? builder.doors : new EnumMap<>(CardinalPoint.class);
     }
 
-    public RoomBO getAdjacentRoom(CardinalPoint cardinalPoint) {
-        return this.adjacentRooms.get(cardinalPoint);
+    public DoorBO getDoor(CardinalPoint cardinalPoint) {
+        return this.doors.get(cardinalPoint);
     }
 
     public Map<ItemBO, Integer> getItems() {
@@ -76,13 +78,31 @@ public class RoomBO implements BusinessObject {
         animals.remove(animal);
     }
 
-    public void linkRoom(CardinalPoint cardinalPoint, RoomBO roomBO) {
-        this.adjacentRooms.put(cardinalPoint, roomBO);
+    public void linkRoomWithUnlockedDoor(CardinalPoint cardinalPoint, RoomBO roomBO) {
+        DoorBO doorBO = DoorBO.builder()
+                .roomA(this)
+                .roomB(roomBO)
+                .build();
+        doorBO.setState(UnlockedDoorState.builder().doorBO(doorBO).build());
+        this.doors.put(cardinalPoint, doorBO);
         CardinalPoint opposite = cardinalPoint.getOpposite();
-        RoomBO oppositeRoom = roomBO.getAdjacentRoom(opposite);
-        if (oppositeRoom != this) {
-            roomBO.linkRoom(opposite, this);
-        }
+        roomBO.linkRoom(opposite, doorBO);
+    }
+    public void linkRoomWithLockedDoor(CardinalPoint cardinalPoint, RoomBO roomBO, ItemBO itemKey){
+        DoorBO doorBO = DoorBO.builder()
+                .roomA(this)
+                .roomB(roomBO)
+                .build();
+        doorBO.setState(LockedDoorState.builder()
+                .doorBO(doorBO)
+                .key(itemKey)
+                .build());
+        this.doors.put(cardinalPoint, doorBO);
+        CardinalPoint opposite = cardinalPoint.getOpposite();
+        roomBO.linkRoom(opposite, doorBO);
+    }
+    public void linkRoom(CardinalPoint cardinalPoint, DoorBO doorBO){
+        this.doors.put(cardinalPoint, doorBO);
     }
 
     public List<AnimalBO> getAnimals() {
