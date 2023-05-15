@@ -13,9 +13,9 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @NoArgsConstructor
 @SuperBuilder
-@DiscriminatorValue(value = "locked room")
-public class LockedRoom extends Room{
+@DiscriminatorValue(value = "locked")
+public class LockedDoorState extends DoorState{
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "key")
-    private Item key;
+    @JoinColumn(name = "item_key")
+    private Item itemKey;
 }
