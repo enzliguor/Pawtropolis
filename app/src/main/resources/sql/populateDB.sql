@@ -16,12 +16,22 @@ VALUES ('Spada di gomma', 1, 'Una spada dall''apparenza minacciosa, ma completam
        ('Cappello della Confusione', 1, 'Un cappello che ti fa dimenticare chi sei per un po'),
        ('Cucchiaio Telecinetico', 1, 'Un cucchiaio che ti permette di muovere oggetti con la mente');
 
-INSERT INTO room (type, name, key)
-VALUES ('room', 'Sala di Partenza', null),
-       ('locked room', 'Stanza dei Biscotti', 7),
-       ('room', 'Sala del Tormento Matrimoniale', null),
-       ('room', 'Camera da letto di Malgioglio', null),
-       ('room', 'Cucina di Gerry Scotti', null);
+INSERT INTO room (name)
+VALUES ('Sala di Partenza'),
+       ('Stanza dei Biscotti'),
+       ('Sala del Tormento Matrimoniale'),
+       ('Camera da letto di Malgioglio'),
+       ('Cucina di Gerry Scotti');
+
+INSERT INTO door_state (state, item_key)
+VALUES ('unlocked', null),
+       ('locked', 1);
+
+INSERT INTO door (room_a, room_b, id_state)
+VALUES (1, 2, 1),
+       (1, 3, 2),
+       (1, 4, 1),
+       (1, 5, 1);
 
 INSERT INTO animal (species, name, favorite_food, age, join_date, weight, height, tail_length, wingspan)
 VALUES ('tiger', 'Tigger', 'steak', 5, '2018-03-01', 200.0, 1.2, 1.0, null),
@@ -61,15 +71,15 @@ VALUES (1, 1, 1),
        (15, 5, 1),
        (16, 5, 1);
 
-INSERT INTO linked_rooms (id_room, cardinal_point, id_adjacent_room)
-VALUES (1, 'NORTH', 2),
+INSERT INTO linked_doors (id_room, cardinal_point, id_door)
+VALUES (1, 'NORTH', 1),
        (2, 'SOUTH', 1),
-       (1, 'WEST', 3),
-       (3, 'EAST', 1),
-       (1, 'EAST', 4),
-       (4, 'WEST', 1),
-       (1, 'SOUTH', 5),
-       (5, 'NORTH', 1);
+       (1, 'WEST', 2),
+       (3, 'EAST', 2),
+       (1, 'EAST', 3),
+       (4, 'WEST', 3),
+       (1, 'SOUTH', 4),
+       (5, 'NORTH', 4);
 
 INSERT INTO animals_in_room (id_animal, id_room)
 VALUES (1, 1),
