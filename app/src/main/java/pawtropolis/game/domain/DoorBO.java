@@ -1,21 +1,24 @@
 package pawtropolis.game.domain;
 
 import lombok.*;
-import pawtropolis.game.domain.doorstate.DoorState;
-import pawtropolis.game.domain.doorstate.LockedDoorState;
+import pawtropolis.game.domain.doorstate.DoorStateBO;
+import pawtropolis.game.domain.doorstate.LockedDoorStateBO;
 
 @Builder
 @Getter
-public class DoorBO {
+@Setter
+public class DoorBO implements BusinessObject{
 
-    protected final RoomBO roomA;
+    private Long id;
 
-    protected final RoomBO roomB;
+    private RoomBO roomA;
+
+    private RoomBO roomB;
     @Setter
-    private DoorState state;
+    private DoorStateBO state;
 
     public boolean isLocked() {
-        return this.state instanceof LockedDoorState;
+        return this.state instanceof LockedDoorStateBO;
     }
 
     public RoomBO open(RoomBO currentRoom) {
