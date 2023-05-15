@@ -3,8 +3,8 @@ package pawtropolis.game.domain;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
-import pawtropolis.game.domain.doorstate.LockedDoorState;
-import pawtropolis.game.domain.doorstate.UnlockedDoorState;
+import pawtropolis.game.domain.doorstate.LockedDoorStateBO;
+import pawtropolis.game.domain.doorstate.UnlockedDoorStateBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.GameUtility;
 
@@ -83,7 +83,7 @@ public class RoomBO implements BusinessObject {
                 .roomA(this)
                 .roomB(roomBO)
                 .build();
-        doorBO.setState(UnlockedDoorState.builder().doorBO(doorBO).build());
+        doorBO.setState(UnlockedDoorStateBO.builder().doorBO(doorBO).build());
         this.doors.put(cardinalPoint, doorBO);
         CardinalPoint opposite = cardinalPoint.getOpposite();
         roomBO.linkRoom(opposite, doorBO);
@@ -93,7 +93,7 @@ public class RoomBO implements BusinessObject {
                 .roomA(this)
                 .roomB(roomBO)
                 .build();
-        doorBO.setState(LockedDoorState.builder()
+        doorBO.setState(LockedDoorStateBO.builder()
                 .doorBO(doorBO)
                 .key(itemKey)
                 .build());

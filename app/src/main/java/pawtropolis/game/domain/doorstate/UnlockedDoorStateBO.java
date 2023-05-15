@@ -6,9 +6,9 @@ import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 @SuperBuilder
-public class UnlockedDoorState extends DoorState {
+public class UnlockedDoorStateBO extends DoorStateBO {
 
-    protected UnlockedDoorState(DoorBO doorBO) {
+    protected UnlockedDoorStateBO(DoorBO doorBO) {
         super(doorBO);
     }
 
@@ -22,7 +22,7 @@ public class UnlockedDoorState extends DoorState {
 
     @Override
     public boolean tryToSwitchState(ItemBO itemKey) {
-        this.doorBO.setState(LockedDoorState.builder()
+        this.doorBO.setState(LockedDoorStateBO.builder()
                 .doorBO(this.doorBO)
                 .key(itemKey)
                 .build());
