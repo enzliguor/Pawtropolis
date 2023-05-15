@@ -3,8 +3,8 @@ package pawtropolis.game.map.initializer;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.persistence.service.RoomService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MapFromDB implements MapInitializer{
 
@@ -18,14 +18,18 @@ public class MapFromDB implements MapInitializer{
     public RoomBO populateMap() {
         RoomBO roomBO = roomService.findById(1L);
         if(roomBO == null) return null;
-        return getCopy(roomBO, new ArrayList<>());
+        return getCopy(roomBO, new HashSet<>());
     }
-    private RoomBO getCopy(RoomBO roomBO, List<RoomBO> list){
-        if(!list.contains(roomBO)){
+    private RoomBO getCopy(RoomBO roomBO, Set<RoomBO> visitedRooms){
+        if(!visitedRooms.contains(roomBO)){
             roomBO.setId(null);
             roomBO.getAnimals().forEach(animal -> animal.setId(null));
-            list.add(roomBO);
-            roomBO.getAdjacentRooms().forEach((key, value)->getCopy(value, list));
+            visitedRooms.add(roomBO);
+            roomBO.getDoors().forEach(((cardinalPoint, doorBO) -> {
+                doorBO.setId(null);
+                getCopy(doorBO.getRoomA(), visitedRooms);
+                getCopy(doorBO.getRoomB(), visitedRooms);
+            }));
         }
         return roomBO;
     }
