@@ -1,16 +1,22 @@
 package pawtropolis.game.domain.doorstate;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import pawtropolis.game.domain.BusinessObject;
 import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 @SuperBuilder
-public abstract class DoorState {
+@Getter
+@Setter
+public abstract class DoorStateBO implements BusinessObject {
 
-    protected final DoorBO doorBO;
+    protected Long id;
+    protected DoorBO doorBO;
 
-    protected DoorState(DoorBO doorBO) {
+    protected DoorStateBO(DoorBO doorBO) {
         this.doorBO = doorBO;
     }
 
