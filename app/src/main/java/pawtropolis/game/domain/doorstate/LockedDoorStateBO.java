@@ -7,11 +7,11 @@ import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 @SuperBuilder
-public class LockedDoorState extends DoorState {
+public class LockedDoorStateBO extends DoorStateBO {
     @Getter
     private final ItemBO key;
 
-    protected LockedDoorState(DoorBO doorBO, ItemBO key) {
+    protected LockedDoorStateBO(DoorBO doorBO, ItemBO key) {
         super(doorBO);
         this.key = key;
     }
@@ -23,7 +23,10 @@ public class LockedDoorState extends DoorState {
     @Override
     public boolean tryToSwitchState(ItemBO itemKey) {
         if(this.key.equals(itemKey)){
-            this.doorBO.setState(new UnlockedDoorState(this.doorBO));
+            this.doorBO.setState(UnlockedDoorStateBO.builder()
+                    .id(1L)
+                    .doorBO(this.doorBO)
+                    .build());
         }
         return !this.doorBO.isLocked();
     }
