@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.BusinessObject;
 import pawtropolis.game.domain.DoorBO;
-import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 @SuperBuilder
@@ -20,8 +19,6 @@ public abstract class DoorStateBO implements BusinessObject {
         this.doorBO = doorBO;
     }
 
-    public abstract RoomBO open(RoomBO currentRoom);
-
-    public abstract boolean tryToSwitchState(ItemBO itemKey);
+    public abstract RoomBO open();
 
 }
