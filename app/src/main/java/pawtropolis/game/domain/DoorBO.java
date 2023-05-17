@@ -21,21 +21,7 @@ public class DoorBO implements BusinessObject{
         return this.state instanceof LockedDoorStateBO;
     }
 
-    public RoomBO open(RoomBO currentRoom) {
-        return this.state.open(currentRoom);
-    }
-
-    public boolean tryToUnlock(ItemBO itemKey) {
-        if (isLocked()) {
-            return this.state.tryToSwitchState(itemKey);
-        }
-        return !isLocked();
-    }
-
-    public boolean lock(ItemBO itemKey) {
-        if (!isLocked()) {
-            return this.state.tryToSwitchState(itemKey);
-        }
-        return isLocked();
+    public RoomBO open() {
+        return this.state.open();
     }
 }
