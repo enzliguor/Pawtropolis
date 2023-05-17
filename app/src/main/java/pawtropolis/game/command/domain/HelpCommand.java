@@ -1,9 +1,8 @@
 package pawtropolis.game.command.domain;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.CustomLogger;
 
-@Slf4j
 @Component
 public class HelpCommand implements Command {
 
@@ -20,6 +19,6 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute() {
-        log.info(HELP);
+		CustomLogger.gameMessage(HELP);
     }
 }

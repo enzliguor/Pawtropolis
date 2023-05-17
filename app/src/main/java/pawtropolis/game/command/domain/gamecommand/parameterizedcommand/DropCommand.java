@@ -1,14 +1,13 @@
 package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.CustomLogger;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.util.Descriptor;
 
-@Slf4j
 @Component
 public class DropCommand extends ParameterizedCommand {
 
@@ -21,11 +20,11 @@ public class DropCommand extends ParameterizedCommand {
         PlayerBO player = this.gameSessionBO.getPlayer();
         ItemBO item = player.dropItemByName(parameter);
         if (item == null) {
-            log.info("\nItemBO not found");
+            CustomLogger.error("\nItem not found");
         } else {
             RoomBO currentRoom = this.gameSessionBO.getCurrentRoom();
             currentRoom.addItem(item);
-            log.info(Descriptor.getBagDescription(player));
+            CustomLogger.gameMessage(Descriptor.getBagDescription(player));
         }
     }
 }

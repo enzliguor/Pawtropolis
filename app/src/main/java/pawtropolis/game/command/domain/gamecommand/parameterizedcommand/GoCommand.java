@@ -1,7 +1,7 @@
 package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.ItemBO;
@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 public class GoCommand extends ParameterizedCommand {
 
@@ -27,7 +26,7 @@ public class GoCommand extends ParameterizedCommand {
     public void execute() {
         CardinalPoint direction = CardinalPoint.of(parameter);
         if (direction == null) {
-            log.info("\nUnrecognized direction\nWhere do you want to go? "
+            CustomLogger.error("\nUnrecognized direction\nWhere do you want to go? "
                     + Arrays.stream(CardinalPoint.values())
                     .map(c -> c.getName() + " - ")
                     .collect(Collectors.joining()) + "\n");
@@ -36,7 +35,7 @@ public class GoCommand extends ParameterizedCommand {
         RoomBO currentRoom = gameSessionBO.getCurrentRoom();
         RoomBO adjacentRoom = currentRoom.getAdjacentRoom(direction);
         if (adjacentRoom == null) {
-            log.info("\nNothing to show in this direction!\n");
+            CustomLogger.error("\nNothing to show in this direction!\n");
             return;
         }
         if (adjacentRoom instanceof LockedRoomBO lockedRoomBO) {
@@ -44,7 +43,7 @@ public class GoCommand extends ParameterizedCommand {
         }
         if (adjacentRoom != null) {
             gameSessionBO.setCurrentRoom(adjacentRoom);
-            log.info(Descriptor.getRoomDescription(adjacentRoom));
+            CustomLogger.gameMessage(Descriptor.getRoomDescription(adjacentRoom));
         }
     }
 
@@ -60,9 +59,9 @@ public class GoCommand extends ParameterizedCommand {
             }
             RoomBO roomBO = lockedRoomBO.tryToUnlock(itemKey);
             if (roomBO == null) {
-                log.info("\nThis is not the right item");
+                CustomLogger.error("\nThis is not the right item");
             } else {
-                log.info("\nYou unlocked the door!");
+                CustomLogger.gameMessage("\nYou unlocked the door!");
                 this.gameSessionBO.getPlayer().dropItemByName(itemKey.getName());
             }
             return roomBO;
@@ -71,7 +70,7 @@ public class GoCommand extends ParameterizedCommand {
     private ItemBO chooseItem() {
         Set<String> itemsName = this.gameSessionBO.getPlayer().getBagContent().keySet();
         if (itemsName.isEmpty()) {
-            log.info("\nYou don't have any item!\nGo pick up some items!");
+            CustomLogger.error("\nYou don't have any item!\nGo pick up some items!");
             return null;
         }
         String input = InputController.readChoice("Type the name of the chosen item", itemsName);

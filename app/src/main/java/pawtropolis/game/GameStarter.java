@@ -1,9 +1,9 @@
 package pawtropolis.game;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.PlayerBO;
@@ -15,7 +15,6 @@ import pawtropolis.persistence.service.PlayerService;
 import java.util.List;
 
 @Component
-@Slf4j
 public class GameStarter implements ApplicationRunner {
 
     private final GameSessionBO gameSessionBO;
@@ -52,8 +51,8 @@ public class GameStarter implements ApplicationRunner {
                 }
             }
         }
-        if(this.gameSessionBO!=null) log.info("\nHello " + gameSessionBO.getPlayer().getName() + "!");
-        log.info("\nType HELP for a list of available command");
+        if(this.gameSessionBO!=null) CustomLogger.gameMessage("\nHello " + gameSessionBO.getPlayer().getName() + "!");
+        CustomLogger.gameMessage("\nType HELP for a list of available command");
         this.gameController.runGame();
     }
 

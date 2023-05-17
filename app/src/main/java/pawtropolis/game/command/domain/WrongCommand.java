@@ -1,10 +1,9 @@
 package pawtropolis.game.command.domain;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.CustomLogger;
 
-@Slf4j
 @Component
 public class WrongCommand implements Command {
 
@@ -16,6 +15,6 @@ public class WrongCommand implements Command {
 
     @Override
     public void execute() {
-        log.info(WRONG_COMMAND);
+        CustomLogger.error(WRONG_COMMAND);
     }
 }
