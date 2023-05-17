@@ -2,16 +2,13 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pawtropolis.console.InputController;
 import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.Descriptor;
-import pawtropolis.game.util.DoorUnlocker;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,19 +35,10 @@ public class GoCommand extends ParameterizedCommand {
             log.info("\nNothing to show in this direction!\n");
             return;
         }
-        if (doorBO.isLocked() && askToUnlock()) {
-            DoorUnlocker.tryToUnlock(doorBO, this.gameSessionBO.getPlayer());
-        }
-        RoomBO adjacentRoom = doorBO.open(currentRoom);
+        RoomBO adjacentRoom = doorBO.open();
         if (adjacentRoom != null) {
             gameSessionBO.setCurrentRoom(adjacentRoom);
             log.info(Descriptor.getRoomDescription(adjacentRoom));
         }
-    }
-
-    private boolean askToUnlock() {
-        String message = "The door is locked: would you like to use an item to unlock it?";
-        String input = InputController.readChoice(message, List.of("Y", "N"));
-        return input.equals("Y");
     }
 }
