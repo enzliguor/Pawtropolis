@@ -83,7 +83,7 @@ public class RoomBO implements BusinessObject {
                 .roomA(this)
                 .roomB(roomBO)
                 .build();
-        doorBO.setState(UnlockedDoorStateBO.builder().doorBO(doorBO).build());
+        doorBO.setState(UnlockedDoorStateBO.builder().id(1L).doorBO(doorBO).build());
         this.doors.put(cardinalPoint, doorBO);
         CardinalPoint opposite = cardinalPoint.getOpposite();
         roomBO.linkRoom(opposite, doorBO);
