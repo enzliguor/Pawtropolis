@@ -8,7 +8,6 @@ import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -18,9 +17,6 @@ public class DoorUnlocker {
 
     public static void tryToUnlock(DoorBO doorBO, PlayerBO playerBO) {
         if(!doorBO.isLocked()){
-            return;
-        }
-        if (!askToUnlock()) {
             return;
         }
         ItemBO itemKey = chooseItem(playerBO);
@@ -33,11 +29,6 @@ public class DoorUnlocker {
         }
         log.info("\nYou unlocked the door!");
         playerBO.dropItemByName(itemKey.getName());
-    }
-
-    private static boolean askToUnlock() {
-        String input = InputController.readChoice("The door is locked: would you like to use an item to unlock it?", List.of("Y", "N"));
-        return input.equals("Y");
     }
 
     private static ItemBO chooseItem(PlayerBO playerBO) {
