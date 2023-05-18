@@ -37,7 +37,7 @@ public class LockedDoorStateBO extends DoorStateBO{
                 return null;
             }
             log.info("\nYou unlocked the door!");
-            playerBO.dropItemByName(itemKey.getName());
+            playerBO.removeItemByName(itemKey.getName());
             return this.doorBO.open();
         }
         return null;

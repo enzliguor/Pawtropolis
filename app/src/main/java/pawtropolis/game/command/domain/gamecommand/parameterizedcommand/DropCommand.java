@@ -19,7 +19,7 @@ public class DropCommand extends ParameterizedCommand {
     @Override
     public void execute() {
         PlayerBO player = this.gameSessionBO.getPlayer();
-        ItemBO item = player.dropItemByName(parameter);
+        ItemBO item = player.removeItemByName(parameter);
         if (item == null) {
             log.info("\nItemBO not found");
         } else {
