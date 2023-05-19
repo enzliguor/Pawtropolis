@@ -1,22 +1,14 @@
 package pawtropolis.game.util;
 
-import org.springframework.stereotype.Component;
-import pawtropolis.game.domain.GameSessionBO;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import pawtropolis.game.domain.ItemBO;
-import pawtropolis.game.domain.PlayerBO;
-import pawtropolis.game.domain.RoomBO;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
-@Component
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameUtility {
-
-    private static GameSessionBO gameSession;
-
-    private GameUtility(GameSessionBO gameSessionBO) {
-        gameSession = gameSessionBO;
-    }
 
     public static ItemBO findItemByName(String itemName, Collection<ItemBO> items) {
         return items.stream()
@@ -31,13 +23,5 @@ public class GameUtility {
                         entry -> entry.getKey().getName(),
                         Map.Entry::getValue
                 ));
-    }
-
-    public static PlayerBO getCurrentPlayer(){
-        return gameSession.getPlayer();
-    }
-
-    public static RoomBO getCurrentRoom(){
-        return gameSession.getCurrentRoom();
     }
 }
