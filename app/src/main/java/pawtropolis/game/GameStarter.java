@@ -12,7 +12,7 @@ import pawtropolis.game.map.initializer.MapInitializer;
 import pawtropolis.persistence.service.GameSessionService;
 import pawtropolis.persistence.service.PlayerService;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -37,7 +37,7 @@ public class GameStarter implements ApplicationRunner {
     }
 
     public void startGame(){
-        String choice = InputController.readChoice(" WELCOME TO PAWTROPOLIS", List.of("NEW PLAYER", "REGISTERED PLAYER"));
+        String choice = InputController.readChoice(" WELCOME TO PAWTROPOLIS", Set.of("NEW PLAYER", "REGISTERED PLAYER"));
         switch (choice) {
             case "NEW PLAYER" -> {
                 PlayerBO playerBO = createPlayer();
@@ -45,7 +45,7 @@ public class GameStarter implements ApplicationRunner {
             }
             case "REGISTERED PLAYER" -> {
                 PlayerBO playerBO = retrievePlayerFromDB();
-                choice = InputController.readChoice("Welcome Back!", List.of("NEW GAME","LOAD GAME"));
+                choice = InputController.readChoice("Welcome Back!", Set.of("NEW GAME","LOAD GAME"));
                 switch (choice) {
                     case "NEW GAME" -> createNewGameSession(playerBO);
                     case "LOAD GAME" -> retrieveGameSessionFromDB(playerBO);
@@ -74,7 +74,7 @@ public class GameStarter implements ApplicationRunner {
         return this.playerService.findByName(playerName);
     }
     private void retrieveGameSessionFromDB(PlayerBO playerBO) {
-        List<String> sessionNames = this.gameSessionService.findSessionNamesByPlayerId(playerBO.getId());
+        Set<String> sessionNames = this.gameSessionService.findSessionNamesByPlayerId(playerBO.getId());
 
         String sessionName = InputController.readChoice("Choose a game session", sessionNames);
 

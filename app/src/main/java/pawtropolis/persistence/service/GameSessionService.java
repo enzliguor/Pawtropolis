@@ -11,7 +11,7 @@ import pawtropolis.persistence.dao.GameSessionDAO;
 import pawtropolis.persistence.entity.GameSession;
 import pawtropolis.persistence.marshaller.Marshaller;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class GameSessionService extends AbstractService<GameSession, Long, GameSessionBO> {
@@ -40,7 +40,7 @@ public class GameSessionService extends AbstractService<GameSession, Long, GameS
         return super.saveOrUpdate(gameSessionBO);
     }
 
-    public List<String> findSessionNamesByPlayerId(Long id){
+    public Set<String> findSessionNamesByPlayerId(Long id){
         return ((GameSessionDAO) dao).findSessionNamesByPlayerId(id);
     }
 

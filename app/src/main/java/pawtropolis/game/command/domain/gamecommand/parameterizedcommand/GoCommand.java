@@ -2,6 +2,7 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pawtropolis.console.InputController;
 import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
@@ -9,6 +10,7 @@ import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.Descriptor;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -40,5 +42,9 @@ public class GoCommand extends ParameterizedCommand {
             gameSessionBO.setCurrentRoom(adjacentRoom);
             log.info(Descriptor.getRoomDescription(adjacentRoom));
         }
+    }
+    private static boolean askToUnlock() {
+        String input = InputController.readChoice("The door is locked: would you like to use an item to unlock it?", Set.of("Y", "N"));
+        return input.equals("Y");
     }
 }

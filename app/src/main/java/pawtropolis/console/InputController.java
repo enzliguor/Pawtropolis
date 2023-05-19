@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collection;
+import java.util.Set;
 import java.util.function.Predicate;
 
 @Slf4j
@@ -24,18 +24,14 @@ public final class InputController {
 			return "";
 		}
 	}
-	public static String readChoice(String message, Collection<String> options) {
+	public static String readChoice(String message, Set<String> options) {
 		String choice;
 		StringBuilder stringBuilder = new StringBuilder("\n>").append(message);
 		options.forEach(option -> stringBuilder.append("\n- ").append(option));
 		do {
 			log.info(stringBuilder.toString());
-			String input = readString().trim();
-			choice = options.stream()
-					.filter(opt -> opt.equalsIgnoreCase(input))
-					.findFirst()
-					.orElse(null);
-		} while (choice == null);
+			choice = readString().trim();
+		} while (!options.contains(choice));
 		return choice;
 	}
 	public static String evaluateInput(String message, Predicate<String> condition, String errorMessage) {
