@@ -1,4 +1,4 @@
-package pawtropolis.persistence.entity;
+package pawtropolis.persistence.entity.animals;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

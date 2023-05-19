@@ -1,4 +1,4 @@
-package pawtropolis.persistence.entity;
+package pawtropolis.persistence.entity.animals;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import pawtropolis.persistence.entity.EntityDB;
 
 import java.time.LocalDate;
 

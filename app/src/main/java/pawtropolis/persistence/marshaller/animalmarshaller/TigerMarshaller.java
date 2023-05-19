@@ -1,11 +1,12 @@
-package pawtropolis.persistence.marshaller;
+package pawtropolis.persistence.marshaller.animalmarshaller;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+import pawtropolis.persistence.marshaller.Marshaller;
 import pawtropolis.persistence.utils.AnimalBuilderDirector;
 import pawtropolis.game.domain.animals.domain.TigerBO;
-import pawtropolis.persistence.entity.Tiger;
+import pawtropolis.persistence.entity.animals.Tiger;
 
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
