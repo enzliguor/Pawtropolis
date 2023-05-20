@@ -1,10 +1,9 @@
-package pawtropolis.game.domain.doorstate;
+package pawtropolis.game.domain.door;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.BusinessObject;
-import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 

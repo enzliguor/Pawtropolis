@@ -2,7 +2,7 @@ package pawtropolis.game.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pawtropolis.game.domain.DoorBO;
+import pawtropolis.game.domain.door.DoorBO;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.domain.animals.domain.AnimalBO;

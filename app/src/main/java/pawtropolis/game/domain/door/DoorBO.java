@@ -1,13 +1,16 @@
-package pawtropolis.game.domain;
+package pawtropolis.game.domain.door;
 
 import lombok.*;
-import pawtropolis.game.domain.doorstate.DoorStateBO;
-import pawtropolis.game.domain.doorstate.LockedDoorStateBO;
+import pawtropolis.game.domain.BusinessObject;
+import pawtropolis.game.domain.ItemBO;
+import pawtropolis.game.domain.RoomBO;
+import pawtropolis.game.domain.door.DoorStateBO;
+import pawtropolis.game.domain.door.LockedDoorStateBO;
 
 @Builder
 @Getter
 @Setter
-public class DoorBO implements BusinessObject{
+public class DoorBO implements BusinessObject {
 
     private Long id;
 

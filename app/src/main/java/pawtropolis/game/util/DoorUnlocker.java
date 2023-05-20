@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pawtropolis.console.InputController;
-import pawtropolis.game.domain.DoorBO;
+import pawtropolis.game.domain.door.DoorBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.PlayerBO;
 

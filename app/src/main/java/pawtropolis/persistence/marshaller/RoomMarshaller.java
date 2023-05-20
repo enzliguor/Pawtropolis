@@ -2,10 +2,10 @@ package pawtropolis.persistence.marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.domain.DoorBO;
+import pawtropolis.game.domain.door.DoorBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
-import pawtropolis.persistence.entity.Door;
+import pawtropolis.persistence.entity.door.Door;
 import pawtropolis.persistence.entity.Room;
 import pawtropolis.persistence.marshaller.animalmarshaller.AnimalMarshaller;
 

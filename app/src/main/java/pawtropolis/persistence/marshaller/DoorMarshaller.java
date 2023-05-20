@@ -2,9 +2,9 @@ package pawtropolis.persistence.marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.domain.DoorBO;
-import pawtropolis.game.domain.doorstate.DoorStateBO;
-import pawtropolis.persistence.entity.Door;
+import pawtropolis.game.domain.door.DoorBO;
+import pawtropolis.game.domain.door.DoorStateBO;
+import pawtropolis.persistence.entity.door.Door;
 
 @Component
 public class DoorMarshaller implements Marshaller<Door, DoorBO> {

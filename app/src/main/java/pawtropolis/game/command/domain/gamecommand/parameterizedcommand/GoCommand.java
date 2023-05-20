@@ -3,7 +3,7 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 import org.springframework.stereotype.Component;
 import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
-import pawtropolis.game.domain.DoorBO;
+import pawtropolis.game.domain.door.DoorBO;
 import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;

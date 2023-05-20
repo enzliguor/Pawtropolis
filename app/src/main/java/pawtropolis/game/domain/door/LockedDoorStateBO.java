@@ -1,4 +1,4 @@
-package pawtropolis.game.domain.doorstate;
+package pawtropolis.game.domain.door;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

@@ -3,8 +3,8 @@ package pawtropolis.persistence.marshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.domain.doorstate.DoorStateBO;
-import pawtropolis.persistence.entity.DoorState;
+import pawtropolis.game.domain.door.DoorStateBO;
+import pawtropolis.persistence.entity.door.DoorState;
 
 import java.util.HashMap;
 import java.util.Map;

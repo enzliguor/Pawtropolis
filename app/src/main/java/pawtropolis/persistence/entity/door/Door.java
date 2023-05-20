@@ -1,7 +1,10 @@
-package pawtropolis.persistence.entity;
+package pawtropolis.persistence.entity.door;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pawtropolis.persistence.entity.EntityDB;
+import pawtropolis.persistence.entity.Room;
+
 @Entity
 @Getter
 @Setter
@@ -11,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Table(name = "door")
-public class Door implements EntityDB{
+public class Door implements EntityDB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

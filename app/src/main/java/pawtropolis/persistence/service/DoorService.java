@@ -2,8 +2,8 @@ package pawtropolis.persistence.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import pawtropolis.game.domain.DoorBO;
-import pawtropolis.persistence.entity.Door;
+import pawtropolis.game.domain.door.DoorBO;
+import pawtropolis.persistence.entity.door.Door;
 import pawtropolis.persistence.marshaller.Marshaller;
 
 @Service

@@ -1,8 +1,9 @@
-package pawtropolis.persistence.entity;
+package pawtropolis.persistence.entity.door;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import pawtropolis.persistence.entity.EntityDB;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

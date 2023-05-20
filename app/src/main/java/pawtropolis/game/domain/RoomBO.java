@@ -2,8 +2,9 @@ package pawtropolis.game.domain;
 
 import lombok.*;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
-import pawtropolis.game.domain.doorstate.LockedDoorStateBO;
-import pawtropolis.game.domain.doorstate.UnlockedDoorStateBO;
+import pawtropolis.game.domain.door.DoorBO;
+import pawtropolis.game.domain.door.LockedDoorStateBO;
+import pawtropolis.game.domain.door.UnlockedDoorStateBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.GameUtility;
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.persistence.entity.animals.Animal;
+import pawtropolis.persistence.entity.door.Door;
 
 import java.util.Map;
 import java.util.Set;

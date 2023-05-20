@@ -1,4 +1,4 @@
-package pawtropolis.persistence.entity;
+package pawtropolis.persistence.entity.door;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import pawtropolis.persistence.entity.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
