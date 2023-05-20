@@ -1,11 +1,14 @@
-package pawtropolis.persistence.marshaller;
+package pawtropolis.persistence.marshaller.doormarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.domain.door.LockedDoorStateBO;
 import pawtropolis.persistence.entity.door.LockedDoorState;
+import pawtropolis.persistence.marshaller.ItemMarshaller;
+import pawtropolis.persistence.marshaller.Marshaller;
+
 @Component
-public class LockedDoorStateMarshaller implements Marshaller<LockedDoorState, LockedDoorStateBO>{
+public class LockedDoorStateMarshaller implements Marshaller<LockedDoorState, LockedDoorStateBO> {
 
     private final ItemMarshaller itemMarshaller;
 

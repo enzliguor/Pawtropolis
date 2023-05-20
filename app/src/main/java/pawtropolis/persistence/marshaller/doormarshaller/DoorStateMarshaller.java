@@ -1,10 +1,11 @@
-package pawtropolis.persistence.marshaller;
+package pawtropolis.persistence.marshaller.doormarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pawtropolis.game.domain.door.DoorStateBO;
 import pawtropolis.persistence.entity.door.DoorState;
+import pawtropolis.persistence.marshaller.Marshaller;
 
 import java.util.HashMap;
 import java.util.Map;

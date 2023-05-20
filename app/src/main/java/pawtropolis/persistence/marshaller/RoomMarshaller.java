@@ -8,6 +8,7 @@ import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.persistence.entity.door.Door;
 import pawtropolis.persistence.entity.Room;
 import pawtropolis.persistence.marshaller.animalmarshaller.AnimalMarshaller;
+import pawtropolis.persistence.marshaller.doormarshaller.DoorMarshaller;
 
 import java.util.EnumMap;
 import java.util.HashMap;

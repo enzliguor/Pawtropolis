@@ -1,8 +1,10 @@
-package pawtropolis.persistence.marshaller;
+package pawtropolis.persistence.marshaller.doormarshaller;
 
 import org.springframework.stereotype.Component;
 import pawtropolis.game.domain.door.UnlockedDoorStateBO;
 import pawtropolis.persistence.entity.door.UnlockedDoorState;
+import pawtropolis.persistence.marshaller.Marshaller;
+
 @Component
 public class UnlockedDoorStateMarshaller implements Marshaller<UnlockedDoorState, UnlockedDoorStateBO> {
 
