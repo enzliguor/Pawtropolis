@@ -8,6 +8,7 @@ import pawtropolis.game.domain.GameSessionBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.Descriptor;
+import pawtropolis.game.util.DoorUnlocker;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -37,7 +38,10 @@ public class GoCommand extends ParameterizedCommand {
             log.info("\nNothing to show in this direction!\n");
             return;
         }
-        RoomBO adjacentRoom = doorBO.open();
+        if(doorBO.isLocked() && askToUnlock()){
+            DoorUnlocker.tryToUnlock(doorBO, this.gameSessionBO.getPlayer());
+        }
+        RoomBO adjacentRoom = doorBO.open(currentRoom);
         if (adjacentRoom != null) {
             gameSessionBO.setCurrentRoom(adjacentRoom);
             log.info(Descriptor.getRoomDescription(adjacentRoom));
