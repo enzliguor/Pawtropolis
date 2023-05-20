@@ -9,14 +9,13 @@ public class UnlockedDoorStateMarshaller implements Marshaller<UnlockedDoorState
     @Override
     public UnlockedDoorState marshall(UnlockedDoorStateBO businessObject) {
         return UnlockedDoorState.builder()
-                .id(businessObject.getId())
+                .id(1L)
                 .build();
     }
 
     @Override
     public UnlockedDoorStateBO unmarshall(UnlockedDoorState entity) {
         return UnlockedDoorStateBO.builder()
-                .id(entity.getId())
                 .build();
     }
 
