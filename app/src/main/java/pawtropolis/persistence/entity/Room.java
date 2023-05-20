@@ -3,6 +3,7 @@ package pawtropolis.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import pawtropolis.game.map.util.CardinalPoint;
+import pawtropolis.persistence.entity.animals.Animal;
 
 import java.util.Map;
 import java.util.Set;
