@@ -43,7 +43,7 @@ public class PlayerBO implements BusinessObject {
 		return this.bag.removeItem(item);
 	}
 
-	public ItemBO dropItemByName(String itemName){
+	public ItemBO removeItemByName(String itemName){
 		return this.bag.removeItemByName(itemName);
 	}
 

@@ -34,7 +34,10 @@ public class RoomService extends AbstractService<Room, Long, RoomBO> {
         if(!rooms.contains(roomBO)){
             saveNewItemsInRoom(roomBO);
             rooms.add(roomBO);
-            roomBO.getAdjacentRooms().forEach((cardinal, room)-> saveNewItemsInAllRooms(room, rooms));
+            roomBO.getDoors().forEach((cardinal, door)-> {
+                saveNewItemsInAllRooms(door.getRoomA(), rooms);
+                saveNewItemsInAllRooms(door.getRoomB(), rooms);
+            });
         }
     }
 

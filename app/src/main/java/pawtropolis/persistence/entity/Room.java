@@ -2,8 +2,8 @@ package pawtropolis.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import pawtropolis.game.map.util.CardinalPoint;
+import pawtropolis.persistence.entity.animals.Animal;
 
 import java.util.Map;
 import java.util.Set;
@@ -11,17 +11,11 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(exclude = {"adjacentRooms"})
-@ToString(exclude = {"adjacentRooms"})
+@EqualsAndHashCode(exclude = {"doors"})
+@ToString(exclude = {"doors"})
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-        name = "type",
-        discriminatorType = DiscriminatorType.STRING
-)
-@DiscriminatorValue(value = "room")
 @Table(name = "room")
-@SuperBuilder
+@Builder
 public class Room implements EntityDB{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +37,14 @@ public class Room implements EntityDB{
             inverseJoinColumns = {@JoinColumn(name = "id_animal", referencedColumnName = "id")})
     private Set<Animal> animals;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
-    @JoinTable(name = "linked_rooms",
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinTable(name = "linked_doors",
             joinColumns = {
                     @JoinColumn(name = "id_room", referencedColumnName = "id")},
             inverseJoinColumns = {
-                    @JoinColumn(name = "id_adjacent_room", referencedColumnName = "id")
+                    @JoinColumn(name = "id_door", referencedColumnName = "id")
             })
     @MapKeyEnumerated(value = EnumType.STRING)
-    @MapKeyColumn(name = "cardinal_point", table = "linked_rooms")
-    private Map<CardinalPoint, Room> adjacentRooms;
+    @MapKeyColumn(name = "cardinal_point", table = "linked_doors")
+    private Map<CardinalPoint, Door> doors;
 }

@@ -2,7 +2,7 @@ package pawtropolis.game.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import pawtropolis.game.domain.LockedRoomBO;
+import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.PlayerBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
@@ -17,7 +17,7 @@ public class Descriptor {
     public static String getRoomDescription(RoomBO roomBO){
         Map<String, Integer> itemsName = roomBO.getItemsNameAndQuantity();
         Map<Class<? extends AnimalBO>, List<String>> animals = roomBO.getAnimalsName();
-        Map<CardinalPoint, RoomBO> adjacentRooms = roomBO.getAdjacentRooms();
+        Map<CardinalPoint, DoorBO> doors = roomBO.getDoors();
 
         StringBuilder builder = new StringBuilder("\n\nYou are in ").append(roomBO.getName()).append(".");
         StringJoiner itemJoiner = new StringJoiner(", ");
@@ -36,10 +36,10 @@ public class Descriptor {
         builder.append("\nNPC: ").append(animalJoiner);
 
         StringJoiner roomJoiner = new StringJoiner(", \n");
-        for (Map.Entry<CardinalPoint, RoomBO> entry : adjacentRooms.entrySet()){
-            roomJoiner.add("- " + entry.getKey() + ((entry.getValue() instanceof LockedRoomBO)? " 'LOCKED'" : ""));
+        for (Map.Entry<CardinalPoint, DoorBO> entry : doors.entrySet()){
+            roomJoiner.add("- " + entry.getKey() + ((entry.getValue().isLocked())? " 'LOCKED'" : ""));
         }
-        builder.append("\nAdjacent rooms:\n").append(roomJoiner).append("\n");
+        builder.append("\nDOORS:\n").append(roomJoiner).append("\n");
 
         return builder.toString();
     }

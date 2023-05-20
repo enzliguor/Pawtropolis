@@ -21,12 +21,32 @@ CREATE TABLE player
 CREATE TABLE room
 (
     id   serial PRIMARY KEY,
-    type VARCHAR(255),
-    name VARCHAR(255),
-    key INT,
-    FOREIGN KEY (key)
+    name VARCHAR(255)
+);
+
+CREATE TABLE door_state
+(
+    id   serial PRIMARY KEY,
+    state VARCHAR(255),
+    item_key INT,
+    FOREIGN KEY (item_key)
         REFERENCES item (id)
 );
+
+CREATE TABLE door
+(
+    id   serial PRIMARY KEY,
+    room_a INT,
+    room_b INT,
+    id_state INT,
+    FOREIGN KEY (room_a)
+        REFERENCES room (id),
+    FOREIGN KEY (room_b)
+        REFERENCES room (id),
+    FOREIGN KEY (id_state)
+        REFERENCES door_state (id)
+);
+
 
 CREATE TABLE items_in_bag
 (
@@ -51,16 +71,16 @@ CREATE TABLE items_in_room
     FOREIGN KEY (id_room)
         REFERENCES room (id)
 );
-CREATE TABLE linked_rooms
+CREATE TABLE linked_doors
 (
     id_room           INT NOT NULL,
     cardinal_point VARCHAR(255) NOT NULL,
-    id_adjacent_room  INT NOT NULL,
+    id_door  INT NOT NULL,
     PRIMARY KEY (id_room, cardinal_point),
     FOREIGN KEY (id_room)
         REFERENCES room (id),
-    FOREIGN KEY (id_adjacent_room)
-        REFERENCES room (id)
+    FOREIGN KEY (id_door)
+        REFERENCES door (id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

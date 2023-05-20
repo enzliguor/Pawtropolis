@@ -9,7 +9,7 @@ import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
 import pawtropolis.game.command.CommandManager;
 
-import java.util.List;
+import java.util.Set;
 
 @ToString
 @Component
@@ -35,7 +35,7 @@ public class GameController {
     }
     public void endGame() {
         this.gameRunning = false;
-        String choice = InputController.readChoice("Do you want to save before exit?", List.of("YES","NO"));
+        String choice = InputController.readChoice("Do you want to save before exit?", Set.of("YES","NO"));
         if (choice.equals("YES")) commandManager.executeCommand("save");
     }
 

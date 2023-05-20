@@ -3,15 +3,14 @@ package pawtropolis.game.command.domain.gamecommand.parameterizedcommand;
 import org.springframework.stereotype.Component;
 import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
+import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.GameSessionBO;
-import pawtropolis.game.domain.ItemBO;
-import pawtropolis.game.domain.LockedRoomBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.Descriptor;
+import pawtropolis.game.util.DoorUnlocker;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,47 +32,22 @@ public class GoCommand extends ParameterizedCommand {
             return;
         }
         RoomBO currentRoom = gameSessionBO.getCurrentRoom();
-        RoomBO adjacentRoom = currentRoom.getAdjacentRoom(direction);
-        if (adjacentRoom == null) {
+        DoorBO doorBO = currentRoom.getDoor(direction);
+        if (doorBO == null) {
             CustomLogger.error("\nNothing to show in this direction!\n");
             return;
         }
-        if (adjacentRoom instanceof LockedRoomBO lockedRoomBO) {
-            adjacentRoom = (askToUnlock()) ? tryToUnlock(lockedRoomBO) : null;
+        if(doorBO.isLocked() && askToUnlock()){
+            DoorUnlocker.tryToUnlock(doorBO, this.gameSessionBO.getPlayer());
         }
+        RoomBO adjacentRoom = doorBO.open(currentRoom);
         if (adjacentRoom != null) {
             gameSessionBO.setCurrentRoom(adjacentRoom);
             CustomLogger.gameMessage(Descriptor.getRoomDescription(adjacentRoom));
         }
     }
-
-    private boolean askToUnlock(){
-        String input = InputController.readChoice("The door is locked: would you like to use an item to unlock it?", List.of("Y", "N"));
+    private static boolean askToUnlock() {
+        String input = InputController.readChoice("The door is locked: would you like to use an item to unlock it?", Set.of("Y", "N"));
         return input.equals("Y");
-    }
-
-    private RoomBO tryToUnlock(LockedRoomBO lockedRoomBO) {
-            ItemBO itemKey = chooseItem();
-            if(itemKey==null){
-                return null;
-            }
-            RoomBO roomBO = lockedRoomBO.tryToUnlock(itemKey);
-            if (roomBO == null) {
-                CustomLogger.error("\nThis is not the right item");
-            } else {
-                CustomLogger.gameMessage("\nYou unlocked the door!");
-                this.gameSessionBO.getPlayer().dropItemByName(itemKey.getName());
-            }
-            return roomBO;
-    }
-
-    private ItemBO chooseItem() {
-        Set<String> itemsName = this.gameSessionBO.getPlayer().getBagContent().keySet();
-        if (itemsName.isEmpty()) {
-            CustomLogger.error("\nYou don't have any item!\nGo pick up some items!");
-            return null;
-        }
-        String input = InputController.readChoice("Type the name of the chosen item", itemsName);
-        return this.gameSessionBO.getPlayer().getItemByName(input);
     }
 }

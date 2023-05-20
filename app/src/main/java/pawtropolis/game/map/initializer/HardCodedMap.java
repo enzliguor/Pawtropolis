@@ -2,7 +2,6 @@ package pawtropolis.game.map.initializer;
 
 import lombok.NoArgsConstructor;
 import pawtropolis.game.domain.ItemBO;
-import pawtropolis.game.domain.LockedRoomBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.domain.animals.domain.EagleBO;
@@ -67,7 +66,7 @@ public class HardCodedMap implements MapInitializer {
 
         RoomBO starterRoom = RoomBO.builder().name("Starter Room").build();
         RoomBO roomSouth = RoomBO.builder().name("Room SOUTH").build();
-        LockedRoomBO roomNorth = LockedRoomBO.builder().name("Room NORTH").key(ball).build();
+        RoomBO roomNorth = RoomBO.builder().name("Room NORTH").build();
         RoomBO roomEast = RoomBO.builder().name("Room EAST").build();
         RoomBO roomWest = RoomBO.builder().name("Room WEST").build();
 
@@ -83,10 +82,10 @@ public class HardCodedMap implements MapInitializer {
         roomEast.addItem(book);
         roomWest.addItem(hat);
 
-        starterRoom.linkRoom(CardinalPoint.SOUTH, roomSouth);
-        starterRoom.linkRoom(CardinalPoint.NORTH, roomNorth);
-        starterRoom.linkRoom(CardinalPoint.EAST, roomEast);
-        starterRoom.linkRoom(CardinalPoint.WEST, roomWest);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.SOUTH, roomSouth);
+        starterRoom.linkRoomWithLockedDoor(CardinalPoint.NORTH, roomNorth, ball);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.EAST, roomEast);
+        starterRoom.linkRoomWithUnlockedDoor(CardinalPoint.WEST, roomWest);
 
         return starterRoom;
     }

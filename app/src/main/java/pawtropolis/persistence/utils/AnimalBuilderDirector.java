@@ -3,7 +3,7 @@ package pawtropolis.persistence.utils;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import pawtropolis.game.domain.animals.domain.*;
-import pawtropolis.persistence.entity.*;
+import pawtropolis.persistence.entity.animals.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AnimalBuilderDirector {
