@@ -1,16 +1,11 @@
 package pawtropolis.game.domain.doorstate;
 
 import lombok.experimental.SuperBuilder;
-import pawtropolis.game.domain.DoorBO;
 import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 @SuperBuilder
 public class UnlockedDoorStateBO extends DoorStateBO {
-
-    protected UnlockedDoorStateBO(DoorBO doorBO) {
-        super(doorBO);
-    }
 
     @Override
     public RoomBO open(RoomBO currentRoom) {
