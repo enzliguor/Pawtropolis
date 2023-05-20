@@ -22,12 +22,12 @@ public class RoomBO implements BusinessObject {
     private final List<AnimalBO> animals;
     private final EnumMap<CardinalPoint, DoorBO> doors;
 
-    protected RoomBO(RoomBOBuilder builder) {
-        this.id = builder.id;
-        this.name = builder.name;
-        this.items = (builder.items != null) ? builder.items : new HashMap<>();
-        this.animals = (builder.animals != null) ? builder.animals : new ArrayList<>();
-        this.doors = (builder.doors != null) ? builder.doors : new EnumMap<>(CardinalPoint.class);
+    private RoomBO(Long id, String name, Map<ItemBO, Integer> items, List<AnimalBO> animals, EnumMap<CardinalPoint, DoorBO> doors) {
+        this.id = id;
+        this.name = name;
+        this.items = (items != null) ? items : new HashMap<>();
+        this.animals = (animals != null) ? animals : new ArrayList<>();
+        this.doors = (doors != null) ? doors : new EnumMap<>(CardinalPoint.class);
     }
 
     public DoorBO getDoor(CardinalPoint cardinalPoint) {
