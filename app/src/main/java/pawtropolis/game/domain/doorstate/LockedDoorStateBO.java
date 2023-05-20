@@ -7,12 +7,13 @@ import pawtropolis.game.domain.ItemBO;
 import pawtropolis.game.domain.RoomBO;
 
 
+@Getter
 @Slf4j
 @SuperBuilder
 public class LockedDoorStateBO extends DoorStateBO{
 
     private Long id;
-    @Getter
+
     private final ItemBO key;
 
     @Override
