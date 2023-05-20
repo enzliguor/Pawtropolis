@@ -1,7 +1,6 @@
 package pawtropolis.game.domain;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import pawtropolis.game.domain.animals.domain.AnimalBO;
 import pawtropolis.game.domain.doorstate.LockedDoorStateBO;
 import pawtropolis.game.domain.doorstate.UnlockedDoorStateBO;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 @Getter
 @EqualsAndHashCode(exclude = "doors")
 @ToString(exclude = "doors")
-@SuperBuilder
+@Builder
 public class RoomBO implements BusinessObject {
     @Setter
     private Long id;
@@ -23,7 +22,7 @@ public class RoomBO implements BusinessObject {
     private final List<AnimalBO> animals;
     private final EnumMap<CardinalPoint, DoorBO> doors;
 
-    protected RoomBO(RoomBOBuilder<?, ?> builder) {
+    protected RoomBO(RoomBOBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.items = (builder.items != null) ? builder.items : new HashMap<>();
