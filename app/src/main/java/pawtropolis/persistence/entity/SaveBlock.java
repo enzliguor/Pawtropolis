@@ -10,17 +10,17 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 @Getter
-@Table(name = "game_session")
+@Table(name = "save_block")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Builder
-public class GameSession implements  EntityDB{
+public class SaveBlock implements  EntityDB{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "session_name")
-    String sessionName;
+    @Column(name = "block_name")
+    String blockName;
     @OneToOne(cascade =CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_player", referencedColumnName = "id")
     private Player player;

@@ -108,10 +108,10 @@ CREATE TABLE animals_in_room
         REFERENCES animal (id)
 );
 
-CREATE TABLE game_session
+CREATE TABLE save_block
 (
     id            serial PRIMARY KEY,
-    session_name  VARCHAR(255),
+    block_name  VARCHAR(255),
     id_player     INT,
     id_room       INT,
     id_bag      INT NOT NULL,

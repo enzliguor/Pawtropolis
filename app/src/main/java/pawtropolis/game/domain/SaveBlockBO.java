@@ -11,23 +11,23 @@ import org.springframework.stereotype.Component;
 @Setter
 @Builder
 @Component
-public class GameSessionBO implements BusinessObject {
+public class SaveBlockBO implements BusinessObject {
 
     private Long id;
-    private String sessionName;
+    private String name;
     private PlayerBO player;
     private RoomBO currentRoom;
 
     public void initializeGameSession(PlayerBO player, RoomBO room, String sessionName){
             this.player = player;
             this.currentRoom = room;
-            this.sessionName = sessionName;
+            this.name = sessionName;
     }
-    public void initializeGameSession(GameSessionBO gameSessionBO){
-            this.id = gameSessionBO.getId();
-            this.sessionName = gameSessionBO.getSessionName();
-            this.player = gameSessionBO.getPlayer();
-            this.currentRoom = gameSessionBO.getCurrentRoom();
+    public void initializeGameSession(SaveBlockBO saveBlockBO){
+            this.id = saveBlockBO.getId();
+            this.name = saveBlockBO.getName();
+            this.player = saveBlockBO.getPlayer();
+            this.currentRoom = saveBlockBO.getCurrentRoom();
     }
 
     public boolean isNotPersisted(){

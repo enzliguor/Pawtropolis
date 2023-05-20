@@ -2,15 +2,15 @@ package pawtropolis.game.command.domain.gamecommand;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pawtropolis.game.command.domain.Command;
-import pawtropolis.game.domain.GameSessionBO;
+import pawtropolis.game.domain.SaveBlockBO;
 
 public abstract class GameCommand implements Command {
 
-    protected GameSessionBO gameSessionBO;
+    protected SaveBlockBO saveBlockBO;
 
     @Autowired
-    protected GameCommand(GameSessionBO gameSessionBO){
-        this.gameSessionBO = gameSessionBO;
+    protected GameCommand(SaveBlockBO saveBlockBO){
+        this.saveBlockBO = saveBlockBO;
     }
 
 }

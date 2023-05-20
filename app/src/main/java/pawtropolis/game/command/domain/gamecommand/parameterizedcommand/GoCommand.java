@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import pawtropolis.console.CustomLogger;
 import pawtropolis.console.InputController;
 import pawtropolis.game.domain.door.DoorBO;
-import pawtropolis.game.domain.GameSessionBO;
+import pawtropolis.game.domain.SaveBlockBO;
 import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.game.util.Descriptor;
@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Component
 public class GoCommand extends ParameterizedCommand {
 
-    protected GoCommand(GameSessionBO gameSessionBO) {
-        super(gameSessionBO);
+    protected GoCommand(SaveBlockBO saveBlockBO) {
+        super(saveBlockBO);
     }
 
     @Override
@@ -31,18 +31,18 @@ public class GoCommand extends ParameterizedCommand {
                     .collect(Collectors.joining()) + "\n");
             return;
         }
-        RoomBO currentRoom = gameSessionBO.getCurrentRoom();
+        RoomBO currentRoom = saveBlockBO.getCurrentRoom();
         DoorBO doorBO = currentRoom.getDoor(direction);
         if (doorBO == null) {
             CustomLogger.error("\nNothing to show in this direction!\n");
             return;
         }
         if(doorBO.isLocked() && askToUnlock()){
-            DoorUnlocker.tryToUnlock(doorBO, this.gameSessionBO.getPlayer());
+            DoorUnlocker.tryToUnlock(doorBO, this.saveBlockBO.getPlayer());
         }
         RoomBO adjacentRoom = doorBO.open(currentRoom);
         if (adjacentRoom != null) {
-            gameSessionBO.setCurrentRoom(adjacentRoom);
+            saveBlockBO.setCurrentRoom(adjacentRoom);
             CustomLogger.gameMessage(Descriptor.getRoomDescription(adjacentRoom));
         }
     }

@@ -2,11 +2,11 @@ package pawtropolis.persistence.marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pawtropolis.game.domain.GameSessionBO;
+import pawtropolis.game.domain.SaveBlockBO;
 import pawtropolis.game.domain.PlayerBO;
-import pawtropolis.persistence.entity.GameSession;
+import pawtropolis.persistence.entity.SaveBlock;
 @Component
-public class GameSessionMarshaller implements  Marshaller<GameSession, GameSessionBO> {
+public class SaveBlockMarshaller implements  Marshaller<SaveBlock, SaveBlockBO> {
 
     private final PlayerMarshaller playerMarshaller;
 
@@ -14,17 +14,17 @@ public class GameSessionMarshaller implements  Marshaller<GameSession, GameSessi
 
     private final RoomMarshaller roomMarshaller;
     @Autowired
-    public GameSessionMarshaller(PlayerMarshaller playerMarshaller, RoomMarshaller roomMarshaller, BagMarshaller bagMarshaller) {
+    public SaveBlockMarshaller(PlayerMarshaller playerMarshaller, RoomMarshaller roomMarshaller, BagMarshaller bagMarshaller) {
         this.playerMarshaller = playerMarshaller;
         this.roomMarshaller = roomMarshaller;
         this.bagMarshaller = bagMarshaller;
     }
 
     @Override
-    public GameSession marshall(GameSessionBO businessObject) {
-        return GameSession.builder()
+    public SaveBlock marshall(SaveBlockBO businessObject) {
+        return SaveBlock.builder()
                 .id(businessObject.getId())
-                .sessionName((businessObject.getSessionName()))
+                .blockName((businessObject.getName()))
                 .lifePoints(businessObject.getPlayer().getLifePoints())
                 .bag(this.bagMarshaller.marshall(businessObject.getPlayer().getBag()))
                 .player(this.playerMarshaller.marshall(businessObject.getPlayer()))
@@ -33,25 +33,25 @@ public class GameSessionMarshaller implements  Marshaller<GameSession, GameSessi
     }
 
     @Override
-    public GameSessionBO unmarshall(GameSession entity) {
+    public SaveBlockBO unmarshall(SaveBlock entity) {
         PlayerBO playerBO = this.playerMarshaller.unmarshall(entity.getPlayer());
         playerBO.setBag(this.bagMarshaller.unmarshall(entity.getBag()));
         playerBO.setLifePoints(entity.getLifePoints());
-        return GameSessionBO.builder()
+        return SaveBlockBO.builder()
                 .id(entity.getId())
-                .sessionName(entity.getSessionName())
+                .name(entity.getBlockName())
                 .player(playerBO)
                 .currentRoom(this.roomMarshaller.unmarshall(entity.getCurrentRoom()))
                 .build();
     }
 
     @Override
-    public Class<GameSession> getEntityClass() {
-        return GameSession.class;
+    public Class<SaveBlock> getEntityClass() {
+        return SaveBlock.class;
     }
 
     @Override
-    public Class<GameSessionBO> getBoClass() {
-        return GameSessionBO.class;
+    public Class<SaveBlockBO> getBoClass() {
+        return SaveBlockBO.class;
     }
 }
