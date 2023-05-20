@@ -7,6 +7,7 @@ import pawtropolis.game.domain.RoomBO;
 import pawtropolis.game.map.util.CardinalPoint;
 import pawtropolis.persistence.entity.Door;
 import pawtropolis.persistence.entity.Room;
+import pawtropolis.persistence.marshaller.animalmarshaller.AnimalMarshaller;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -109,8 +110,8 @@ public class RoomMarshaller implements Marshaller<Room, RoomBO> {
                     doorBO.setRoomB(convertedRooms.get(door.getRoomB()));
 
                     RoomBO destinationRoomBO = convertedRooms.get(destinationRoom);
-                    sourceRoom.linkRoom(cardinal, doorBO);
-                    destinationRoomBO.linkRoom(cardinal.getOpposite(), doorBO);
+                    sourceRoom.addDoor(cardinal, doorBO);
+                    destinationRoomBO.addDoor(cardinal.getOpposite(), doorBO);
                 }
             });
         }
